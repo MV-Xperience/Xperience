@@ -15,7 +15,7 @@ export default function Logout(params) {
 			signOut(auth).then(()=>setLoggedOut(true));
 		}, 1000)
 	}, [])
-	return (
+	return (//this needs to be eddited at some point
 			<p>logging you out...</p>
 	)
 }

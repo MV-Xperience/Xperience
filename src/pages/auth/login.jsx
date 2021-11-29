@@ -1,5 +1,5 @@
 import React from "react";
-import FirebaseContainer from "./fbAuth";
+import FirebaseContainer from "./Auth";
 
 function Login() {
     return (
