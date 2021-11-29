@@ -9,14 +9,14 @@ import "./dashboard.css";
 const auth = getAuth();
 
 const Dashboard = () => {
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     let navigate = useNavigate();
     useEffect(() => {
-        if (!loading && user == undefined) {
+        if (!loading && user === undefined) {
             // No user, redirect
             navigate("/login");
         }
-    }, [loading]);
+    }, [loading, navigate, user]);
     return (
         <>
             <Navbar></Navbar>
