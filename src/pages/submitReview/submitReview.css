@@ -15,11 +15,7 @@
     padding: 1em;
 }
 
-#enterReview {
-    /* margin-left: 7%; */
-}
-#enterReview > * {
-}
+
 .slider > input {
     appearance: none;
     -webkit-appearance: none;
@@ -88,10 +84,7 @@ input[type="text"] {
     border-radius: var(--border-radius);
     /*cool*/
 }
-input[type="text"]:focus {
-    /* box-shadow: inset 0px -3.5px 0px 0px var(--content-color);
-    transition-timing-function: ease-out; */
-}
+
 
 textarea {
     font-family: inherit;
@@ -107,10 +100,6 @@ textarea {
     border-radius: var(--border-radius);
     font-size: 1.5em;
     /*cool*/
-}
-textarea {
-    /* box-shadow: inset 0px -3.5px 0px 0px var(--content-color);
-    transition-timing-function: ease-out; */
 }
 
 h1 {

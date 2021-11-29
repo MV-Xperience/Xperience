@@ -3,11 +3,10 @@ import {Route, Routes } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import fbApp from "./tools/Firebase";
-import Login from "./pages/auth/Login.jsx";
+import Login from "./pages/auth/login.jsx";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Logout from "./pages/auth/Logout.jsx";
 import SubmitReview from "./pages/submitReview/SubmitReview";
-
 
 import "./app.css";
 
