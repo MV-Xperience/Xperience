@@ -1,0 +1,8 @@
+.your-questions-title {
+    display: flex;
+    flex-direction: row;
+}
+.your-questions-title h1 {
+    width: auto;
+    margin: 0px 1rem;
+}

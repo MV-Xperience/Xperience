@@ -6,10 +6,28 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+// NEEDED TO GET MATERIAL UI ICONS LIKE BUTTONS TO BE THE CORRECT COLOR
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: "#d4af37",
+            contrastText: "#000000",
+        },
+        secondary: {
+            light: "#ff7961",
+            main: "#f44336",
+            dark: "#ba000d",
+            contrastText: "#000",
+        },
+    },
+});
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <ThemeProvider theme={theme}>
+            <App />
+        </ThemeProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );
