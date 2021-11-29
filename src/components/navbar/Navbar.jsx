@@ -11,14 +11,14 @@ const Navbar = (params) => {
         <>
             <nav className='navbar'>
                 <div className='navbarContent'>
-                    <Link to='/home'>
+                    <Link to='/'>
                         <img src='favicon.ico' alt='logo' className='navbarLogo' />
                     </Link>
                     <div className='searchBar'>
                         <input className='searchInput' placeholder={"Search for questions, answers, classes ..."}></input>
                     </div>
-                    <Link className='navbarOption' to='/home'>
-                        Home
+                    <Link className='navbarOption' to='/'>
+                        Dashboard
                     </Link>
                     <Link to='/help' className='navbarOption'>
                         Help

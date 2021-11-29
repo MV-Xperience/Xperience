@@ -7,7 +7,7 @@ export default function Logout(params) {
 	const [loggedOut, setLoggedOut] = useState(false)
 	const nav = useNavigate();
 	if (loggedOut) {
-		nav("/");
+		nav("/#/");
 	}
 	useEffect(() => {
 		window.setTimeout(e=>{

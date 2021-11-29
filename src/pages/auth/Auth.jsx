@@ -1,15 +1,28 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 // IMPORT THIS WHENEVER YOU NEED AUTHENTICATION
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
+import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
+import { useNavigate } from 'react-router-dom';
 
 var provider = new GoogleAuthProvider();
 
-const FirebaseContainer = (params) => {
-  function signIn() {
-    const auth = getAuth()
+const FirebaseContainer = () => {
+  const auth = getAuth()
+  const nav = useNavigate();
+
+
+  const signIn = ()=>{
     signInWithPopup(auth, provider)
   }
+
+	useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+          nav("/");
+      } 
+    });
+	}, [auth, nav])
+  
   return (
     <div>
       <button onClick={signIn} className="boxShadow" style={{ width: "auto", height: 5 + "rem", padding: 1 + "rem", display: "flex", alignItems: "center", backgroundColor: "white", borderRadius: 1 + "rem", border: "none" }}>

@@ -44,6 +44,9 @@
     padding: 1em;
     box-sizing: border-box;
     transition: background-color 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .navbarOption:hover {

@@ -1,7 +1,8 @@
 import React from "react";
 import FirebaseContainer from "./Auth";
 
-function Login() {
+const Login = () => {
+
     return (
         <div>
             <FirebaseContainer />
