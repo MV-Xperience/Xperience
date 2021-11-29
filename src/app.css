@@ -1,0 +1,34 @@
+@media (prefers-color-scheme: light) {
+    html {
+        --background-color: white;
+        --main-background-color: white;
+        --accent-background: #f5f5f5;
+        --content-color: black;
+        --shadow-color: gray;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html {
+        --background-color: #262626;
+        --main-background-color: #262626;
+        --accent-background: black;
+        --content-color: white;
+    }
+}
+html {
+    scroll-behavior: smooth;
+    --accent-color: #d4af37;
+
+    --border-radius: 0.5em;
+    margin: 0%;
+
+    background-color: var(--main-background-color);
+}
+body {
+    background-color: var(--background-color);
+    margin: 0;
+    font-family: "Oxygen", sans-serif;
+    color: var(--content-color);
+    text-decoration: none;
+}
