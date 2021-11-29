@@ -1,16 +1,9 @@
-// import Navbar from "./pages/Navbar.js";
-// import Default from "./pages/default/default.jsx";
-// import Home from "./pages/home/home.jsx";
-// import QuestionList from "./pages/questions/questionList.jsx";
-// import ReviewFinder from "./pages/reviewfinder/reviewfinder.jsx";
-// import SubmitReview from "./pages/reviewSubmitter/submitReview.jsx";
-// import ReplyList from "./pages/questions/replyFourm";
+
 import Logout from "./pages/auth/logout.jsx";
-// import Dashboard from "./pages/dashboard/dashboard.js";
 
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import fbApp from "./fb.js";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import fbApp from "./tools/Firebase";
 import Login from "./pages/auth/login.jsx";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth"

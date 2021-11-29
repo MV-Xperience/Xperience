@@ -1,10 +1,10 @@
 import React from "react";
 import FirebaseContainer from "./fbAuth";
 
-function Login(props) {
+function Login() {
     return (
         <div>
-            <FirebaseContainer></FirebaseContainer>
+            <FirebaseContainer />
         </div>
     );
 }
