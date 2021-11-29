@@ -10,8 +10,8 @@ export default function Logout(params) {
 	}
 	useEffect(() => {
 		window.setTimeout(e=>{
-			getAuth().signOut();
-			setLoggedOut(true);
+			const auth = getAuth()
+			signOut(auth).then(()=>setLoggedOut(true));
 		}, 1000)
 	}, [])
 	return (

@@ -22,6 +22,7 @@ function App() {
   onAuthStateChanged(auth, (userIn) => {
     setUser(userIn);
   });
+  console.log(user);
 
   return (
     <Router>
