@@ -17,7 +17,7 @@ const Dashboard = () => {
             // No user, redirect
             navigate("/login");
         }
-    }, [loading]);
+    }, [loading, navigate, user]);
     return (
         <>
             <Navbar></Navbar>
