@@ -21,7 +21,8 @@ const Dashboard = () => {
         <>
             <Navbar></Navbar>
             <div>
-                <YourQuestions />
+                <YourQuestions user={user} loading={loading} />
+                <div></div>
             </div>
         </>
     );

@@ -1,8 +1,39 @@
 .your-questions-title {
     display: flex;
     flex-direction: row;
+    margin-bottom: 1rem;
 }
 .your-questions-title h1 {
     width: auto;
-    margin: 0px 1rem;
+    margin-right: 1rem;
+    font-size: 3rem;
+}
+.individual-question-div {
+    box-shadow: 0 0 0.5em -0.2em var(--shadow-color);
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+.individual-question-div a {
+    text-decoration: underline;
+    color: var(--content-color);
+}
+.individual-question-div h2 {
+    margin: 0px;
+    margin: 0.25rem 0rem;
+    font-weight: 500;
+}
+.all-questions-container {
+    height: 75%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.your-questions-container {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
 }
