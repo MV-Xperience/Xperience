@@ -13,14 +13,15 @@ import "./app.css";
 const App = () => {
     const auth = getAuth(fbApp);
     const [user, setUser] = useState(auth.currentUser);
+    
     onAuthStateChanged(auth, (userIn) => {
         setUser(userIn);
-    });
-    console.log(user);
+    }); 
+    
+    console.log(user);// remove this line later
 
     return (
         <div className='App'>
-            {/* <Navbar user={user} /> */}
             <div className='content'>
                 <Routes>
                     <Route path='/' element={<Dashboard />} />

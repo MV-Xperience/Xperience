@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { getFirestore, collection, query, orderBy, where, limit, getDocs } from "@firebase/firestore";
-import CircularProgress from "@mui/material/CircularProgress";
+import Loading from "../../components/loading/Loading";
 
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 
 const db = getFirestore();
-
 const SuggestedActions = (params) => {
     const [loading, setLoading] = useState(true);
     const [suggestedQuestions, setSuggestedQuestions] = useState([]);
@@ -42,11 +41,11 @@ const SuggestedActions = (params) => {
                 <p style={{ fontWeight: 500, marginTop: 0 }}>Answer relevant questions:</p>
                 {loading ? (
                     <div style={{ width: 100 + "%", display: "flex", justifyContent: "center" }}>
-                        <CircularProgress color='primary'></CircularProgress>
+                        <Loading />
                     </div>
                 ) : (
                     suggestedQuestions.map((doc) => {
-                        return <EachSuggestedQuestion data={doc.data} id={doc.id} key={doc.id}></EachSuggestedQuestion>;
+                        return <EachSuggestedQuestion data={doc.data} id={doc.id} key={doc.id} />;
                     })
                 )}
             </div>
