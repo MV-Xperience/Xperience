@@ -7,18 +7,19 @@ import Login from "./pages/auth/Login.jsx";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Logout from "./pages/auth/Logout.jsx";
 import SubmitReview from "./pages/submitReview/SubmitReview";
+import NewQuestion from "./pages/newQuestion/NewQuestion";
 
 import "./app.css";
 
 const App = () => {
     const auth = getAuth(fbApp);
     const [user, setUser] = useState(auth.currentUser);
-    
+
     onAuthStateChanged(auth, (userIn) => {
         setUser(userIn);
-    }); 
-    
-    console.log(user);// remove this line later
+    });
+
+    console.log(user); // remove this line later
 
     return (
         <div className='App'>
@@ -26,11 +27,16 @@ const App = () => {
                 <Routes>
                     <Route path='/' element={<Dashboard />} />
                     <Route path='/home'></Route>
-                    <Route path='/questions'>{/* <QuestionList user={user} /> */}</Route>
-                    <Route path='/questions/:id'>{/* <ReplyList /> */}</Route>
-                    <Route path='/review'>{/* <ReviewFinder /> */}</Route>
-                    <Route exact path='/submitReview' element={<SubmitReview />} />
-                    <Route path='/About'></Route>
+                    <Route path='/question'>
+                        {/* <QuestionList user={user} /> */}
+                        <Route path='/question/:id'>{/* <ReplyList /> */}</Route>
+                        <Route path='/question/new' element={<NewQuestion />}></Route>
+                    </Route>
+                    <Route path='/review'>
+                        {/* <ReviewFinder /> */}
+                        <Route path='/review/new'></Route>
+                    </Route>
+                    <Route path='/about'></Route>
                     <Route path='/logout' element={<Logout />} />
                     <Route path='/login' element={<Login />} />
                 </Routes>
