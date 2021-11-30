@@ -15,13 +15,14 @@ const SuggestedActions = (params) => {
     // In the future, could order by replies < 0
     // In the future, could use an array peopleToIgnore, to make sure they aren't always spammed with the same recommendation
     useEffect(() => {
-        if (params.loading) {
+        if (!params.loading && params.user !== null) {
             // Get the questions from the query
+            console.log("Starting");
             const questionCollection = collection(db, "questions");
             const q = query(questionCollection, where("numReplies", "==", 0), orderBy("date", "desc"), limit(3));
             getDocuments(q);
         }
-    }, [params.loading]);
+    }, [params]);
     async function getDocuments(q) {
         const querySnapshot = await getDocs(q);
         console.log("Got documents");

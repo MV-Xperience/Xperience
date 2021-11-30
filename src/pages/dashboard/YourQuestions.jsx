@@ -11,13 +11,12 @@ const YourQuestions = (params) => {
     const [loading, setLoading] = useState(true);
     // Get data from firestore
     useEffect(() => {
-        if (!params.loading) {
+        if (!params.loading && params.user !== null) {
             // Load in everything!
-            console.log(params.user.uid);
             const userRef = doc(db, "users", params.user.uid);
             getAllData(userRef);
         }
-    }, [params.loading]);
+    }, [params]);
     async function getAllData(userRef) {
         const document = await getDoc(userRef);
         let allQuestionIds = document.data().questionIds;

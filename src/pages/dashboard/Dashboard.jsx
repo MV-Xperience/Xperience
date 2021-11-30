@@ -13,11 +13,11 @@ const Dashboard = () => {
     const [user, loading] = useAuthState(auth);
     let navigate = useNavigate();
     useEffect(() => {
-        if (!loading && user === undefined) {
+        if (!loading && user === null) {
             // No user, redirect
             navigate("/login");
         }
-    }, [loading, navigate, user]);
+    }, [loading]);
     return (
         <>
             <Navbar></Navbar>
