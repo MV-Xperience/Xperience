@@ -27,6 +27,7 @@ const FirebaseContainer = () => {
                     questionIds: emptyArray,
                     reviewPaths: emptyArray,
                     readQuestions: emptyArray,
+                    displayName: user.displayName,
                 });
             }
         };
