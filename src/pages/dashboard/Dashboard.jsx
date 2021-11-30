@@ -1,5 +1,6 @@
 import Navbar from "../../components/navbar/Navbar";
 import YourQuestions from "./YourQuestions";
+import SuggestedActions from "./SuggestedActions";
 import { getAuth } from "@firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
@@ -20,9 +21,9 @@ const Dashboard = () => {
     return (
         <>
             <Navbar></Navbar>
-            <div>
+            <div className='entire-dashboard'>
                 <YourQuestions user={user} loading={loading} />
-                <div></div>
+                <SuggestedActions user={user} loading={loading}></SuggestedActions>
             </div>
         </>
     );
