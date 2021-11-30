@@ -38,7 +38,7 @@ const FirebaseContainer = () => {
     onAuthStateChanged(auth, (user) => {
 
       if (user) {
-          checkUser(user).then(()=>(nav("/")))
+        checkUser(user).then(()=>(nav("/")))
       } 
     });
 

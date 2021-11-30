@@ -29,12 +29,12 @@ const App = () => {
                     <Route path='/home'></Route>
                     <Route path='/question'>
                         {/* <QuestionList user={user} /> */}
-                        <Route path='/question/:id'>{/* <ReplyList /> */}</Route>
-                        <Route path='/question/new' element={<NewQuestion />}></Route>
+                        <Route path='/question/:id' />{/* <ReplyList /> */}
+                        <Route path='/question/new' element={<NewQuestion />} />
                     </Route>
                     <Route path='/review'>
                         {/* <ReviewFinder /> */}
-                        <Route path='/review/new'></Route>
+                        <Route path='/review/new' />
                     </Route>
                     <Route path='/about'></Route>
                     <Route path='/logout' element={<Logout />} />
