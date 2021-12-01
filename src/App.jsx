@@ -33,8 +33,8 @@ const App = () => {
                         <Route path='/question/new' element={<NewQuestion />} />
                     </Route>
                     <Route path='/review'>
-                        {/* <ReviewFinder /> */}
-                        <Route path='/review/new' />
+                        {/*  */}
+                        <Route path='/review/new' element = {<SubmitReview />}/>
                     </Route>
                     <Route path='/about'></Route>
                     <Route path='/logout' element={<Logout />} />

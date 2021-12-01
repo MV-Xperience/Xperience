@@ -2,6 +2,8 @@ import { useRef } from "react";
 import "./submitReview.css";
 import classNames from "../../data/classNames2122.json";
 import Slider from "../../components/slider/Slider";
+import { getFirestore, getDoc, doc, setDoc} from "@firebase/firestore";
+
 
 const ReviewSubmitter = () => {
     const classInput = useRef();
@@ -11,6 +13,8 @@ const ReviewSubmitter = () => {
     const reviewInput = useRef();
     // const formRefs = useRef([classInput, ratingInput, timeInput, stressInput, reviewInput]);
     const requiredRefs = useRef([classInput, ratingInput, reviewInput]);
+
+    const db = getFirestore();
 
     function checkRequired() {
         for (var i = 0; i < requiredRefs.current.length; i++) {
@@ -23,7 +27,7 @@ const ReviewSubmitter = () => {
         }
         return true;
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         if (!checkRequired()) {
             return;
@@ -33,53 +37,11 @@ const ReviewSubmitter = () => {
             alert("Your class name, " + classInput.current.value + " is not in our list of classes. Please choose a class in the dropdown.");
             return;
         }
-        // const uid = firebase.auth().currentUser.uid;
-        // console.log("submitting");
-        // sha256(uid + classId).then((reviewId) => {
-        //     console.log(reviewId);
-        //     const classRef = db.collection("classes").doc(classId);
-        //     const reviewRef = classRef.collection("reviews").doc(reviewId);
+        else{
 
-        //     const userRef = db.collection("users").doc(uid);
-        //     const batch = db.batch();
-        //     userRef
-        //         .update({ reviewIds: firebase.firestore.FieldValue.arrayUnion(reviewId) })
-        //         .then(makeReview)
-        //         .catch((e) => {
-        //             console.log("creating user now");
-        //             userRef
-        //                 .set({ reviewIds: [reviewId] })
-        //                 .then(makeReview)
-        //                 .catch((e) => {
-        //                     console.log(e);
-        //                     console.log(
-        //                         "user already exists. Therefore the review already exists! We need to decide if we want to allow reviews to be edited/deleted!!"
-        //                     );
-        //                 });
-        //         });
-        //     function makeReview() {
-        //         batch.update(classRef, {
-        //             reviewCt: firebase.firestore.FieldValue.increment(1),
-        //             sumOfStars: firebase.firestore.FieldValue.increment(ratingInput.current.value),
-        //         });
-        //         batch.set(reviewRef, {
-        //             class: classInput.current.value,
-        //             rating: Number(ratingInput.current.value),
-        //             timeSpentPerNight: Number(timeInput.current.value),
-        //             stressLevel: Number(stressInput.current.value),
-        //             review: reviewInput.current.value,
-        //         });
-        //         batch.set(reviewRef.collection("diffPerms").doc("private"), { uid: uid });
-        //         batch.commit().then(() => {
-        //             alert("Your review has been submitted👍");
-        //             formRefs.current.forEach((e) => {
-        //                 e.current.value = null;
-        //             });
-        //         });
-            
+        }
+
     };
-    console.log(ratingInput.current);
-    // (nameOfClass X) (secondClass X)
     return (
         <div className='pageContent'>
             <div className='mainText' style={{ width: "" }}>
