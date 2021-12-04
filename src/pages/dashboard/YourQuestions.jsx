@@ -4,7 +4,7 @@ import IndQuestion from "./IndQuestion";
 import Fab from "@mui/material/Fab";
 import { useEffect, useState } from "react";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-
+import { Link } from "react-router-dom";
 const db = getFirestore();
 const YourQuestions = (params) => {
     const [questionData, setQuestionData] = useState([]);
@@ -41,9 +41,11 @@ const YourQuestions = (params) => {
         <div className='your-questions-container'>
             <div className='your-questions-title'>
                 <h1>Your Recent Questions</h1>
-                <Fab color='primary' aria-label='add' style={{ fontSize: "1.5rem" }}>
-                    +
-                </Fab>
+                <Link to='/question/new'>
+                    <Fab color='primary' aria-label='add' style={{ fontSize: "1.5rem" }}>
+                        +
+                    </Fab>
+                </Link>
             </div>
             <div className='all-questions-container'>
                 {loading ? (
@@ -57,7 +59,10 @@ const YourQuestions = (params) => {
                         })}
                         {questionData.length < 4 ? (
                             <h2 style={{ marginTop: "auto" }}>
-                                Have more questions? <Button variant='contained'>Ask them here</Button>
+                                Have more questions?
+                                <Link to='/question/new'>
+                                    <Button variant='contained'>Ask them here</Button>
+                                </Link>
                             </h2>
                         ) : (
                             <></>

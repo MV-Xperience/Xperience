@@ -11,6 +11,7 @@
     margin: 0.5rem 0;
     font-weight: 400;
     margin-bottom: 0px;
+    margin-top: 2rem;
 }
 .actual-question-input {
     font-size: 1rem;
@@ -28,15 +29,73 @@
 .tag-input-container {
     width: 100%;
     box-shadow: var(--box-shadow);
-    border-radius: 2rem;
+    border-radius: 10rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    height: 5rem;
 }
 .tag-input-container input {
     background-color: var(--accent-background);
     margin: 1rem;
     padding: 1rem;
     border-radius: 2rem;
-    border: 1px solid var(--accent-background) !important;
+    outline: none;
+    border: none;
+    font-size: 0.9rem;
 }
-.tag-input-container input:focus {
-    border: 1px solid var(--border-shadow) !important;
+.each-tag-entry {
+    min-width: 10%;
+    border-radius: 2rem;
+    border: 2px solid var(--shadow-color);
+    box-shadow: var(--box-shadow);
+    margin: 1rem;
+    margin-right: 0rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.each-tag-entry p {
+    padding: 1rem;
+    font-size: 0.9rem;
+    margin: 0;
+}
+.each-tag-entry button {
+    background-color: transparent;
+    border: 0;
+    fill: var(--shadow-color);
+    cursor: pointer;
+    transition: all 0.25s;
+    height: 2.9rem;
+    width: 2.9rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.each-tag-entry button:hover {
+    transform: rotate(90deg);
+}
+.fade-in-alert {
+    animation: comeIn 2s;
+    height: 0px;
+    opacity: 0;
+}
+@keyframes comeIn {
+    0% {
+        opacity: 0;
+        height: 0px;
+    }
+    10% {
+        opacity: 1;
+        height: 2.5rem;
+    }
+    90% {
+        opacity: 1;
+        height: 2.5rem;
+    }
+    100% {
+        opacity: 0;
+        height: 0px;
+    }
 }
