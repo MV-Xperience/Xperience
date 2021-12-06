@@ -17,7 +17,7 @@ const NewQuestion = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const [tags, setTags] = useState([]);
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     let navigate = useNavigate();
     useEffect(() => {
         if (!loading) {
@@ -26,7 +26,7 @@ const NewQuestion = () => {
                 navigate("/login");
             }
         }
-    }, [loading]);
+    }, [loading, navigate, user]);
     const addTag = (e) => {
         e.preventDefault();
         console.log(tagInput.current.value);
@@ -52,7 +52,7 @@ const NewQuestion = () => {
     const removeItem = (tagToRemove) => {
         let array = [...tags];
         array = array.filter((tag) => {
-            return tag != tagToRemove;
+            return tag !== tagToRemove;
         });
         console.log(array);
         setTags(array);
