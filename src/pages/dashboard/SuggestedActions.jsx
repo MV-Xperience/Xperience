@@ -4,7 +4,8 @@ import Loading from "../../components/loading/Loading";
 
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-
+import Chip from "@mui/material/Chip";
+import ReplyRoundedIcon from "@mui/icons-material/ReplyRounded";
 const db = getFirestore();
 const SuggestedActions = (params) => {
     const [loading, setLoading] = useState(true);
@@ -63,14 +64,13 @@ const EachSuggestedQuestion = (params) => {
             <p>{params.data.text}</p>
             <div className='each-suggested-question-tag'>
                 {params.data.tags.map((tag) => {
-                    return (
-                        <Button variant='outlined' style={{ borderRadius: 1 + "rem", marginRight: 0.5 + "rem" }}>
-                            {tag}
-                        </Button>
-                    );
+                    return <Chip style={{ borderRadius: 1 + "rem", marginRight: 0.5 + "rem" }} color='primary' clickable={true} label={tag} variant='outlined'></Chip>;
                 })}
             </div>
-            <Link to={"/question/" + params.id}>Reply</Link>
+            <Link to={"/question/" + params.id} className='reply-each-question'>
+                Reply
+                <ReplyRoundedIcon />
+            </Link>
         </div>
     );
 };
