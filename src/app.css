@@ -1,7 +1,6 @@
 @media (prefers-color-scheme: light) {
     html {
         --background-color: white;
-        --main-background-color: white;
         --accent-background: #f5f5f5;
         --content-color: black;
         --shadow-color: gray;
@@ -12,7 +11,6 @@
 @media (prefers-color-scheme: dark) {
     html {
         --background-color: #262626;
-        --main-background-color: #262626;
         --accent-background: black;
         --content-color: white;
         --box-shadow: 0 0 0.5em -0.2em var(--shadow-color);
@@ -25,7 +23,7 @@ html {
     --border-radius: 0.5em;
     margin: 0%;
 
-    background-color: var(--main-background-color);
+    background-color: var(--background-color);
 }
 a {
     text-decoration: none;

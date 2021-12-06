@@ -2,7 +2,7 @@
     box-sizing: border-box;
     padding-left: 3em;
     padding-right: 3em;
-    background-color: var(--main-background-color);
+    background-color: var(--background-color);
 }
 
 .horizontalReviewDiv {

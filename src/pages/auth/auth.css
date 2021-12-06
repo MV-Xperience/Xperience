@@ -4,7 +4,7 @@
     padding: 1rem;
     display: flex;
     align-items: center;
-    background-color: var(--main-background-color);
+    background-color: var(--accent-background);
     border-radius: 1rem;
     border: none;
     box-shadow: var(--box-shadow);
@@ -49,4 +49,8 @@
 .logout-container h1 {
     font-size: 3rem;
     margin-right: 1rem;
+}
+
+button p {
+    color: var(--content-color);
 }
