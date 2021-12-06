@@ -4,8 +4,24 @@ const Slider = forwardRef((props, ref) => {
 
     const [value, setValue] = useState(3);
     const selectedVal = useRef();
-  
-    const updateLook = (newValue)=>{
+   
+
+    useEffect(()=>{
+        setTimeout(() => {
+            setValue(props.defaultValue);
+            updateLook(props.defaultValue);
+        }, 100);
+    }, []);
+
+    const onSliderChange = (event) =>{
+        const newValue = event.target.value;
+        setValue(newValue);
+		window.setTimeout(()=>{
+			updateLook(newValue)
+		}, 0)
+    }
+
+    function updateLook(newValue) {
         const percThrough = ((newValue - props.min) / props.max); // 12.5 bc circle thingy has width of 25px
         let thumbPos = ((newValue - props.min) / props.max) * ref.current.clientWidth; // 12.5 bc circle thingy has width of 25px
         // event.target.style.boxShadow += " 5px 5px 5px black";
@@ -33,22 +49,9 @@ const Slider = forwardRef((props, ref) => {
         ref.current.style.backgroundSize = `${percThrough*100}% 100%`;
         if (selectedVal.current) selectedVal.current.style.left = thumbPos+'px';
     } 
-    
-    useEffect(()=>{
-        setTimeout(() => {
-            setValue(props.defaultValue);
-            updateLook(props.defaultValue);
-        }, 100);
-    }, [props,updateLook]);
-
-    const onSliderChange = (e)=>{
-        const newValue = e.target.value;
-        setValue(newValue);
-        updateLook(newValue);
-    }
-
-    
-	
+	window.addEventListener('resize', e=>{
+		updateLook(value) // doesn't trigger a react redraw but doesn't need to because it directly changes the css
+	})
     return (
         <div className='slider'>
             <input
