@@ -7,6 +7,7 @@ import Login from "./pages/auth/Login.jsx";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Logout from "./pages/auth/Logout.jsx";
 import SubmitReview from "./pages/submitReview/SubmitReview";
+import ViewQuestion from "./pages/viewQuestion/ViewQuestion";
 import NewQuestion from "./pages/newQuestion/NewQuestion";
 
 import "./app.css";
@@ -29,12 +30,13 @@ const App = () => {
                     <Route path='/home'></Route>
                     <Route path='/question'>
                         {/* <QuestionList user={user} /> */}
-                        <Route path='/question/:id' />{/* <ReplyList /> */}
+                        <Route path='/question/:id' element={<ViewQuestion />} />
+
                         <Route path='/question/new' element={<NewQuestion />} />
                     </Route>
                     <Route path='/review'>
                         {/*  */}
-                        <Route path='/review/new' element = {<SubmitReview />}/>
+                        <Route path='/review/new' element={<SubmitReview />} />
                     </Route>
                     <Route path='/about'></Route>
                     <Route path='/logout' element={<Logout />} />
