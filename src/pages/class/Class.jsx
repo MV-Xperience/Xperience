@@ -76,6 +76,52 @@ const Class = () => {
     },[db, id])
 
 
+    const ReviewModal = ()=>{
+      return(
+      
+        <Modal open={openModal} onClose={handleCloseModal} className="modal">
+              <div className='modalContainer'>
+                 <Box className = 'modalContent' >
+
+                  <div className="modalLeft">
+                    <div className = 'modaltitle'>
+                      <h2>Author: {currentReview.author}</h2>
+                      <Rating sx = {{fontSize: '3vw'}} name="read-only" value={currentReview.rating} readOnly />
+                    </div>
+
+                    <h3>{currentReview.review}</h3>
+
+                  </div>
+
+
+                  <div className="modalRight">
+                      <div className='modalData'>                       
+                        <h4>Stress Level: {currentReview.stressLevel}/5</h4>
+                        <h4>Learning Level: {currentReview.learningLevel}/5</h4>
+                        <h4>Difficulty Level: {currentReview.difficulty}/5</h4>
+                        <h4>Time Commitment: {currentReview.timeSpentPerNight} Min per Night</h4>
+                        <h4>Year Taken: {currentReview.yearTaken}</h4>
+
+                      </div>
+                  </div>
+
+                
+
+                  {/* <div className='modalBottom boxButtons'>
+
+                     
+                      <button>🤝 {currentReview.helpfulCount}</button>
+                  </div> */}
+
+                  
+                </Box>
+              </div>
+            </Modal>
+      
+        )
+    }
+
+
 
     const thumb = {
         color: 'primary',
@@ -101,28 +147,14 @@ const Class = () => {
     return ( 
         <>
 
-      
-
-
             {loading ? <Loading /> : 
 
               <div className= "classContainer">
+                
+              <ReviewModal/>
+              
 
-              <Modal
-              open={openModal}
-              onClose={handleCloseModal}
-              >
-              <div className='modalContainer'>
-                 <Box className = 'modalContent' >
-                  <h4>{currentReview.review}</h4>
-                  <div className = 'boxButtons'>
-                      <Rating name="read-only" value={currentReview.rating} readOnly />
-                  </div>
-                </Box>
-              </div>
-            </Modal>
-
-            <Navbar />
+              <Navbar />
                 <div className= "title">
                   <h1>{classData.name}</h1>                
                   <div className= "stars">
