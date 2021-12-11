@@ -1,14 +1,18 @@
 import {useParams} from 'react-router-dom';
 import {getFirestore, doc, getDoc, orderBy, query, collection, getDocs} from "firebase/firestore";
 import {useEffect, useState} from 'react';
+
 import Loading from "../../components/loading/Loading";
 import Navbar from "../../components/navbar/Navbar";
+
+import NoReview from './NoReview';
+
 import './class.css';
+
 import Rating from '@mui/material/Rating';
 import Slider from '@mui/material/Slider';
-import NoReview from './NoReview';
-import Review from './Review';
-
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 
 
 const Class = () => {
@@ -20,6 +24,20 @@ const Class = () => {
     const [loading, setLoading] = useState(false)
 
     const [classReviewData, setClassReviewData] = useState({})
+
+    const [openModal, setOpenModal] = useState(false);
+    const [currentReview, setCurrentReview] = useState({});
+
+    const handleOpenModal = (doc) => {
+        setOpenModal(true);
+        setCurrentReview(doc.data())
+        console.log(openModal);
+    }
+    const handleCloseModal = () => {
+        setOpenModal(false);
+        console.log(openModal);
+    }
+
 
     useEffect(() => {
 
@@ -65,20 +83,48 @@ const Class = () => {
         height: '4vh',
     }
 
-    
+    const Review = ({review}) => {
+
+      return ( 
+          <> 
+              <Box className = 'box' onClick = {()=>handleOpenModal(review)}>
+                  <h4>{review.data().review}</h4>
+                  <div className = 'boxButtons'>
+                      <Rating name="read-only" value={review.data().rating} readOnly />
+                      <button>🤝 {review.data().helpfulCount}</button>
+                  </div>
+              </Box> 
+          </>
+       );
+  }
 
     return ( 
         <>
 
-            <Navbar />
+      
+
 
             {loading ? <Loading /> : 
 
               <div className= "classContainer">
+
+              <Modal
+              open={openModal}
+              onClose={handleCloseModal}
+              >
+              <div className='modalContainer'>
+                 <Box className = 'modalContent' >
+                  <h4>{currentReview.review}</h4>
+                  <div className = 'boxButtons'>
+                      <Rating name="read-only" value={currentReview.rating} readOnly />
+                  </div>
+                </Box>
+              </div>
+            </Modal>
+
+            <Navbar />
                 <div className= "title">
-                  <h1>{classData.name}</h1>
-
-
+                  <h1>{classData.name}</h1>                
                   <div className= "stars">
                     <Rating 
                     

@@ -83,7 +83,6 @@ h4{
     margin: 2vh 0;
     padding: 0.5vh 1vw;
     transition: all 0.1s ease-in;
-    left: -1vw;
 }
 .box:hover{
     box-shadow: 0 0 10px var(--accent-color);
@@ -112,4 +111,26 @@ h4{
 
 }
 
+.modalContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    outline: none;
+    margin-top: 25vh;
+    z-index: 2;
+}
+
+.modalContent{
+    background-color: var(--accent-background);
+    width: 75vw;
+    height: 50vh;
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
 
