@@ -1,0 +1,115 @@
+h1{
+    font-size: 3.5em;
+}
+h4{
+    font-weight: normal;
+}
+
+.classContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2vh 3vw;
+}
+
+.classContainer h3{
+    font-weight: normal;
+}
+
+.classContent{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.classContent > *{
+    margin: 0 3vw;
+}
+
+.leftSide{
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    width: 50vw;
+}
+
+.rightSide{
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    width: 35vw;
+}
+
+.noReviewContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.sliders{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5vh;
+}
+
+.sliders h3{
+    font-weight: 500;
+}
+
+.noReviewContainer h1{
+    margin: 10vh 0 0 5vh;
+    color: var(--accent-color);
+}
+
+.noReviewContainer a{
+    color: black;
+    margin: 0;
+    transition: all 0.3s ease-in;
+}
+.noReviewContainer a:hover{
+    color: var(--accent-color);
+}
+
+.box{
+    margin: 2vh 0;
+    padding: 0.5vh 1vw;
+    transition: all 0.1s ease-in;
+    left: -1vw;
+}
+.box:hover{
+    box-shadow: 0 0 10px var(--accent-color);
+    cursor: pointer;
+}
+
+.boxButtons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.boxButtons button{
+    outline: none;
+    border: 3px solid var(--accent-color);
+    border-radius: 16px;
+    background: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    font-size: 1.5em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+

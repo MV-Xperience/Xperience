@@ -78,7 +78,7 @@ const NewQuestion = () => {
     };
     return (
         <>
-            <Navbar></Navbar>
+            <Navbar />
             <div className='new-question-container'>
                 <h1>Ask a Question</h1>
                 <h2>Question:</h2>
