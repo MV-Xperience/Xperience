@@ -43,8 +43,29 @@ h4{
     display: flex;
     flex-direction: column;
     align-self: start;
-    width: 35vw;
+    width: calc(35vw + 10px);
+
 }
+.reviews{
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    width: 35vw;
+    max-height: 55vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.reviews::-webkit-scrollbar{
+    width: 10px;
+    border-radius: var(--border-radius);
+    background-color: var(--accent-background);
+}
+
+.reviews::-webkit-scrollbar-thumb{
+    background-color: var(--accent-color);
+}
+
 
 .noReviewContainer{
     display: flex;
@@ -85,7 +106,6 @@ h4{
     transition: all 0.1s ease-in;
 }
 .box:hover{
-    box-shadow: 0 0 10px var(--accent-color);
     cursor: pointer;
 }
 
@@ -93,22 +113,27 @@ h4{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
+    gap: 1vw;
+}
+
+.reviewStar{
+    font-size: '3em',
 }
 
 .boxButtons button{
     outline: none;
     border: 3px solid var(--accent-color);
-    border-radius: 16px;
+    border-radius: var(--border-radius);
     background: none;
     cursor: pointer;
     transition: all 0.3s ease-in;
-    font-size: 1.5em;
+    font-size: 1em;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
+    width: 4vw;
+    height: 3vw;
 }
 
 .modalContainer{
@@ -162,7 +187,7 @@ h4{
     font-weight: normal;
 }
 .modalContent h4{
-    font-size: 1.25em;
+    font-size: 1.5em;
     margin: 1vh 0;
 }
 

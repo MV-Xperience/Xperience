@@ -86,7 +86,7 @@ const Class = () => {
                   <div className="modalLeft">
                     <div className = 'modaltitle'>
                       <h2>Author: {currentReview.author}</h2>
-                      <Rating sx = {{fontSize: '3vw'}} name="read-only" value={currentReview.rating} readOnly />
+                      <Rating sx = {{fontSize: '1.25em'}} name="read-only" value={currentReview.rating} readOnly />
                     </div>
 
                     <h3>{currentReview.review}</h3>
@@ -102,18 +102,13 @@ const Class = () => {
                         <h4>Time Commitment: {currentReview.timeSpentPerNight} Min per Night</h4>
                         <h4>Year Taken: {currentReview.yearTaken}</h4>
 
+                        <div className='boxButtons'>
+                          <button>❤️{currentReview.likeCount}</button>
+                          <button>🤝 {currentReview.helpfulCount}</button>
+                          <button>🚩{currentReview.reportCount}</button>
+                        </div>
                       </div>
-                  </div>
-
-                
-
-                  {/* <div className='modalBottom boxButtons'>
-
-                     
-                      <button>🤝 {currentReview.helpfulCount}</button>
-                  </div> */}
-
-                  
+                  </div> 
                 </Box>
               </div>
             </Modal>
@@ -129,20 +124,24 @@ const Class = () => {
         height: '4vh',
     }
 
-    const Review = ({review}) => {
+      const Review = ({review}) => {
 
-      return ( 
-          <> 
-              <Box className = 'box' onClick = {()=>handleOpenModal(review)}>
-                  <h4>{review.data().review}</h4>
-                  <div className = 'boxButtons'>
-                      <Rating name="read-only" value={review.data().rating} readOnly />
-                      <button>🤝 {review.data().helpfulCount}</button>
-                  </div>
-              </Box> 
-          </>
-       );
-  }
+        return ( 
+            <> 
+                <Box className = 'box' onClick = {()=>handleOpenModal(review)}>
+                    <h4>{review.data().review.substring(0, 200)}...</h4>
+                    <div className = 'boxButtons'>
+                        <Rating className = 'reviewStar' sx = {{fontSize: '1.75em'}} value={review.data().rating} readOnly />
+                        <div className = 'boxButtons'>
+                            <button>❤️{review.data().likeCount}</button>
+                            <button>🤝 {review.data().helpfulCount}</button>
+                            <button>🚩{review.data().reportCount}</button>
+                        </div>
+                    </div>
+                </Box> 
+            </>
+        );
+    }
 
     return ( 
         <>
@@ -187,7 +186,12 @@ const Class = () => {
                       <h3>Stress Level</h3>
                       <Slider color= "primary" valueLabelDisplay="on" readOnly step={0.25} value = {classData.sumOfStress/classData.reviewCt} max = {5} min = {0} sx = {{width: '35vw',height: '3vh', '& .MuiSlider-thumb': thumb}}/>
                     </div>
-        
+
+                    <div className= "sliders">
+                      <h3>Learning Level</h3>
+                      <Slider color= "primary" valueLabelDisplay="on" readOnly step={0.25} value = {classData.sumOfLearning/classData.reviewCt} max = {5} min = {0} sx = {{width: '35vw',height: '3vh', '& .MuiSlider-thumb': thumb}}/>
+                    </div>
+                    
                     <div className= "sliders">
                       <h3>Difficulty Level</h3>
                       <Slider color= "primary" valueLabelDisplay="on" readOnly step={0.25} value = {classData.sumOfStress/classData.reviewCt} max = {5} min = {0} sx = {{width: '35vw',height: '3vh', '& .MuiSlider-thumb': thumb}}/>
@@ -201,11 +205,13 @@ const Class = () => {
 
                   <div className="rightSide">
                     <h1>Reviews</h1>
-                    {classReviewData.map((review, index) => {
-                      return (
-                        <Review key={index} review={review}/>
-                      )
-                    })}
+                    <div className="reviews">
+                      {classReviewData.map((review, index) => {
+                        return (
+                          <Review key={index} review={review}/>
+                        )
+                      })}
+                    </div>
                   </div>
                 </div> : <NoReview />}
               </div> 

@@ -1,1 +1,488 @@
-{"AP STUDIO ART: 2D":{"code":"IA1020"},"AP STUDIO ART: 3D":{"code":"IA0110"},"AP STUDIO ART: DRAWING":{"code":"IA1010"},"ART SURVEY":{"code":"IC0010"},"CERAMICS":{"code":"IC0020"},"COMMERCIAL ART":{"code":"KC1080"},"DRAWING I":{"code":"IC1010"},"DRAWING II":{"code":"IC1011"},"PAINTING I":{"code":"IC1110"},"PHOTOGRAPHY I":{"code":"IC1210"},"PHOTOGRAPHY II":{"code":"IC1211"},"PUBLICATION DESIGN":{"code":"BC2210"},"DIGITAL ART & IMAGING":{"code":"IC1230"},"CONDITIONING":{"code":"PO1250"},"AVID":{"code":"HC0020-30-40-50"},"AVID PEER TUTOR":{"code":"HO0070"},"ENGINEERING TECHNOLOGY I":{"code":"BC2020"},"ENGINEERING TECHNOLOGY II":{"code":"BC2030"},"INNOVATIVE DESIGN CAPSTONE":{"code":"BC2050"},"ARCHITECTURAL DESIGN":{"code":"BC3010"},"INTRO TO COMPUTER SCIENCE":{"code":"BC1010"},"AP COMPUTER SCIENCE":{"code":"BA1010"},"APP AND GAME DESIGN":{"code":"BC1018"},"ADVANCED COMPUTER SCIENCE":{"code":"BC1019"},"ELD I LITERATURE":{"code":"GC1010"},"ELD I ORAL":{"code":"GC1011"},"ELD II LITERATURE":{"code":"GC1020"},"ELD II ORAL":{"code":"GC1021"},"ELD III LITERATURE":{"code":"GC1030"},"SURVEY/COMP LIT SDAIE":{"code":"DC1011"},"ELD IV LITERATURE":{"code":"GC1040"},"SURVEY/COMP LIT":{"code":"DC1010"},"CIVICS ELL":{"code":"EI1030"},"ECON ELL":{"code":"EI1031"},"CWI ELL":{"code":"GI1130"},"US HISTORY SDAIE":{"code":"EC3011"},"AMERICAN LITERATURE":{"code":"DC3010"},"AMERICAN LITERATURE HONORS":{"code":"DB3018"},"AP LANGUAGE & COMPOSITION":{"code":"DA2010"},"AP LITERATURE & COMPOSITION":{"code":"DA4010"},"COMP JOURNALISM":{"code":"DC5051"},"COMPOSITION WORLD LITERATURE":{"code":"DC2010"},"COMP WORLD LIT SDAIE":{"code":"DC2011"},"INTRO TO JOURNALISM":{"code":"DC5050"},"PHILOSOPHY IN LITERATURE":{"code":"DC5030"},"SURVEY COMPOSITION LIT.":{"code":"DC1010"},"SURVEY COMPOSITION SDAIE":{"code":"DC1011"},"HEALTH EDUCATION":{"code":"LC1013"},"HEALTH & WELLNESS":{"code":"LC1015"},"ALGEBRA 1 ENHANCED":{"code":"AI1210"},"Algebra Skill":{"code":"AI1110"},"ALGEBRA II":{"code":"AC3010"},"ALGEBRA II ENHANCED A":{"code":"AI3110"},"ALGEBRA II ENHANCED B":{"code":"AI3111"},"ALGEBRA II-HONORS":{"code":"AB3010"},"AP CALCULUS AB":{"code":"AA5010"},"AP CALCULUS BC":{"code":"AA5011"},"AP STATISTICS":{"code":"AA6010"},"CALCULUS":{"code":"AC5010"},"FINANCIAL MATH":{"code":"AC3115"},"GEOMETRY":{"code":"AC2110"},"GEOMETRY HONORS":{"code":"AB2010"},"MATH MASTERY":{"code":"AI0010"},"MULTIVARIABLE CALCULUS HONORS":{"code":"AB5010"},"STATISTICS":{"code":"AC6010"},"TRIGONOMETRY/MATH ANALYSIS":{"code":"AC4010"},"HONORS":{"code":"AB4010"},"BROADCASTING":{"code":"KC1050"},"PEER TUTOR":{"code":"NO1060"},"RALLY":{"code":"OO1050"},"TEACHER'S AIDE":{"code":"SO1230"},"STUDENT GOVERNMENT":{"code":"OC1020"},"STUDENT ACTIVITIES":{"code":"OC1030"},"AMBASSADORS":{"code":"OC1035"},"A CAPPELLA - TREBLE VOICES":{"code":"JC1110"},"A CAPPELLA - BASS CLEF VOICES":{"code":"JC1110"},"CHAMBER CHOIR":{"code":"JC1100"},"CONCERT CHOIR":{"code":"JC1030"},"MADRIGALS":{"code":"JC1090"},"ADVANCED JAZZ DANCE":{"code":"JC1211"},"INTERMEDIATE JAZZ DANCE":{"code":"JC1212"},"JAZZ DANCE":{"code":"JC1210"},"WORLD DANCE":{"code":"JC1215"},"ACTING I":{"code":"JC1410"},"ACTING II":{"code":"JC1420"},"ACTING III":{"code":"JC1430"},"STAGECRAFT I":{"code":"JC1510"},"STAGECRAFT II":{"code":"JC1520"},"AUXILIARY UNIT":{"code":"JO1211"},"CHAMBER ENSEMBLE":{"code":"JC1250"},"MARCHING BAND":{"code":"JC1200"},"STRING ORCHESTRA":{"code":"JC1270"},"SYMPHONIC BAND":{"code":"JC1230"},"SYMPHONY ORCHESTRA":{"code":"JC1280"},"INTRO TO MUSIC":{"code":"JC1310"},"WIND ENSEMBLE":{"code":"JC1240"},"WINTER AUXILIARY":{"code":"JO1212"},"GR. 9 PE CORE":{"code":"PO1010"},"GR. 10-12 WEIGHT TRAINING":{"code":"PO1230"},"GR. 10-12 ADVANCED WEIGHT TRAINING":{"code":"PO1231"},"GR. 10-12 TEAM SPORTS":{"code":"PO1260"},"GR. 10-12 TOTAL FITNESS":{"code":"PO1270"},"ANATOMY & PHYSIOLOGY":{"code":"CC4025"},"AP BIOLOGY":{"code":"CA1010"},"AP CHEMISTRY":{"code":"CA2010"},"AP ENVIRONMENTAL SCIENCE":{"code":"CA4010"},"AP PHYSICS 1":{"code":"CA3010"},"AP PHYSICS C":{"code":"CA3039-42"},"BIOLOGY":{"code":"CC1010"},"BIOLOGY HONORS":{"code":"CB1010"},"CHEMISTRY":{"code":"CC2010"},"CHEMISTRY HONORS":{"code":"CB2010"},"ENVIRONMENTAL SCIENCE":{"code":"CC4010"},"PHYSICS":{"code":"CC3010"},"PRE-BIOLOGY":{"code":"CC1012"},"PRE-ENVIRONMENTAL SCIENCE":{"code":"CC4012"},"AP EUROPEAN HISTORY":{"code":"EA2010"},"AP MACROECONOMICS":{"code":"EA4020"},"AP PSYCHOLOGY":{"code":"EA4030"},"AP US GOVERNMENT & POLITICS":{"code":"EA4010"},"AP US HISTORY":{"code":"EA3010"},"SOCIAL JUSTICE":{"code":"EC4410"},"AP WORLD HISTORY":{"code":"EA2030"},"CIVICS":{"code":"EC4010"},"CONTEMPORARY WORLD ISSUES":{"code":"EC1110"},"ECONOMICS":{"code":"EC4020"},"US HISTORY":{"code":"EC3010"},"WORLD STUDIES":{"code":"EC1010"},"AP JAPANESE LANG/CULTURE":{"code":"FA4014"},"AP SPANISH LANG/CULTURE":{"code":"FA2015"},"AP SPANISH LIT/CULTURE":{"code":"FA2017"},"FRENCH I":{"code":"FC1010"},"FRENCH II":{"code":"FC1011"},"FRENCH III":{"code":"FC1012"},"FRENCH III HONORS":{"code":"FB1013"},"FRENCH V HONORS":{"code":"FB1016"},"JAPANESE I":{"code":"FC4010"},"JAPANESE II":{"code":"FC4011"},"JAPANESE III":{"code":"FC4012"},"JAPANESE III H":{"code":"FB4010"},"JAPANESE IV":{"code":"FC4013"},"MANDARIN/CHINESE I":{"code":"FC5010"},"MANDARIN/CHINESE II":{"code":"FC5011"},"MANDARIN/CHINESE III":{"code":"FC5012"},"MANDARIN/CHINESE IV":{"code":"FC5013"},"MANDARIN/CHINESE IV H":{"code":"FC5014"},"SPANISH l":{"code":"FC2010"},"SPANISH II":{"code":"FC2011"},"SPANISH II HONORS":{"code":"FB2012"},"SPANISH III":{"code":"FB2013"},"SPANISH III HONORS":{"code":"FB2014"},"SPANISH III H for SPANISH SPEAKERS":{"code":"FB2111"},"SPANISH IV":{"code":"FC2015"},"ENGLISH 4":{"code":"TC1030"},"DIGITAL MEDIA I":{"code":"TC1060"},"DIGITAL MEDIA II":{"code":"TC1063"},"DESIGN I":{"code":"TC1040"},"DESIGN II":{"code":"TC1043"},"FILM PRODUCTION I":{"code":"TC1050"},"FILM PRODUCTION II":{"code":"TC1053"},"ANIMATION I":{"code":"TC1070"},"ANIMATION II":{"code":"TC1073"}}
+{
+    "AP STUDIO ART: 2D":{
+       "code":"IA1020"
+    },
+    "AP STUDIO ART: 3D":{
+       "code":"IA0110"
+    },
+    "AP STUDIO ART: DRAWING":{
+       "code":"IA1010"
+    },
+    "ART SURVEY":{
+       "code":"IC0010"
+    },
+    "CERAMICS":{
+       "code":"IC0020"
+    },
+    "COMMERCIAL ART":{
+       "code":"KC1080"
+    },
+    "DRAWING I":{
+       "code":"IC1010"
+    },
+    "DRAWING II":{
+       "code":"IC1011"
+    },
+    "PAINTING I":{
+       "code":"IC1110"
+    },
+    "PHOTOGRAPHY I":{
+       "code":"IC1210"
+    },
+    "PHOTOGRAPHY II":{
+       "code":"IC1211"
+    },
+    "PUBLICATION DESIGN":{
+       "code":"BC2210"
+    },
+    "DIGITAL ART & IMAGING":{
+       "code":"IC1230"
+    },
+    "CONDITIONING":{
+       "code":"PO1250"
+    },
+    "AVID":{
+       "code":"HC0020-30-40-50"
+    },
+    "AVID PEER TUTOR":{
+       "code":"HO0070"
+    },
+    "ENGINEERING TECHNOLOGY I":{
+       "code":"BC2020"
+    },
+    "ENGINEERING TECHNOLOGY II":{
+       "code":"BC2030"
+    },
+    "INNOVATIVE DESIGN CAPSTONE":{
+       "code":"BC2050"
+    },
+    "ARCHITECTURAL DESIGN":{
+       "code":"BC3010"
+    },
+    "INTRO TO COMPUTER SCIENCE":{
+       "code":"BC1010"
+    },
+    "AP COMPUTER SCIENCE":{
+       "code":"BA1010"
+    },
+    "APP AND GAME DESIGN":{
+       "code":"BC1018"
+    },
+    "ADVANCED COMPUTER SCIENCE":{
+       "code":"BC1019"
+    },
+    "ELD I LITERATURE":{
+       "code":"GC1010"
+    },
+    "ELD I ORAL":{
+       "code":"GC1011"
+    },
+    "ELD II LITERATURE":{
+       "code":"GC1020"
+    },
+    "ELD II ORAL":{
+       "code":"GC1021"
+    },
+    "ELD III LITERATURE":{
+       "code":"GC1030"
+    },
+    "SURVEY/COMP LIT SDAIE":{
+       "code":"DC1011"
+    },
+    "ELD IV LITERATURE":{
+       "code":"GC1040"
+    },
+    "SURVEY/COMP LIT":{
+       "code":"DC1010"
+    },
+    "CIVICS ELL":{
+       "code":"EI1030"
+    },
+    "ECON ELL":{
+       "code":"EI1031"
+    },
+    "CWI ELL":{
+       "code":"GI1130"
+    },
+    "US HISTORY SDAIE":{
+       "code":"EC3011"
+    },
+    "AMERICAN LITERATURE":{
+       "code":"DC3010"
+    },
+    "AMERICAN LITERATURE HONORS":{
+       "code":"DB3018"
+    },
+    "AP LANGUAGE & COMPOSITION":{
+       "code":"DA2010"
+    },
+    "AP LITERATURE & COMPOSITION":{
+       "code":"DA4010"
+    },
+    "COMP JOURNALISM":{
+       "code":"DC5051"
+    },
+    "COMPOSITION WORLD LITERATURE":{
+       "code":"DC2010"
+    },
+    "COMP WORLD LIT SDAIE":{
+       "code":"DC2011"
+    },
+    "INTRO TO JOURNALISM":{
+       "code":"DC5050"
+    },
+    "PHILOSOPHY IN LITERATURE":{
+       "code":"DC5030"
+    },
+    "SURVEY COMPOSITION LIT.":{
+       "code":"DC1010"
+    },
+    "SURVEY COMPOSITION SDAIE":{
+       "code":"DC1011"
+    },
+    "HEALTH EDUCATION":{
+       "code":"LC1013"
+    },
+    "HEALTH & WELLNESS":{
+       "code":"LC1015"
+    },
+    "ALGEBRA 1 ENHANCED":{
+       "code":"AI1210"
+    },
+    "Algebra Skill":{
+       "code":"AI1110"
+    },
+    "ALGEBRA II":{
+       "code":"AC3010"
+    },
+    "ALGEBRA II ENHANCED A":{
+       "code":"AI3110"
+    },
+    "ALGEBRA II ENHANCED B":{
+       "code":"AI3111"
+    },
+    "ALGEBRA II-HONORS":{
+       "code":"AB3010"
+    },
+    "AP CALCULUS AB":{
+       "code":"AA5010"
+    },
+    "AP CALCULUS BC":{
+       "code":"AA5011"
+    },
+    "AP STATISTICS":{
+       "code":"AA6010"
+    },
+    "CALCULUS":{
+       "code":"AC5010"
+    },
+    "FINANCIAL MATH":{
+       "code":"AC3115"
+    },
+    "GEOMETRY":{
+       "code":"AC2110"
+    },
+    "GEOMETRY HONORS":{
+       "code":"AB2010"
+    },
+    "MATH MASTERY":{
+       "code":"AI0010"
+    },
+    "MULTIVARIABLE CALCULUS HONORS":{
+       "code":"AB5010"
+    },
+    "STATISTICS":{
+       "code":"AC6010"
+    },
+    "TRIGONOMETRY/MATH ANALYSIS":{
+       "code":"AC4010"
+    },
+    "HONORS":{
+       "code":"AB4010"
+    },
+    "BROADCASTING":{
+       "code":"KC1050"
+    },
+    "PEER TUTOR":{
+       "code":"NO1060"
+    },
+    "RALLY":{
+       "code":"OO1050"
+    },
+    "TEACHER'S AIDE":{
+       "code":"SO1230"
+    },
+    "STUDENT GOVERNMENT":{
+       "code":"OC1020"
+    },
+    "STUDENT ACTIVITIES":{
+       "code":"OC1030"
+    },
+    "AMBASSADORS":{
+       "code":"OC1035"
+    },
+    "A CAPPELLA - TREBLE VOICES":{
+       "code":"JC1110"
+    },
+    "A CAPPELLA - BASS CLEF VOICES":{
+       "code":"JC1110"
+    },
+    "CHAMBER CHOIR":{
+       "code":"JC1100"
+    },
+    "CONCERT CHOIR":{
+       "code":"JC1030"
+    },
+    "MADRIGALS":{
+       "code":"JC1090"
+    },
+    "ADVANCED JAZZ DANCE":{
+       "code":"JC1211"
+    },
+    "INTERMEDIATE JAZZ DANCE":{
+       "code":"JC1212"
+    },
+    "JAZZ DANCE":{
+       "code":"JC1210"
+    },
+    "WORLD DANCE":{
+       "code":"JC1215"
+    },
+    "ACTING I":{
+       "code":"JC1410"
+    },
+    "ACTING II":{
+       "code":"JC1420"
+    },
+    "ACTING III":{
+       "code":"JC1430"
+    },
+    "STAGECRAFT I":{
+       "code":"JC1510"
+    },
+    "STAGECRAFT II":{
+       "code":"JC1520"
+    },
+    "AUXILIARY UNIT":{
+       "code":"JO1211"
+    },
+    "CHAMBER ENSEMBLE":{
+       "code":"JC1250"
+    },
+    "MARCHING BAND":{
+       "code":"JC1200"
+    },
+    "STRING ORCHESTRA":{
+       "code":"JC1270"
+    },
+    "SYMPHONIC BAND":{
+       "code":"JC1230"
+    },
+    "SYMPHONY ORCHESTRA":{
+       "code":"JC1280"
+    },
+    "INTRO TO MUSIC":{
+       "code":"JC1310"
+    },
+    "WIND ENSEMBLE":{
+       "code":"JC1240"
+    },
+    "WINTER AUXILIARY":{
+       "code":"JO1212"
+    },
+    "GR. 9 PE CORE":{
+       "code":"PO1010"
+    },
+    "GR. 10-12 WEIGHT TRAINING":{
+       "code":"PO1230"
+    },
+    "GR. 10-12 ADVANCED WEIGHT TRAINING":{
+       "code":"PO1231"
+    },
+    "GR. 10-12 TEAM SPORTS":{
+       "code":"PO1260"
+    },
+    "GR. 10-12 TOTAL FITNESS":{
+       "code":"PO1270"
+    },
+    "ANATOMY & PHYSIOLOGY":{
+       "code":"CC4025"
+    },
+    "AP BIOLOGY":{
+       "code":"CA1010"
+    },
+    "AP CHEMISTRY":{
+       "code":"CA2010"
+    },
+    "AP ENVIRONMENTAL SCIENCE":{
+       "code":"CA4010"
+    },
+    "AP PHYSICS 1":{
+       "code":"CA3010"
+    },
+    "AP PHYSICS C":{
+       "code":"CA3039-42"
+    },
+    "BIOLOGY":{
+       "code":"CC1010"
+    },
+    "BIOLOGY HONORS":{
+       "code":"CB1010"
+    },
+    "CHEMISTRY":{
+       "code":"CC2010"
+    },
+    "CHEMISTRY HONORS":{
+       "code":"CB2010"
+    },
+    "ENVIRONMENTAL SCIENCE":{
+       "code":"CC4010"
+    },
+    "PHYSICS":{
+       "code":"CC3010"
+    },
+    "PRE-BIOLOGY":{
+       "code":"CC1012"
+    },
+    "PRE-ENVIRONMENTAL SCIENCE":{
+       "code":"CC4012"
+    },
+    "AP EUROPEAN HISTORY":{
+       "code":"EA2010"
+    },
+    "AP MACROECONOMICS":{
+       "code":"EA4020"
+    },
+    "AP PSYCHOLOGY":{
+       "code":"EA4030"
+    },
+    "AP US GOVERNMENT & POLITICS":{
+       "code":"EA4010"
+    },
+    "AP US HISTORY":{
+       "code":"EA3010"
+    },
+    "SOCIAL JUSTICE":{
+       "code":"EC4410"
+    },
+    "AP WORLD HISTORY":{
+       "code":"EA2030"
+    },
+    "CIVICS":{
+       "code":"EC4010"
+    },
+    "CONTEMPORARY WORLD ISSUES":{
+       "code":"EC1110"
+    },
+    "ECONOMICS":{
+       "code":"EC4020"
+    },
+    "US HISTORY":{
+       "code":"EC3010"
+    },
+    "WORLD STUDIES":{
+       "code":"EC1010"
+    },
+    "AP JAPANESE LANG/CULTURE":{
+       "code":"FA4014"
+    },
+    "AP SPANISH LANG/CULTURE":{
+       "code":"FA2015"
+    },
+    "AP SPANISH LIT/CULTURE":{
+       "code":"FA2017"
+    },
+    "FRENCH I":{
+       "code":"FC1010"
+    },
+    "FRENCH II":{
+       "code":"FC1011"
+    },
+    "FRENCH III":{
+       "code":"FC1012"
+    },
+    "FRENCH III HONORS":{
+       "code":"FB1013"
+    },
+    "FRENCH V HONORS":{
+       "code":"FB1016"
+    },
+    "JAPANESE I":{
+       "code":"FC4010"
+    },
+    "JAPANESE II":{
+       "code":"FC4011"
+    },
+    "JAPANESE III":{
+       "code":"FC4012"
+    },
+    "JAPANESE III H":{
+       "code":"FB4010"
+    },
+    "JAPANESE IV":{
+       "code":"FC4013"
+    },
+    "MANDARIN/CHINESE I":{
+       "code":"FC5010"
+    },
+    "MANDARIN/CHINESE II":{
+       "code":"FC5011"
+    },
+    "MANDARIN/CHINESE III":{
+       "code":"FC5012"
+    },
+    "MANDARIN/CHINESE IV":{
+       "code":"FC5013"
+    },
+    "MANDARIN/CHINESE IV H":{
+       "code":"FC5014"
+    },
+    "SPANISH l":{
+       "code":"FC2010"
+    },
+    "SPANISH II":{
+       "code":"FC2011"
+    },
+    "SPANISH II HONORS":{
+       "code":"FB2012"
+    },
+    "SPANISH III":{
+       "code":"FB2013"
+    },
+    "SPANISH III HONORS":{
+       "code":"FB2014"
+    },
+    "SPANISH III H for SPANISH SPEAKERS":{
+       "code":"FB2111"
+    },
+    "SPANISH IV":{
+       "code":"FC2015"
+    },
+    "ENGLISH 4":{
+       "code":"TC1030"
+    },
+    "DIGITAL MEDIA I":{
+       "code":"TC1060"
+    },
+    "DIGITAL MEDIA II":{
+       "code":"TC1063"
+    },
+    "DESIGN I":{
+       "code":"TC1040"
+    },
+    "DESIGN II":{
+       "code":"TC1043"
+    },
+    "FILM PRODUCTION I":{
+       "code":"TC1050"
+    },
+    "FILM PRODUCTION II":{
+       "code":"TC1053"
+    },
+    "ANIMATION I":{
+       "code":"TC1070"
+    },
+    "ANIMATION II":{
+       "code":"TC1073"
+    }
+ }
