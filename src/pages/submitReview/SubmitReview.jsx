@@ -6,7 +6,8 @@ import Loading from "../../components/loading/Loading";
 import Slider from '@mui/material/Slider';
 import Rating from '@mui/material/Rating';
 
-import { getFirestore, collection, addDoc, doc, updateDoc, getDoc} from "@firebase/firestore";
+import { getFirestore, writeBatch, doc, arrayUnion} from "firebase/firestore"; 
+
 import {getAuth} from "@firebase/auth";
 
 const ReviewSubmitter = () => {
@@ -35,7 +36,14 @@ const ReviewSubmitter = () => {
             return;
         }
         else{
-            await addDoc(collection(db, `classes/${classId}/reviews`), {
+
+            const batch = writeBatch(db);
+
+            batch.update(doc(db, `users/${getAuth().currentUser.uid}`), {
+                reviewedClasses: arrayUnion(classId)
+            });     
+
+            const reviewData = {
                 author: getAuth().currentUser.displayName,
                 class: classInput,
                 difficulty: difficultyInput,
@@ -48,17 +56,24 @@ const ReviewSubmitter = () => {
                 helpfulCount: 0,
                 likeCount: 0,
                 reportCount: 0
-            })
+            }
 
-            const classDoc = await getDoc(doc(db, `classes/${classId}`));
-            await updateDoc(doc(db, 'classes', `${classId}`), {
-                reviewCt: classDoc.reviewCt + 1,
-                sumOfStars: classDoc.sumOfStars + rating,
-                sumOfDiffulty: classDoc.sumOfDiffulty + difficultyInput,
-                sumOfLearning: classDoc.sumOfLearning + learningInput,
-                sumOfStress: classDoc.sumOfStress + stressInput,
-                sumOfTimeCommit: classDoc.sumOfTimeCommit + timeInput,
-            }).then(() => {
+            batch.set(doc(db, `classes/${classId}/reviews/${getAuth().currentUser.uid}`), reviewData); 
+
+            const classRef = doc(db, `classes/${classId}`);
+
+            const updateData = {
+                reviewCt: classRef.reviewCt + 1,
+                sumOfStars: classRef.sumOfStars + rating,
+                sumOfDiffulty: classRef.sumOfDiffulty + difficultyInput,
+                sumOfLearning: classRef.sumOfLearning + learningInput,
+                sumOfStress: classRef.sumOfStress + stressInput,
+                sumOfTimeCommit: classRef.sumOfTimeCommit + timeInput
+            }
+
+            batch.update(classRef, updateData)
+
+            await batch.commit().then(() => {
                 setClassInput('')
                 setRating(0)
                 setReview('')
@@ -69,7 +84,7 @@ const ReviewSubmitter = () => {
                 setYearInput('');
                 setLoading(false);
                 alert("Your review has been submitted!");
-            })
+            })    
         }
     };
 
