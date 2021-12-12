@@ -53,9 +53,9 @@ const ReviewSubmitter = () => {
             const classDoc = await getDoc(doc(db, `classes/${classId}`));
             await updateDoc(doc(db, 'classes', `${classId}`), {
                 reviewCt: classDoc.reviewCt + 1,
+                sumOfStars: classDoc.sumOfStars + rating,
                 sumOfDiffulty: classDoc.sumOfDiffulty + difficultyInput,
                 sumOfLearning: classDoc.sumOfLearning + learningInput,
-                sumOfLearning: classDoc.sumOfLearning + rating,
                 sumOfStress: classDoc.sumOfStress + stressInput,
                 sumOfTimeCommit: classDoc.sumOfTimeCommit + timeInput,
             }).then(() => {
