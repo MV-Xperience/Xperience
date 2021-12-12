@@ -51,16 +51,14 @@ const ReviewSubmitter = () => {
             })
 
             const classDoc = await getDoc(doc(db, `classes/${classId}`));
-            console.log('got here')
             await updateDoc(doc(db, 'classes', `${classId}`), {
                 reviewCt: classDoc.reviewCt + 1,
                 sumOfDiffulty: classDoc.sumOfDiffulty + difficultyInput,
                 sumOfLearning: classDoc.sumOfLearning + learningInput,
-                rating: classDoc.rating + rating,
+                sumOfLearning: classDoc.sumOfLearning + rating,
                 sumOfStress: classDoc.sumOfStress + stressInput,
                 sumOfTimeCommit: classDoc.sumOfTimeCommit + timeInput,
             }).then(() => {
-                setLoading(false);
                 setClassInput('')
                 setRating(0)
                 setReview('')
@@ -69,6 +67,7 @@ const ReviewSubmitter = () => {
                 setStressInput(2)
                 setDifficultyInput(3)
                 setYearInput('');
+                setLoading(false);
                 alert("Your review has been submitted!");
             })
         }
@@ -101,7 +100,7 @@ const ReviewSubmitter = () => {
                         return <option key = {index} value={className}></option>;
                     })}
                 </datalist>
-                <form id='enterReview'>
+                <form id='enterReview' onSubmit={handleSubmit}>
                     {/* <div className='titlesforReview required'>Class Name</div> */}
                     <input type='text' required value={classInput} list='classes' onChange = {(e)=>setClassInput(e.target.value)}placeholder='Search for the class you are reviewing...'></input>
                         <div className = 'inputRating'>
@@ -131,7 +130,7 @@ const ReviewSubmitter = () => {
                             <Slider valueLabelDisplay="on" value={timeInput} min={0} max={180} step={15} required defaultValue={60} sx = {sliderStyles} onChange={(event, newValue) => {setTimeInput(newValue)}}></Slider>
                         </div>
                     </div>
-                    <input type='Submit' id='subMainButton' className='reviewSubmit' onClick = {handleSubmit}/>
+                    <input type='Submit' id='subMainButton' className='reviewSubmit'/>
                     {/* <div className='titlesforReview required'>General Review</div> */}
                 </form>
             </div>}
