@@ -6,7 +6,7 @@ import Loading from "../../components/loading/Loading";
 import Slider from '@mui/material/Slider';
 import Rating from '@mui/material/Rating';
 
-import { getFirestore, writeBatch, doc, arrayUnion} from "firebase/firestore"; 
+import { getFirestore, writeBatch, doc, arrayUnion, getDoc, increment} from "firebase/firestore"; 
 
 import {getAuth} from "@firebase/auth";
 
@@ -27,6 +27,7 @@ const ReviewSubmitter = () => {
 
     const handleSubmit = async(e) => {
         setLoading(true);
+        e.preventDefault();
         
         const classId = classNames[classInput]?.code;
 
@@ -58,17 +59,21 @@ const ReviewSubmitter = () => {
                 reportCount: 0
             }
 
-            batch.set(doc(db, `classes/${classId}/reviews/${getAuth().currentUser.uid}`), reviewData); 
-
             const classRef = doc(db, `classes/${classId}`);
 
+            batch.update(doc(db, 'users/' + getAuth().currentUser.uid), {
+                reviewedClasses: arrayUnion(classId)
+            });
+
+            batch.set(doc(classRef, `/reviews/${getAuth().currentUser.uid}`), reviewData); 
+            console.log(rating)
             const updateData = {
-                reviewCt: classRef.reviewCt + 1,
-                sumOfStars: classRef.sumOfStars + rating,
-                sumOfDiffulty: classRef.sumOfDiffulty + difficultyInput,
-                sumOfLearning: classRef.sumOfLearning + learningInput,
-                sumOfStress: classRef.sumOfStress + stressInput,
-                sumOfTimeCommit: classRef.sumOfTimeCommit + timeInput
+                reviewCt: increment(1),
+                sumOfStars: increment(rating),
+                sumOfDiffulty: increment(difficultyInput),
+                sumOfLearning: increment(learningInput),
+                sumOfStress: increment(stressInput),
+                sumOfTimeCommit: increment(timeInput)
             }
 
             batch.update(classRef, updateData)
@@ -86,6 +91,7 @@ const ReviewSubmitter = () => {
                 alert("Your review has been submitted!");
             })    
         }
+        return false;
     };
 
     const thumbStyle = {
@@ -105,7 +111,7 @@ const ReviewSubmitter = () => {
     return (
         <>
             <Navbar />
-            {loading ? <Loading /> : 
+            {loading && <Loading />}
             <div className='pageContent'>
                 <div className='mainText' style={{ width: "" }}>
                     <h1 className='pageHeading'>Submit A Review</h1>
@@ -148,7 +154,7 @@ const ReviewSubmitter = () => {
                     <input type='Submit' id='subMainButton' className='reviewSubmit'/>
                     {/* <div className='titlesforReview required'>General Review</div> */}
                 </form>
-            </div>}
+            </div>
         </>
     );
 };
