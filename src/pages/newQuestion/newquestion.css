@@ -16,7 +16,7 @@
 .actual-question-input {
     font-size: 1rem;
     width: 100%;
-    border-radius: 1rem 1rem 1rem 1rem;
+    border-radius: var(--border-radius);
     background-color: var(--accent-background);
     border-bottom: 3px solid var(--accent-background) !important;
     /* box-shadow: var(--box-shadow); */
@@ -24,7 +24,7 @@
 }
 .actual-question-input:focus {
     border-bottom: 3px solid var(--accent-color) !important;
-    border-radius: 1rem 1rem 0rem 0rem;
+    border-radius: var(--border-radius) 0rem;
 }
 .tag-input-container {
     width: 100%;
@@ -39,7 +39,7 @@
     background-color: var(--accent-background);
     margin: 1rem;
     padding: 1rem;
-    border-radius: 2rem;
+    border-radius: var(--border-radius);
     outline: none;
     border: none;
     font-size: 0.9rem;

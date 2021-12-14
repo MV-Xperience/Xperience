@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import {HashRouter} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -14,7 +14,6 @@ const theme = createTheme({
     palette: {
         primary: {
             main: "#f2c73b",
-
             contrastText: "#000000",
         },
         secondary: {
@@ -28,9 +27,9 @@ const theme = createTheme({
 ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
-            <HashRouter>
+            <BrowserRouter>
                 <App />
-            </HashRouter>
+            </BrowserRouter>
         </ThemeProvider>
     </React.StrictMode>,
     document.getElementById("root")
@@ -39,4 +38,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.unregister();
+serviceWorkerRegistration.register();

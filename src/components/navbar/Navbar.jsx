@@ -12,10 +12,10 @@ const Navbar = (params) => {
             <nav className='navbar'>
                 <div className='navbarContent'>
                     <Link to='/'>
-                        <img src='favicon.ico' alt='logo' className='navbarLogo' />
+                        <img src='/favicon.ico' alt='logo' className='navbarLogo' />
                     </Link>
                     <div className='searchBar'>
-                        <input className='searchInput' placeholder={"Search for questions, answers, classes ..."}></input>
+                        <input className='searchInput' placeholder={"Search for tags, questions, or classes ..."}></input>
                     </div>
                     <Link className='navbarOption' to='/'>
                         Dashboard

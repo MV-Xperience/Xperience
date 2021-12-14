@@ -9,6 +9,7 @@ import Logout from "./pages/auth/Logout.jsx";
 import SubmitReview from "./pages/submitReview/SubmitReview";
 import ViewQuestion from "./pages/viewQuestion/ViewQuestion";
 import NewQuestion from "./pages/newQuestion/NewQuestion";
+import Class from "./pages/class/Class.jsx";
 
 import "./app.css";
 
@@ -27,20 +28,20 @@ const App = () => {
             <div className='content'>
                 <Routes>
                     <Route path='/' element={<Dashboard />} />
-                    <Route path='/home'></Route>
-                    <Route path='/question'>
+                    <Route path='home'></Route>
+                    <Route path='question'>
                         {/* <QuestionList user={user} /> */}
-                        <Route path='/question/:id' element={<ViewQuestion />} />
-
-                        <Route path='/question/new' element={<NewQuestion />} />
+                        <Route path=':id' />
+                        {/* <ReplyList /> */}
+                        <Route path='new' element={<NewQuestion />} />
                     </Route>
-                    <Route path='/review'>
-                        {/*  */}
-                        <Route path='/review/new' element={<SubmitReview />} />
+                    <Route path='review' element={<SubmitReview />} />
+                    <Route path='class'>
+                        <Route path=':id' element={<Class />} />
                     </Route>
-                    <Route path='/about'></Route>
-                    <Route path='/logout' element={<Logout />} />
-                    <Route path='/login' element={<Login />} />
+                    <Route path='about' />
+                    <Route path='logout' element={<Logout />} />
+                    <Route path='login' element={<Login />} />
                 </Routes>
             </div>
         </div>
