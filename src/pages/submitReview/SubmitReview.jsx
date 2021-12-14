@@ -6,7 +6,7 @@ import Loading from "../../components/loading/Loading";
 import Slider from '@mui/material/Slider';
 import Rating from '@mui/material/Rating';
 
-import { getFirestore, writeBatch, doc, arrayUnion, getDoc, increment} from "firebase/firestore"; 
+import { getFirestore, writeBatch, doc, arrayUnion, increment} from "firebase/firestore"; 
 
 import {getAuth} from "@firebase/auth";
 
@@ -66,7 +66,6 @@ const ReviewSubmitter = () => {
             });
 
             batch.set(doc(classRef, `/reviews/${getAuth().currentUser.uid}`), reviewData); 
-            console.log(rating)
             const updateData = {
                 reviewCt: increment(1),
                 sumOfStars: increment(rating),
@@ -149,6 +148,8 @@ const ReviewSubmitter = () => {
                             <Slider valueLabelDisplay="on" value={difficultyInput} min={0} max={5} step={1} required defaultValue={3} sx = {sliderStyles} onChange={(event, newValue) => {setDifficultyInput(newValue)}}></Slider>
                             <div className='titlesforReview'>Average Time Commitment Per Day</div>
                             <Slider valueLabelDisplay="on" value={timeInput} min={0} max={180} step={15} required defaultValue={60} sx = {sliderStyles} onChange={(event, newValue) => {setTimeInput(newValue)}}></Slider>
+                            <div className='titlesforReview'>What Year Did You Take This Class</div>
+                            <input type='text' value={yearInput} onChange={(e) => {setYearInput(e.target.value)}} placeholder='Enter the year you took this class...'></input>
                         </div>
                     </div>
                     <input type='Submit' id='subMainButton' className='reviewSubmit'/>
