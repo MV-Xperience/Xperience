@@ -13,7 +13,8 @@
     margin-bottom: 0px;
     margin-top: 2rem;
 }
-.actual-question-input {
+
+.new-question-container textarea {
     font-size: 1rem;
     width: 100%;
     border-radius: var(--border-radius);
@@ -21,8 +22,12 @@
     border-bottom: 3px solid var(--accent-background) !important;
     /* box-shadow: var(--box-shadow); */
     transition: all 0.25s;
+    border: 0px;
+    outline: 0px;
+    padding: 1rem;
+    margin-top: 1rem;
 }
-.actual-question-input:focus {
+.new-question-container textarea:focus {
     border-bottom: 3px solid var(--accent-color) !important;
     border-radius: var(--border-radius) 0rem;
 }
@@ -39,7 +44,7 @@
     background-color: var(--accent-background);
     margin: 1rem;
     padding: 1rem;
-    border-radius: var(--border-radius);
+    border-radius: 10rem;
     outline: none;
     border: none;
     font-size: 0.9rem;

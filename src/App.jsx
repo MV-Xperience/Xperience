@@ -31,7 +31,7 @@ const App = () => {
                     <Route path='home'></Route>
                     <Route path='question'>
                         {/* <QuestionList user={user} /> */}
-                        <Route path=':id' />
+                        <Route path=':id' element={<ViewQuestion />} />
                         {/* <ReplyList /> */}
                         <Route path='new' element={<NewQuestion />} />
                     </Route>

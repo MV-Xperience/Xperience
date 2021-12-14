@@ -3,46 +3,43 @@ import "./submitReview.css";
 import classNames from "../../data/classNames2122.json";
 import Navbar from "../../components/navbar/Navbar";
 import Loading from "../../components/loading/Loading";
-import Slider from '@mui/material/Slider';
-import Rating from '@mui/material/Rating';
+import Slider from "@mui/material/Slider";
+import Rating from "@mui/material/Rating";
 
-import { getFirestore, writeBatch, doc, arrayUnion, increment} from "firebase/firestore"; 
+import { getFirestore, writeBatch, doc, arrayUnion, increment } from "firebase/firestore";
 
-import {getAuth} from "@firebase/auth";
+import { getAuth } from "@firebase/auth";
 
 const ReviewSubmitter = () => {
-    const [classInput, setClassInput] = useState('');
+    const [classInput, setClassInput] = useState("");
     const [rating, setRating] = useState(0);
-    const [review, setReview] = useState('');
+    const [review, setReview] = useState("");
     const [learningInput, setLearningInput] = useState(4);
     const [timeInput, setTimeInput] = useState(60);
     const [stressInput, setStressInput] = useState(2);
     const [difficultyInput, setDifficultyInput] = useState(3);
-    const [yearInput, setYearInput] = useState('');
-
+    const [yearInput, setYearInput] = useState("");
 
     const [loading, setLoading] = useState(false);
 
     const db = getFirestore();
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         setLoading(true);
         e.preventDefault();
-        
+
         const classId = classNames[classInput]?.code;
 
         if (!classId) {
             setLoading(false);
             alert("Your class name, " + classInput + " is not in our list of classes. Please choose a class in the dropdown.");
             return;
-        }
-        else{
-
+        } else {
             const batch = writeBatch(db);
 
             batch.update(doc(db, `users/${getAuth().currentUser.uid}`), {
-                reviewedClasses: arrayUnion(classId)
-            });     
+                reviewedClasses: arrayUnion(classId),
+            });
 
             const reviewData = {
                 author: getAuth().currentUser.displayName,
@@ -56,57 +53,56 @@ const ReviewSubmitter = () => {
                 year: yearInput,
                 helpfulCount: 0,
                 likeCount: 0,
-                reportCount: 0
-            }
+                reportCount: 0,
+            };
 
             const classRef = doc(db, `classes/${classId}`);
 
-            batch.update(doc(db, 'users/' + getAuth().currentUser.uid), {
-                reviewedClasses: arrayUnion(classId)
+            batch.update(doc(db, "users/" + getAuth().currentUser.uid), {
+                reviewedClasses: arrayUnion(classId),
             });
 
-            batch.set(doc(classRef, `/reviews/${getAuth().currentUser.uid}`), reviewData); 
+            batch.set(doc(classRef, `/reviews/${getAuth().currentUser.uid}`), reviewData);
             const updateData = {
                 reviewCt: increment(1),
                 sumOfStars: increment(rating),
                 sumOfDiffulty: increment(difficultyInput),
                 sumOfLearning: increment(learningInput),
                 sumOfStress: increment(stressInput),
-                sumOfTimeCommit: increment(timeInput)
-            }
+                sumOfTimeCommit: increment(timeInput),
+            };
 
-            batch.update(classRef, updateData)
+            batch.update(classRef, updateData);
 
             await batch.commit().then(() => {
-                setClassInput('')
-                setRating(0)
-                setReview('')
-                setLearningInput(4)
-                setTimeInput(60)
-                setStressInput(2)
-                setDifficultyInput(3)
-                setYearInput('');
+                setClassInput("");
+                setRating(0);
+                setReview("");
+                setLearningInput(4);
+                setTimeInput(60);
+                setStressInput(2);
+                setDifficultyInput(3);
+                setYearInput("");
                 setLoading(false);
                 alert("Your review has been submitted!");
-            })    
+            });
         }
         return false;
     };
 
     const thumbStyle = {
-        color: 'primary', 
-        width: '3vh',
-        height: '3vh',
-    }
+        color: "primary",
+        width: "3vh",
+        height: "3vh",
+    };
 
     const sliderStyles = {
-        width: '25vw',
-        height: '2vh',
-        '& .MuiSlider-thumb': thumbStyle,
-        color: 'primary',
-    }
+        width: "25vw",
+        height: "2vh",
+        "& .MuiSlider-thumb": thumbStyle,
+        color: "primary",
+    };
 
-    
     return (
         <>
             <Navbar />
@@ -117,16 +113,22 @@ const ReviewSubmitter = () => {
                 </div>
                 <datalist id='classes'>
                     {Object.keys(classNames).map((className, index) => {
-                        return <option key = {index} value={className}></option>;
+                        return <option key={index} value={className}></option>;
                     })}
                 </datalist>
                 <form id='enterReview' onSubmit={handleSubmit}>
                     {/* <div className='titlesforReview required'>Class Name</div> */}
-                    <input type='text' required value={classInput} list='classes' onChange = {(e)=>setClassInput(e.target.value)}placeholder='Search for the class you are reviewing...'></input>
-                        <div className = 'inputRating'>
-                            <h2>Rating</h2>
-                            <Rating sx = {{fontSize: '3em'}} value={rating} onChange={(event, newValue) => {setRating(newValue)}}/>
-                        </div>
+                    <input type='text' required value={classInput} list='classes' onChange={(e) => setClassInput(e.target.value)} placeholder='Search for the class you are reviewing...'></input>
+                    <div className='inputRating'>
+                        <h2>Rating</h2>
+                        <Rating
+                            sx={{ fontSize: "3em" }}
+                            value={rating}
+                            onChange={(event, newValue) => {
+                                setRating(newValue);
+                            }}
+                        />
+                    </div>
                     <div className='horizontalReviewDiv'>
                         <textarea
                             value={review}
@@ -134,25 +136,75 @@ const ReviewSubmitter = () => {
                             id='reviewSelector'
                             required
                             placeholder='Write a thoughful review here!'
-                            maxLength="500"
-                            onChange={(e) => {setReview(e.target.value)}}
-                            >    
-                        </textarea>
+                            maxLength='500'
+                            onChange={(e) => {
+                                setReview(e.target.value);
+                            }}></textarea>
 
                         <div className='reviewSliderDiv'>
                             <div className='titlesforReview'>What Level of Stress Did This Class Give You</div>
-                            <Slider valueLabelDisplay="on" value={stressInput} min={0} max={5} step = {1} required defaultValue={2} sx = {sliderStyles} onChange={(event, newValue) => {setStressInput(newValue)}}></Slider>
+                            <Slider
+                                valueLabelDisplay='hover'
+                                value={stressInput}
+                                min={0}
+                                max={5}
+                                step={1}
+                                required
+                                defaultValue={2}
+                                sx={sliderStyles}
+                                onChange={(event, newValue) => {
+                                    setStressInput(newValue);
+                                }}></Slider>
                             <div className='titlesforReview'>How Much Did You Learn In This Class</div>
-                            <Slider valueLabelDisplay="on" value={learningInput} min={0} max={5} step={1} required defaultValue={4} sx = {sliderStyles} onChange={(event, newValue) => {setLearningInput(newValue)}}></Slider>
+                            <Slider
+                                valueLabelDisplay='hover'
+                                value={learningInput}
+                                min={0}
+                                max={5}
+                                step={1}
+                                required
+                                defaultValue={4}
+                                sx={sliderStyles}
+                                onChange={(event, newValue) => {
+                                    setLearningInput(newValue);
+                                }}></Slider>
                             <div className='titlesforReview'>How Difficult Was This Class</div>
-                            <Slider valueLabelDisplay="on" value={difficultyInput} min={0} max={5} step={1} required defaultValue={3} sx = {sliderStyles} onChange={(event, newValue) => {setDifficultyInput(newValue)}}></Slider>
+                            <Slider
+                                valueLabelDisplay='hover'
+                                value={difficultyInput}
+                                min={0}
+                                max={5}
+                                step={1}
+                                required
+                                defaultValue={3}
+                                sx={sliderStyles}
+                                onChange={(event, newValue) => {
+                                    setDifficultyInput(newValue);
+                                }}></Slider>
                             <div className='titlesforReview'>Average Time Commitment Per Day</div>
-                            <Slider valueLabelDisplay="on" value={timeInput} min={0} max={180} step={15} required defaultValue={60} sx = {sliderStyles} onChange={(event, newValue) => {setTimeInput(newValue)}}></Slider>
+                            <Slider
+                                valueLabelDisplay='hover'
+                                value={timeInput}
+                                min={0}
+                                max={180}
+                                step={15}
+                                required
+                                defaultValue={60}
+                                sx={sliderStyles}
+                                onChange={(event, newValue) => {
+                                    setTimeInput(newValue);
+                                }}></Slider>
                             <div className='titlesforReview'>What Year Did You Take This Class</div>
-                            <input type='text' value={yearInput} onChange={(e) => {setYearInput(e.target.value)}} placeholder='Enter the year you took this class...'></input>
+                            <input
+                                type='text'
+                                value={yearInput}
+                                onChange={(e) => {
+                                    setYearInput(e.target.value);
+                                }}
+                                placeholder='Enter the year you took this class...'></input>
                         </div>
                     </div>
-                    <input type='Submit' id='subMainButton' className='reviewSubmit'/>
+                    <input type='Submit' id='subMainButton' className='reviewSubmit' />
                     {/* <div className='titlesforReview required'>General Review</div> */}
                 </form>
             </div>
