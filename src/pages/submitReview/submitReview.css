@@ -54,8 +54,8 @@ input[type="text"] {
 
 textarea {
     font-family: inherit;
-    width: 63vw;
-    height: 45vh;
+    width: 60vw;
+    height: 50vh;
     padding: 20px 20px;
     box-sizing: border-box;
     border: none !important;
@@ -72,6 +72,20 @@ textarea {
 h1 {
     margin: 0;
 }
+
+/* .reviewSliderDiv input[type="text"] {
+    width: auto;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    border: none !important;
+    font-size: 1.5em;
+    outline: none;
+    color: var(--content-color);
+    background-color: var(--accent-background);
+    border-radius: var(--border-radius);
+    text-transform: none;
+
+} */
 
 .reviewSubmit {
     width: 7em;

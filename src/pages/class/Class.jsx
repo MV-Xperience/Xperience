@@ -103,7 +103,7 @@ const Class = () => {
                 <h4>Learning Level: {currentReview.learningLevel}/5</h4>
                 <h4>Difficulty Level: {currentReview.difficulty}/5</h4>
                 <h4>
-                  Time Commitment: {currentReview.timeSpentPerNight} Min per
+                  Time Commitment: {currentReview.time} Min per
                   Night
                 </h4>
                 <h4>Year Taken: {currentReview.yearTaken}</h4>
@@ -122,9 +122,9 @@ const Class = () => {
   };
 
   const thumb = {
-    color: "primary",
-    width: "4vh",
-    height: "4vh",
+    color: "transparent",
+    width: "0",
+    height: "0",
   };
 
   const Review = ({ review }) => {
@@ -165,12 +165,12 @@ const Class = () => {
               <Rating
                 name='mainClassStars'
                 value={classData.sumOfStars / classData.reviewCt}
-                disabled
+                readOnly
                 precision={0.5}
                 size='large'
                 color='primary'
                 sx={{
-                  fontSize: "3.5em",
+                  fontSize: "3.5em", opacity: "0.8",
                 }}
               />
             </div>
