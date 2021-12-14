@@ -4,10 +4,66 @@
 }
 .view-replies-container h1 {
     font-size: 2.5rem;
+    margin-bottom: 2rem;
+    display: block;
 }
 .each-reply {
     padding: 1rem;
     width: calc(100% - 2rem);
     border-radius: 1rem;
     box-shadow: var(--box-shadow);
+}
+.each-reply div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.each-reply span {
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    background-color: var(--accent-background);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.25s;
+}
+.each-reply span:hover {
+    box-shadow: var(--box-shadow);
+    transform: scale(1.05);
+}
+.each-reply span:active {
+    transform: scale(0.95);
+}
+.each-reply h2 {
+    width: 80%;
+}
+.each-reply span > p {
+    margin: 0px;
+    margin-right: 0.5rem;
+}
+.replies-entry {
+    width: calc(100% - 5rem);
+    background-color: var(--accent-background);
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+    padding: 0.5rem;
+
+    height: auto;
+    position: fixed;
+    top: calc(100vh - 10rem);
+    left: 2rem;
+}
+.replies-entry textarea {
+    width: calc(100% - 4rem);
+    background-color: transparent;
+    border: 0px;
+    outline: 0px;
+    font-size: 1rem;
+    margin: 1rem;
+    resize: none;
+}
+.replies-entry div {
+    display: flex;
+    justify-content: right;
 }

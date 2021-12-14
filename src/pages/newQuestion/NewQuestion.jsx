@@ -67,6 +67,7 @@ const NewQuestion = () => {
         data.displayName = user.displayName;
         data.date = serverTimestamp();
         data.resolved = false;
+        data.likedBy = [];
         console.log(data);
         const docRef = await addDoc(collection(db, "questions"), data);
         console.log("Document created! ID:", docRef.id);

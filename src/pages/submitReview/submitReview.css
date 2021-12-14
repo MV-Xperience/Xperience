@@ -64,12 +64,12 @@
     pointer-events: none;
     max-height: 0;
 }
-input {
+/* input {
     font-family: inherit;
     background-color: var(--accent-background);
     color: var(--content-color);
-}
-input[type="text"] {
+} */
+/* input[type="text"] {
     width: 100%;
     padding: 20px 20px;
     margin-top: 1em;
@@ -80,10 +80,9 @@ input[type="text"] {
     color: var(--content-color);
     background-color: var(--background-color);
     border-radius: var(--border-radius);
-    /*cool*/
-}
+} */
 
-textarea {
+/* textarea {
     font-family: inherit;
     width: 100%;
     padding: 20px 20px;
@@ -96,15 +95,12 @@ textarea {
     background-color: var(--background-color);
     border-radius: var(--border-radius);
     font-size: 1.5em;
-    /*cool*/
-}
-
+} */
+/* 
 h1 {
-    /* border-bottom: 2px solid #d4af37; */
     margin: 0;
     display: inline;
-    /* font-size: 50px; */
-}
+} */
 /* h1::after {
     content: "";
     width: 100%;
@@ -128,6 +124,6 @@ h1 {
     background-color: var(--content-color); /*fix button color + position */
     color: var(--accent-background);
 }
-button {
+/* button {
     font-family: inherit;
-}
+} */

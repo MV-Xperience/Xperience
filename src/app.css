@@ -35,3 +35,6 @@ body {
     color: var(--content-color);
     text-decoration: none;
 }
+textarea {
+    font-family: "Roboto", sans-serif;
+}
