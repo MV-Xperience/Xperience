@@ -15,7 +15,7 @@ const Navbar = (params) => {
                         <img src='/favicon.ico' alt='logo' className='navbarLogo' />
                     </Link>
                     <div className='searchBar'>
-                        <input className='searchInput' placeholder={"Search for tags, questions, or classes ..."}></input>
+                        <input className='searchInput' placeholder={"Search for certain tags or classes ..."}></input>
                     </div>
                     <Link className='navbarOption' to='/'>
                         Dashboard

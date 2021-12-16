@@ -16,7 +16,7 @@ const ViewQuestion = () => {
     const [replies, setReplies] = useState([]);
     const [loadingData, setLoading] = useState(true);
     const [liked, setLiked] = useState(false);
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     useEffect(() => {
         // Load in question data
         if (!loading && user) {
@@ -52,7 +52,7 @@ const ViewQuestion = () => {
                 <div className='view-replies-container'>
                     <h1>{data.text}</h1>
                     <div>
-                        {replies.length == 0 ? (
+                        {replies.length === 0 ? (
                             <div>
                                 <h2>There are no replies yet.</h2>
                             </div>
