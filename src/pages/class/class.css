@@ -1,73 +1,107 @@
-h1{
-    font-size: 3.5em;
+h1 {
+    font-size: 3rem;
 }
-h4{
+h4 {
     font-weight: normal;
 }
+.ind-rating-container {
+    padding: 1rem;
+    background-color: var(--accent-background);
+    box-shadow: var(--box-shadow);
+    border-radius: 1rem;
+    width: 6rem;
+    height: 6rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 1rem;
+    transition: all 0.25s;
+}
+.ind-rating-container:hover {
+    transform: scale(1.025);
+}
+.ind-rating-container:active {
+    transform: scale(0.975);
+}
+.ind-rating-container p {
+    margin: 0px;
+}
+.ind-rating-container h2 {
+    font-size: 3rem;
+    margin: 0px;
+}
+.ind-rating-container span {
+    font-size: 1rem;
+}
+.overall-rating-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
-.classContainer{
+.classContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.title{
+.title {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 2vh 3vw;
 }
 
-.classContainer h3{
+.classContainer h3 {
     font-weight: normal;
 }
 
-.classContent{
+.classContent {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.classContent > *{
+.classContent > * {
     margin: 0 3vw;
 }
 
-.leftSide{
+.leftSide {
     display: flex;
     flex-direction: column;
     align-self: start;
     width: 50vw;
 }
 
-.rightSide{
+.rightSide {
     display: flex;
     flex-direction: column;
     align-self: start;
     width: calc(35vw + 10px);
-
 }
-.reviews{
+.reviews {
     display: flex;
     flex-direction: column;
     align-self: start;
     width: 35vw;
-    max-height: 55vh;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
-.reviews::-webkit-scrollbar{
+.reviews::-webkit-scrollbar {
     width: 10px;
     border-radius: var(--border-radius);
     background-color: var(--accent-background);
 }
 
-.reviews::-webkit-scrollbar-thumb{
+.reviews::-webkit-scrollbar-thumb {
     background-color: var(--accent-color);
 }
 
-
-.noReviewContainer{
+.noReviewContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,127 +109,134 @@ h4{
     width: 100%;
 }
 
-.sliders{
+.sliders {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 5vh;
 }
 
-.sliders h3{
+.sliders h3 {
     font-weight: 500;
 }
 
-.noReviewContainer h1{
+.noReviewContainer h1 {
     margin: 10vh 0 0 5vh;
     color: var(--accent-color);
 }
 
-.noReviewContainer a{
+.noReviewContainer a {
     color: black;
     margin: 0;
     transition: all 0.3s ease-in;
 }
-.noReviewContainer a:hover{
+.noReviewContainer a:hover {
     color: var(--accent-color);
 }
 
-.box{
+.box {
     margin: 2vh 0;
     padding: 0.5vh 1vw;
     transition: all 0.1s ease-in;
+    background-color: var(--accent-background);
+    border-radius: var(--border-radius);
 }
-.box:hover{
+.box:hover {
     cursor: pointer;
 }
 
-.boxButtons{
+.boxButtons {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1vw;
+    margin-bottom: 0.5rem;
 }
 
-.reviewStar{
-    font-size: '3em',
+.reviewStar {
+    font-size: "3em";
 }
 
-.boxButtons button{
+.boxButtons button {
     outline: none;
-    border: 3px solid var(--accent-color);
-    border-radius: var(--border-radius);
+    border-radius: 1.5rem;
     background: none;
     cursor: pointer;
-    transition: all 0.3s ease-in;
-    font-size: 1em;
+    font-size: 1rem;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4vw;
-    height: 3vw;
+    padding: 0.75rem;
+    border: none;
+    background-color: var(--accent-color);
+    box-shadow: var(--box-shadow);
 }
 
-.modalContainer{
+.modalContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     align-self: center;
     outline: none;
     width: fit-content;
     margin: auto;
-    margin-top: 25%;
-    height: 50%;
+    /* margin-top: 25%; */
+    /* height: 50vh; */
+    /* centers it actually */
     z-index: 2;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
-
-.modalContent{
-    background-color: var(--accent-background);
+.modalContent {
+    background-color: var(--background-color);
     width: 75vw;
-    height: 50vh;
+    /* height: 50vh; */
     border-radius: 16px;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    pointer-events: all;
 }
 
-.modalLeft{
+.modalLeft {
     margin: 0 3vw;
     width: 45vw;
 }
 
-.modaltitle{
+.modaltitle {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     font-size: 2em;
 }
 
-.modaltitle > *{
+.modaltitle > * {
     margin: 3vh 0;
 }
 
-
-.modaltitle h2{
+.modaltitle h2 {
     font-size: 1.5em;
     margin: 1vh 0;
 }
 
-.modalContent h3{
+.modalContent h3 {
     font-size: 1.25em;
     margin: 1vh 0;
     font-weight: normal;
 }
-.modalContent h4{
+.modalContent h4 {
     font-size: 1.5em;
     margin: 1vh 0;
 }
 
-
-.modalData{
+.modalData {
     display: flex;
     flex-direction: column;
     justify-content: center;
