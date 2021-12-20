@@ -4,6 +4,43 @@ h1 {
 h4 {
     font-weight: normal;
 }
+.ind-rating-container {
+    padding: 1rem;
+    background-color: var(--accent-background);
+    box-shadow: var(--box-shadow);
+    border-radius: 1rem;
+    width: 6rem;
+    height: 6rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 1rem;
+    transition: all 0.25s;
+}
+.ind-rating-container:hover {
+    transform: scale(1.025);
+}
+.ind-rating-container:active {
+    transform: scale(0.975);
+}
+.ind-rating-container p {
+    margin: 0px;
+}
+.ind-rating-container h2 {
+    font-size: 3rem;
+    margin: 0px;
+}
+.ind-rating-container span {
+    font-size: 1rem;
+}
+.overall-rating-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
 .classContainer {
     width: 100%;
@@ -50,7 +87,6 @@ h4 {
     flex-direction: column;
     align-self: start;
     width: 35vw;
-    max-height: 55vh;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -114,6 +150,7 @@ h4 {
     justify-content: space-between;
     align-items: center;
     gap: 1vw;
+    margin-bottom: 0.5rem;
 }
 
 .reviewStar {
@@ -122,18 +159,18 @@ h4 {
 
 .boxButtons button {
     outline: none;
-    border: 3px solid var(--accent-color);
-    border-radius: var(--border-radius);
+    border-radius: 1.5rem;
     background: none;
     cursor: pointer;
-    transition: all 0.3s ease-in;
-    font-size: 1em;
+    font-size: 1rem;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4vw;
-    height: 3vw;
+    padding: 0.75rem;
+    border: none;
+    background-color: var(--accent-color);
+    box-shadow: var(--box-shadow);
 }
 
 .modalContainer {

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import Loading from "../../components/loading/Loading";
 import Navbar from "../../components/navbar/Navbar";
-
+import IndRating from "./IndRating";
 import NoReview from "./NoReview";
 
 import "./class.css";
@@ -13,6 +13,10 @@ import Rating from "@mui/material/Rating";
 import Slider from "@mui/material/Slider";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+
+import FlagIcon from "@mui/icons-material/Flag";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import CheckIcon from "@mui/icons-material/Check";
 
 const Class = () => {
     let { id } = useParams();
@@ -116,9 +120,17 @@ const Class = () => {
                     <div className='boxButtons'>
                         <Rating className='reviewStar' sx={{ fontSize: "1.75em" }} value={review.data().rating} readOnly />
                         <div className='boxButtons'>
-                            <button>❤️{review.data().likeCount}</button>
-                            <button>🤝 {review.data().helpfulCount}</button>
-                            <button>🚩{review.data().reportCount}</button>
+                            <button>
+                                <ThumbUpIcon />
+                                {review.data().likeCount}
+                            </button>
+                            <button>
+                                <CheckIcon />
+                                {review.data().helpfulCount}
+                            </button>
+                            <button>
+                                <FlagIcon /> {review.data().reportCount}
+                            </button>
                         </div>
                     </div>
                 </Box>
@@ -156,81 +168,14 @@ const Class = () => {
                         <div className='classContent'>
                             <div className='leftSide'>
                                 <h3>{classData.desc}</h3>
-
-                                <div className='sliders'>
-                                    <h3>Stress Level</h3>
-                                    <Slider
-                                        color='primary'
-                                        valueLabelDisplay='on'
-                                        readOnly
-                                        step={0.25}
-                                        value={classData.sumOfStress / classData.reviewCt}
-                                        max={5}
-                                        min={0}
-                                        sx={{
-                                            width: "35vw",
-                                            height: "3vh",
-                                            "& .MuiSlider-thumb": thumb,
-                                        }}
-                                    />
-                                </div>
-
-                                <div className='sliders'>
-                                    <h3>Learning Level</h3>
-                                    <Slider
-                                        color='primary'
-                                        valueLabelDisplay='on'
-                                        readOnly
-                                        step={0.25}
-                                        value={classData.sumOfLearning / classData.reviewCt}
-                                        max={5}
-                                        min={0}
-                                        sx={{
-                                            width: "35vw",
-                                            height: "3vh",
-                                            "& .MuiSlider-thumb": thumb,
-                                        }}
-                                    />
-                                </div>
-
-                                <div className='sliders'>
-                                    <h3>Difficulty Level</h3>
-                                    <Slider
-                                        color='primary'
-                                        valueLabelDisplay='on'
-                                        readOnly
-                                        step={0.25}
-                                        value={classData.sumOfStress / classData.reviewCt}
-                                        max={5}
-                                        min={0}
-                                        sx={{
-                                            width: "35vw",
-                                            height: "3vh",
-                                            "& .MuiSlider-thumb": thumb,
-                                        }}
-                                    />
-                                </div>
-
-                                <div className='sliders'>
-                                    <h3>Time Commitment</h3>
-                                    <Slider
-                                        color='primary'
-                                        valueLabelDisplay='on'
-                                        readOnly
-                                        step={15}
-                                        value={classData.sumOfTimeCommit / classData.reviewCt}
-                                        max={180}
-                                        min={0}
-                                        sx={{
-                                            width: "35vw",
-                                            height: "3vh",
-                                            "& .MuiSlider-thumb": thumb,
-                                        }}
-                                        valueLabelFormat={(value) => <div>{value + " Min Per Day"}</div>}
-                                    />
+                                <div className='overall-rating-container'>
+                                    <IndRating name='Stress Level' level={Math.round((classData.sumOfStress / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
+                                    <IndRating name='Learning Level' level={Math.round((classData.sumOfLearning / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
+                                    {/* Blame Ashwin for the terrible spelling */}
+                                    <IndRating name='Difficulty' level={Math.round((classData.sumOfDiffulty / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
+                                    <IndRating name='Time Commitment' level={Math.round((classData.sumOfTimeCommit / classData.reviewCt) * 10) / 10} extra='min'></IndRating>
                                 </div>
                             </div>
-
                             <div className='rightSide'>
                                 <h1>Reviews</h1>
                                 <div className='reviews'>
@@ -250,3 +195,81 @@ const Class = () => {
 };
 
 export default Class;
+//
+{
+    /*
+  all the slider garbage
+<div className='sliders'> 
+  <h3>Stress Level</h3>
+<Slider
+    color='primary'
+    valueLabelDisplay='on'
+    readOnly
+    step={0.25}
+    value={classData.sumOfStress / classData.reviewCt}
+    max={5}
+    min={0}
+    sx={{
+        width: "35vw",
+        height: "3vh",
+        "& .MuiSlider-thumb": thumb,
+    }}
+/>
+</div>
+
+<div className='sliders'>
+<h3>Learning Level</h3>
+<Slider
+    color='primary'
+    valueLabelDisplay='on'
+    readOnly
+    step={0.25}
+    value={classData.sumOfLearning / classData.reviewCt}
+    max={5}
+    min={0}
+    sx={{
+        width: "35vw",
+        height: "3vh",
+        "& .MuiSlider-thumb": thumb,
+    }}
+/>
+</div>
+
+<div className='sliders'>
+<h3>Difficulty Level</h3>
+<Slider
+    color='primary'
+    valueLabelDisplay='on'
+    readOnly
+    step={0.25}
+    value={classData.sumOfStress / classData.reviewCt}
+    max={5}
+    min={0}
+    sx={{
+        width: "35vw",
+        height: "3vh",
+        "& .MuiSlider-thumb": thumb,
+    }}
+/>
+</div>
+
+<div className='sliders'>
+<h3>Time Commitment</h3>
+<Slider
+    color='primary'
+    valueLabelDisplay='on'
+    readOnly
+    step={15}
+    value={classData.sumOfTimeCommit / classData.reviewCt}
+    max={180}
+    min={0}
+    sx={{
+        width: "35vw",
+        height: "3vh",
+        "& .MuiSlider-thumb": thumb,
+    }}
+    valueLabelFormat={(value) => <div>{value + " Min Per Day"}</div>}
+/>
+</div>
+*/
+}
