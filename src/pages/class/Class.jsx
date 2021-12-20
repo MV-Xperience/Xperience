@@ -11,6 +11,8 @@ import "./class.css";
 
 import Rating from "@mui/material/Rating";
 import Slider from "@mui/material/Slider";
+import Button from "@mui/material/Button";
+
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 
@@ -39,6 +41,10 @@ const Class = () => {
         setOpenModal(false);
         console.log(openModal);
     };
+
+    const like = async (review) => {};
+    const helpful = async (review) => {};
+    const report = async (review) => {};
 
     useEffect(() => {
         const getData = async () => {
@@ -78,25 +84,35 @@ const Class = () => {
                     <Box className='modalContent'>
                         <div className='modalLeft'>
                             <div className='modaltitle'>
-                                <h2>Author: {currentReview.author}</h2>
+                                <h2>{currentReview.author?.split(" ")[0]}'s Review</h2>
                                 <Rating sx={{ fontSize: "1.25em" }} name='read-only' value={currentReview.rating} readOnly />
                             </div>
+                            <h4>Based on {currentReview.year}</h4>
 
                             <h3>{currentReview.review}</h3>
                         </div>
 
                         <div className='modalRight'>
                             <div className='modalData'>
-                                <h4>Stress Level: {currentReview.stressLevel}/5</h4>
-                                <h4>Learning Level: {currentReview.learningLevel}/5</h4>
-                                <h4>Difficulty Level: {currentReview.difficulty}/5</h4>
-                                <h4>Time Commitment: {currentReview.time} Min per Night</h4>
-                                <h4>Year Taken: {currentReview.yearTaken}</h4>
-
+                                <h2>{currentReview.author?.split(" ")[0]}'s Ranking</h2>
+                                <div className='ranking-in-modal'>
+                                    <IndRating name='Stress Level' level={currentReview.stressLevel} extra='/5'></IndRating>
+                                    <IndRating name='Learning Level' level={currentReview.learningLevel} extra='/5'></IndRating>
+                                    {/* Blame Ashwin for the terrible spelling */}
+                                    <IndRating name='Difficulty' level={currentReview.difficulty} extra='/5'></IndRating>
+                                    <IndRating name='Time Commitment' level={currentReview.time} extra='min'></IndRating>
+                                </div>
                                 <div className='boxButtons'>
-                                    <button>❤️{currentReview.likeCount}</button>
-                                    <button>🤝 {currentReview.helpfulCount}</button>
-                                    <button>🚩{currentReview.reportCount}</button>
+                                    <Button variant='text' title='Like'>
+                                        <ThumbUpIcon /> {currentReview.likeCount}
+                                    </Button>
+                                    <Button variant='text' title='Helpful'>
+                                        <CheckIcon />
+                                        {currentReview.helpfulCount}
+                                    </Button>
+                                    <Button variant='text' title='Inaccurate'>
+                                        <FlagIcon /> {currentReview.reportCount}
+                                    </Button>
                                 </div>
                             </div>
                         </div>
@@ -116,21 +132,22 @@ const Class = () => {
         return (
             <>
                 <Box className='box' onClick={() => handleOpenModal(review)}>
-                    <h4>{review.data().review.substring(0, 200)}...</h4>
+                    <div>
+                        <h4>{review.data().review.substring(0, 200)}...</h4>
+                    </div>
                     <div className='boxButtons'>
                         <Rating className='reviewStar' sx={{ fontSize: "1.75em" }} value={review.data().rating} readOnly />
                         <div className='boxButtons'>
-                            <button>
-                                <ThumbUpIcon />
-                                {review.data().likeCount}
-                            </button>
-                            <button>
+                            <Button variant='text' onClick={() => like(review)} title='Like'>
+                                <ThumbUpIcon /> {review.data().likeCount}
+                            </Button>
+                            <Button variant='text' onClick={() => helpful(review)} title='Helpful'>
                                 <CheckIcon />
                                 {review.data().helpfulCount}
-                            </button>
-                            <button>
+                            </Button>
+                            <Button variant='text' onClick={() => report(review)} title='Report'>
                                 <FlagIcon /> {review.data().reportCount}
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 </Box>
@@ -169,7 +186,7 @@ const Class = () => {
                             <div className='leftSide'>
                                 <h3>{classData.desc}</h3>
                                 <div className='overall-rating-container'>
-                                    <IndRating name='Stress Level' level={Math.round((classData.sumOfStress / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
+                                    <IndRating name='Stress Level' level={Math.round((classData.sumOfStress / classData.reviewCt) * 10) / 10} extra='/5' style={{ backgroundImage: "linearGradient(to left top, red,white" }}></IndRating>
                                     <IndRating name='Learning Level' level={Math.round((classData.sumOfLearning / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
                                     {/* Blame Ashwin for the terrible spelling */}
                                     <IndRating name='Difficulty' level={Math.round((classData.sumOfDiffulty / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
