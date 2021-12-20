@@ -19,7 +19,7 @@
 html {
     scroll-behavior: smooth;
     --accent-color: rgb(242, 199, 59);
-    --transparent-accent-color: rgba(242, 199, 59, 0.5);
+    --transparent-accent-color: rgba(242, 199, 59, 0.75);
 
     --border-radius: 0.5em;
     margin: 0%;
