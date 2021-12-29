@@ -5,6 +5,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Loading from "../../components/loading/Loading";
 import Slider from "@mui/material/Slider";
 import Rating from "@mui/material/Rating";
+import Button from "@mui/material/Button";
 
 import { getFirestore, writeBatch, doc, arrayUnion, increment } from "firebase/firestore";
 
@@ -56,7 +57,7 @@ const ReviewSubmitter = () => {
                 reportCount: 0,
                 likedBy: [],
                 helpfulBy: [],
-                reportBy: [],
+                reportedBy: [],
             };
 
             const classRef = doc(db, `classes/${classId}`);
@@ -204,10 +205,16 @@ const ReviewSubmitter = () => {
                                 onChange={(e) => {
                                     setYearInput(e.target.value);
                                 }}
-                                placeholder='Enter the year you took this class...'></input>
+                                placeholder='Year'
+                                className='year-input'></input>
                         </div>
                     </div>
-                    <input type='Submit' id='subMainButton' className='reviewSubmit' />
+                    <Button variant='contained' size='large' type='submit'>
+                        Submit
+                    </Button>
+
+                    {/* <input type='Submit' id='subMainButton' className='reviewSubmit'>
+                    </input> */}
                     {/* <div className='titlesforReview required'>General Review</div> */}
                 </form>
             </div>

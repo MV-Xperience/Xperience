@@ -131,7 +131,7 @@ const Class = () => {
                         <div className='modalLeft'>
                             <div className='modaltitle'>
                                 <h2>{currentReview.data().author?.split(" ")[0]}'s Review</h2>
-                                <Rating sx={{ fontSize: "1.25em" }} name='read-only' value={currentReview.rating} readOnly />
+                                <Rating sx={{ fontSize: "1.25em" }} name='read-only' value={currentReview.data().rating} readOnly />
                             </div>
                             <h4>Based on {currentReview.data().year}</h4>
 
