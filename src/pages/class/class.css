@@ -90,6 +90,12 @@ h4 {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+.all-buttons-individual-rating {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .reviews::-webkit-scrollbar {
     width: 10px;

@@ -54,6 +54,9 @@ const ReviewSubmitter = () => {
                 helpfulCount: 0,
                 likeCount: 0,
                 reportCount: 0,
+                likedBy: [],
+                helpfulBy: [],
+                reportBy: [],
             };
 
             const classRef = doc(db, `classes/${classId}`);
