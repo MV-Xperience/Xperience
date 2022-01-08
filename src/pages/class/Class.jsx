@@ -1,5 +1,8 @@
 import { useParams } from "react-router-dom";
-import { getFirestore, doc, getDoc, orderBy, query, collection, getDocs, limit } from "firebase/firestore";
+import { getFirestore, doc, getDoc, orderBy, query, collection, getDocs, limit, arrayUnion, arrayRemove, updateDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 import { useEffect, useState } from "react";
 
 import Loading from "../../components/loading/Loading";
@@ -11,6 +14,10 @@ import "./class.css";
 
 import Rating from "@mui/material/Rating";
 import Slider from "@mui/material/Slider";
+import Button from "@mui/material/Button";
+
+import Chip from "@mui/material/Chip";
+
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 
@@ -18,85 +25,133 @@ import FlagIcon from "@mui/icons-material/Flag";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import CheckIcon from "@mui/icons-material/Check";
 
+const db = getFirestore();
+const auth = getAuth();
 const Class = () => {
     let { id } = useParams();
-    const db = getFirestore();
 
     const [classData, setClassData] = useState({});
-    const [loading, setLoading] = useState(false);
+    const [loadingData, setLoadingData] = useState(true);
+    const [user, loading, error] = useAuthState(auth);
 
     const [classReviewData, setClassReviewData] = useState({});
 
+    // nested object
+    // first key is the id of the review being used
+    // second (nested) key is for report, helpful, liked - if this person has liked it essentially
+    const [reviewAttributes, setReviewAttributes] = useState({ id: { like: "", helpful: "", report: "" } });
     const [openModal, setOpenModal] = useState(false);
-    const [currentReview, setCurrentReview] = useState({});
+    const [currentReview, setCurrentReview] = useState({
+        data: function () {
+            return { id: "id", helpfulBy: [], likedBy: [], reportedBy: [] };
+        },
+    });
 
     const handleOpenModal = (doc) => {
         setOpenModal(true);
-        setCurrentReview(doc.data());
-        console.log(openModal);
+        // changed to now use the entire document, not just the data
+        setCurrentReview(doc);
     };
     const handleCloseModal = () => {
         setOpenModal(false);
-        console.log(openModal);
+    };
+
+    const like = async (review) => {
+        let object = reviewAttributes;
+        console.log(review);
+
+        let reviewRef = doc(db, "/classes/" + id + "/reviews", review.id);
+        if (object[review.id].like == "outlined") {
+            object[review.id].like = "filled";
+            await updateDoc(reviewRef, {
+                likedBy: arrayUnion(user.uid),
+            });
+        } else {
+            object[review.id].like = "outlined";
+            await updateDoc(reviewRef, {
+                likedBy: arrayRemove(user.uid),
+            });
+        }
+        setReviewAttributes({ ...object });
+    };
+    const helpful = async (review) => {
+        let object = reviewAttributes;
+        object[review.id].helpful = object[review.id].helpful == "outlined" ? "filled" : "outlined";
+        setReviewAttributes({ ...object });
+    };
+    const report = async (review) => {
+        let object = reviewAttributes;
+        object[review.id].report = object[review.id].report == "outlined" ? "filled" : "outlined";
+        setReviewAttributes({ ...object });
     };
 
     useEffect(() => {
-        const getData = async () => {
-            setLoading(true);
+        if (!loading && user !== null) {
+            // Load in everything!
+            console.log("Loading in everything, signed in already");
+            getData();
+        }
+    }, [id, loading]);
 
-            const docRef = doc(db, "classes", `${id}`);
-            const docSnap = await getDoc(docRef);
+    const getData = async () => {
+        const docRef = doc(db, "classes", `${id}`);
+        const docSnap = await getDoc(docRef);
 
-            if (docSnap.exists()) {
-                setClassData(docSnap.data());
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
+        if (docSnap.exists()) {
+            setClassData(docSnap.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
 
-            const subCollectionRef = collection(db, `classes/${id}/reviews`);
-            const collectionQuery = query(subCollectionRef, orderBy("helpfulCount", "desc"), limit(5));
-            const querySnapshot = await getDocs(collectionQuery);
-            let temp = [];
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                temp.push(doc);
-            });
+        const subCollectionRef = collection(db, `classes/${id}/reviews`);
+        const collectionQuery = query(subCollectionRef, orderBy("helpfulCount", "desc"), limit(5));
+        const querySnapshot = await getDocs(collectionQuery);
+        let temp = [];
+        let temporaryLikingData = {};
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            temp.push(doc);
+            let likedAlready = doc.data().likedBy.includes(user.uid) ? "filled" : "outlined";
+            let reportedAlready = doc.data().reportedBy.includes(user.uid) ? "filled" : "outlined";
+            let helpfulAlready = doc.data().helpfulBy.includes(user.uid) ? "filled" : "outlined";
+            temporaryLikingData[doc.id] = { like: likedAlready, report: reportedAlready, helpful: helpfulAlready };
+        });
+        setClassReviewData(temp);
+        setReviewAttributes(temporaryLikingData);
 
-            setClassReviewData(temp);
-
-            setLoading(false);
-        };
-
-        getData();
-    }, [db, id]);
+        setLoadingData(false);
+    };
 
     const ReviewModal = () => {
         return (
-            <Modal open={openModal} onClose={handleCloseModal} className='modal'>
+            <Modal open={openModal} onClose={handleCloseModal} className='modal' style={{ transitionDuration: 0 + "s" }}>
                 <div className='modalContainer'>
                     <Box className='modalContent'>
                         <div className='modalLeft'>
                             <div className='modaltitle'>
-                                <h2>Author: {currentReview.author}</h2>
-                                <Rating sx={{ fontSize: "1.25em" }} name='read-only' value={currentReview.rating} readOnly />
+                                <h2>{currentReview.data().author?.split(" ")[0]}'s Review</h2>
+                                <Rating sx={{ fontSize: "1.25em" }} name='read-only' value={currentReview.data().rating} readOnly />
                             </div>
+                            <h4>Based on {currentReview.data().year}</h4>
 
-                            <h3>{currentReview.review}</h3>
+                            <h3>{currentReview.data().review}</h3>
                         </div>
 
                         <div className='modalRight'>
                             <div className='modalData'>
-                                <h4>Stress Level: {currentReview.stressLevel}/5</h4>
-                                <h4>Learning Level: {currentReview.learningLevel}/5</h4>
-                                <h4>Difficulty Level: {currentReview.difficulty}/5</h4>
-                                <h4>Time Commitment: {currentReview.time} Min per Night</h4>
-                                <h4>Year Taken: {currentReview.yearTaken}</h4>
-
+                                <h2>{currentReview.data().author?.split(" ")[0]}'s Ranking</h2>
+                                <div className='ranking-in-modal'>
+                                    <IndRating name='Stress Level' level={currentReview.data().stressLevel} extra='/5'></IndRating>
+                                    <IndRating name='Learning Level' level={currentReview.data().learningLevel} extra='/5'></IndRating>
+                                    {/* Blame Ashwin for the terrible spelling */}
+                                    <IndRating name='Difficulty' level={currentReview.data().difficulty} extra='/5'></IndRating>
+                                    <IndRating name='Time Commitment' level={currentReview.data().time} extra='min'></IndRating>
+                                </div>
                                 <div className='boxButtons'>
-                                    <button>❤️{currentReview.likeCount}</button>
-                                    <button>🤝 {currentReview.helpfulCount}</button>
-                                    <button>🚩{currentReview.reportCount}</button>
+                                    <Chip variant={reviewAttributes[currentReview.id]?.like} title='Like' onClick={() => like(currentReview)} label={currentReview.data().likedBy.length} icon={<ThumbUpIcon />}></Chip>
+                                    <Chip variant={reviewAttributes[currentReview.id]?.helpful} title='Helpful' onClick={() => helpful(currentReview)} label={currentReview.data().helpfulBy.length} icon={<CheckIcon />}></Chip>
+                                    <Chip variant={reviewAttributes[currentReview.id]?.report} title='Inaccurate' onClick={() => report(currentReview)} label={currentReview.data().reportedBy.length} icon={<FlagIcon />}></Chip>
                                 </div>
                             </div>
                         </div>
@@ -116,21 +171,15 @@ const Class = () => {
         return (
             <>
                 <Box className='box' onClick={() => handleOpenModal(review)}>
-                    <h4>{review.data().review.substring(0, 200)}...</h4>
-                    <div className='boxButtons'>
+                    <div>
+                        <h4>{review.data().review.substring(0, 200)}...</h4>
+                    </div>
+                    <div className='all-buttons-individual-rating'>
                         <Rating className='reviewStar' sx={{ fontSize: "1.75em" }} value={review.data().rating} readOnly />
                         <div className='boxButtons'>
-                            <button>
-                                <ThumbUpIcon />
-                                {review.data().likeCount}
-                            </button>
-                            <button>
-                                <CheckIcon />
-                                {review.data().helpfulCount}
-                            </button>
-                            <button>
-                                <FlagIcon /> {review.data().reportCount}
-                            </button>
+                            <Chip variant={reviewAttributes[review.id]?.like} title='Like' onClick={() => like(review)} label={review.data().likedBy.length} icon={<ThumbUpIcon />}></Chip>
+                            <Chip variant={reviewAttributes[review.id]?.helpful} title='Helpful' onClick={() => helpful(review)} label={review.data().helpfulBy.length} icon={<CheckIcon />}></Chip>
+                            <Chip variant={reviewAttributes[review.id]?.report} title='Inaccurate' onClick={() => report(review)} label={review.data().reportedBy.length} icon={<FlagIcon />}></Chip>
                         </div>
                     </div>
                 </Box>
@@ -140,7 +189,7 @@ const Class = () => {
 
     return (
         <>
-            {loading ? (
+            {loadingData ? (
                 <Loading />
             ) : (
                 <div className='classContainer'>
@@ -169,7 +218,7 @@ const Class = () => {
                             <div className='leftSide'>
                                 <h3>{classData.desc}</h3>
                                 <div className='overall-rating-container'>
-                                    <IndRating name='Stress Level' level={Math.round((classData.sumOfStress / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
+                                    <IndRating name='Stress Level' level={Math.round((classData.sumOfStress / classData.reviewCt) * 10) / 10} extra='/5' style={{ backgroundImage: "linearGradient(to left top, red,white" }}></IndRating>
                                     <IndRating name='Learning Level' level={Math.round((classData.sumOfLearning / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
                                     {/* Blame Ashwin for the terrible spelling */}
                                     <IndRating name='Difficulty' level={Math.round((classData.sumOfDiffulty / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
