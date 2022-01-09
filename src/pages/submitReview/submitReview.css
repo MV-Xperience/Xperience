@@ -1,11 +1,11 @@
 .pageContent {
     box-sizing: border-box;
-    padding-left: 3em;
-    padding-right: 3em;
+    padding-left: 3rem;
+    padding-right: 3rem;
     background-color: var(--background-color);
 }
 .titlesforReview {
-    font-size: 1.25em;
+    font-size: 1.25rem;
     font-weight: bold;
     color: var(--text-color);
     margin: 0;
@@ -18,22 +18,21 @@
 }
 
 .reviewSliderDiv {
-    padding-left: 1.5em;
+    padding-left: 1.5rem;
     max-height: 45vh;
 }
 
 #enterReview > input[type="text"] {
     width: calc(100% - 20px);
     padding: 20px 20px;
-    margin-top: 1em;
+    margin-top: 1rem;
     box-sizing: border-box;
     border: none !important;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     outline: none;
     color: var(--content-color);
     background-color: var(--accent-background);
     border-radius: var(--border-radius);
-    text-transform: uppercase;
 }
 
 .inputRating {
@@ -43,11 +42,11 @@
 }
 
 .inputRating > * {
-    margin-right: 1em !important;
+    margin-right: 1rem !important;
 }
 
 .inputRating h2 {
-    font-size: 3em;
+    font-size: 3rem;
     font-weight: bold;
     margin: 2vh 0;
     color: var(--text-color);
@@ -60,14 +59,14 @@
     padding: 20px 20px;
     box-sizing: border-box;
     border: none !important;
-    font-size: 1em;
+    font-size: 1rem;
     outline: none;
     color: var(--content-color);
     background-color: var(--accent-background);
     border-radius: var(--border-radius);
-    font-size: 1.5em;
+    font-size: 1.5rem;
     resize: none;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
 }
 
 h1 {
@@ -79,7 +78,7 @@ h1 {
     padding: 20px 20px;
     box-sizing: border-box;
     border: none !important;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     outline: none;
     color: var(--content-color);
     background-color: var(--accent-background);
@@ -89,10 +88,10 @@ h1 {
 } */
 
 .reviewSubmit {
-    width: 7em;
+    width: 7rem;
     border: none;
     box-sizing: border-box;
-    font-size: 1rem;
+    font-size: 1rrem;
     padding: 20px 0;
     color: var(--content-color);
     background-color: var(--accent-color);

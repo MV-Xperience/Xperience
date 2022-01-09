@@ -8,10 +8,15 @@ import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 
 import { getFirestore, writeBatch, doc, arrayUnion, increment } from "firebase/firestore";
+import useAuthRedirect from "../../hooks/useAuthRedirect";
 
 import { getAuth } from "@firebase/auth";
 
+
 const ReviewSubmitter = () => {
+    
+    useAuthRedirect();
+
     const [classInput, setClassInput] = useState("");
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState("");
@@ -24,6 +29,7 @@ const ReviewSubmitter = () => {
     const [loading, setLoading] = useState(false);
 
     const db = getFirestore();
+    
 
     const handleSubmit = async (e) => {
         setLoading(true);
@@ -124,7 +130,7 @@ const ReviewSubmitter = () => {
                     {/* <div className='titlesforReview required'>Class Name</div> */}
                     <input type='text' required value={classInput} list='classes' onChange={(e) => setClassInput(e.target.value)} placeholder='Search for the class you are reviewing...'></input>
                     <div className='inputRating'>
-                        <h2>Rating</h2>
+                        <h3>Rating</h3>
                         <Rating
                             sx={{ fontSize: "3em" }}
                             value={rating}

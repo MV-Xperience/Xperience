@@ -1,20 +1,14 @@
-h1 {
-    font-size: 3rem;
-}
-h4 {
-    font-weight: normal;
-}
-.ind-rating-container {
+.ind-rating-container{
     padding: 1rem;
     background-color: var(--accent-background);
     box-shadow: var(--box-shadow);
     border-radius: 1rem;
-    width: 6rem;
-    height: 6rem;
+    width: 10vw;
+    height: 10vw;
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     margin: 1rem;
     transition: all 0.25s;
 }
@@ -26,6 +20,7 @@ h4 {
 }
 .ind-rating-container p {
     margin: 0px;
+    font-size: 1.35rem;  
 }
 .ind-rating-container h2 {
     font-size: 3rem;
@@ -39,7 +34,6 @@ h4 {
     flex-direction: row;
     width: 100%;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .classContainer {
@@ -48,15 +42,19 @@ h4 {
     flex-direction: column;
     justify-content: center;
 }
-.title {
+.classContainer .title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2vh 3vw;
+    margin: 2vh 1.25vw;
 }
 
 .classContainer h3 {
     font-weight: normal;
+}
+
+.inputRating h3{
+    font-size: 1.75rem;
 }
 
 .classContent {

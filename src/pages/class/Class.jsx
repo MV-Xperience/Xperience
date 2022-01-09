@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { getFirestore, doc, getDoc, orderBy, query, collection, getDocs, limit, arrayUnion, arrayRemove, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+
 
 import { useEffect, useState } from "react";
 
@@ -13,23 +15,27 @@ import NoReview from "./NoReview";
 import "./class.css";
 
 import Rating from "@mui/material/Rating";
-import Slider from "@mui/material/Slider";
-import Button from "@mui/material/Button";
 
 import Chip from "@mui/material/Chip";
 
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 import FlagIcon from "@mui/icons-material/Flag";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import CheckIcon from "@mui/icons-material/Check";
+import useAuthRedirect from "../../hooks/useAuthRedirect";
+
 
 const db = getFirestore();
 const auth = getAuth();
 const Class = () => {
-    let { id } = useParams();
+    useAuthRedirect();
 
+    let navigate = useNavigate();
+    let { id } = useParams();
+    const db = getFirestore();
     const [classData, setClassData] = useState({});
     const [loadingData, setLoadingData] = useState(true);
     const [user, loading, error] = useAuthState(auth);
@@ -161,12 +167,6 @@ const Class = () => {
         );
     };
 
-    const thumb = {
-        color: "transparent",
-        width: "0",
-        height: "0",
-    };
-
     const Review = ({ review }) => {
         return (
             <>
@@ -194,7 +194,6 @@ const Class = () => {
             ) : (
                 <div className='classContainer'>
                     <ReviewModal />
-
                     <Navbar />
                     <div className='title'>
                         <h1>{classData.name}</h1>
@@ -232,6 +231,8 @@ const Class = () => {
                                         return <Review key={index} review={review} />;
                                     })}
                                 </div>
+                                <br/>
+                                <Button variant='contained' size='large' onClick = {()=> {navigate('./path')}}>View Class Path For this Class</Button>
                             </div>
                         </div>
                     ) : (
@@ -247,7 +248,7 @@ export default Class;
 //
 {
     /*
-  all the slider garbage
+  all the slider garbage 
 <div className='sliders'> 
   <h3>Stress Level</h3>
 <Slider

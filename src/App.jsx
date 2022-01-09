@@ -9,7 +9,9 @@ import Logout from "./pages/auth/Logout.jsx";
 import SubmitReview from "./pages/submitReview/SubmitReview";
 import ViewQuestion from "./pages/viewQuestion/ViewQuestion";
 import NewQuestion from "./pages/newQuestion/NewQuestion";
+import QuestionForum from "./pages/viewAllQuestions/QuestionForum";
 import Class from "./pages/class/Class.jsx";
+import ClassPath from "./pages/classpath/ClassPath.jsx";
 
 import "./app.css";
 
@@ -35,10 +37,15 @@ const App = () => {
                         {/* <ReplyList /> */}
                         <Route path='new' element={<NewQuestion />} />
                     </Route>
+                    <Route path='questionForum' element = {<QuestionForum />}/>
                     <Route path='review' element={<SubmitReview />} />
                     <Route path='class'>
-                        <Route path=':id' element={<Class />} />
+                        <Route path=':id'>
+                            <Route index element = {<Class />} />
+                            <Route path='path' element={<ClassPath />} />
+                        </Route>
                     </Route>
+                    
                     <Route path='about' />
                     <Route path='logout' element={<Logout />} />
                     <Route path='login' element={<Login />} />

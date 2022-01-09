@@ -1,0 +1,24 @@
+.forumContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.forumContainer .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2vh 3vw;
+}
+
+.tagFilter input{
+    margin: 2vh 1vh !important;
+    box-sizing: border-box;
+    border: none !important;
+    width: calc(95% - 20px);
+    padding: 20px;
+    font-size: 1.5rem;
+    outline: none;
+    color: var(--content-color);
+    background-color: var(--accent-background);
+    border-radius: var(--border-radius);
+}
