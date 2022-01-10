@@ -9,6 +9,7 @@ import Loading from "../../components/loading/Loading";
 import Navbar from "../../components/navbar/Navbar";
 import IndRating from "./IndRating";
 import NoReview from "./NoReview";
+import Review from "./Review";
 
 import "./class.css";
 
@@ -33,7 +34,6 @@ const Class = () => {
     const [classData, setClassData] = useState({});
     const [loadingData, setLoadingData] = useState(true);
     const [user, loading, error] = useAuthState(auth);
-
     const [classReviewData, setClassReviewData] = useState({});
 
     // nested object
@@ -46,44 +46,6 @@ const Class = () => {
             return { id: "id", helpfulBy: [], likedBy: [], reportedBy: [] };
         },
     });
-
-    const handleOpenModal = (doc) => {
-        setOpenModal(true);
-        // changed to now use the entire document, not just the data
-        setCurrentReview(doc);
-    };
-    const handleCloseModal = () => {
-        setOpenModal(false);
-    };
-
-    const like = async (review) => {
-        let object = reviewAttributes;
-        console.log(review);
-
-        let reviewRef = doc(db, "/classes/" + id + "/reviews", review.id);
-        if (object[review.id].like == "outlined") {
-            object[review.id].like = "filled";
-            await updateDoc(reviewRef, {
-                likedBy: arrayUnion(user.uid),
-            });
-        } else {
-            object[review.id].like = "outlined";
-            await updateDoc(reviewRef, {
-                likedBy: arrayRemove(user.uid),
-            });
-        }
-        setReviewAttributes({ ...object });
-    };
-    const helpful = async (review) => {
-        let object = reviewAttributes;
-        object[review.id].helpful = object[review.id].helpful == "outlined" ? "filled" : "outlined";
-        setReviewAttributes({ ...object });
-    };
-    const report = async (review) => {
-        let object = reviewAttributes;
-        object[review.id].report = object[review.id].report == "outlined" ? "filled" : "outlined";
-        setReviewAttributes({ ...object });
-    };
 
     useEffect(() => {
         if (!loading && user !== null) {
@@ -112,53 +74,10 @@ const Class = () => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             temp.push(doc);
-            let likedAlready = doc.data().likedBy.includes(user.uid) ? "filled" : "outlined";
-            let reportedAlready = doc.data().reportedBy.includes(user.uid) ? "filled" : "outlined";
-            let helpfulAlready = doc.data().helpfulBy.includes(user.uid) ? "filled" : "outlined";
-            temporaryLikingData[doc.id] = { like: likedAlready, report: reportedAlready, helpful: helpfulAlready };
         });
         setClassReviewData(temp);
-        setReviewAttributes(temporaryLikingData);
 
         setLoadingData(false);
-    };
-
-    const ReviewModal = () => {
-        return (
-            <Modal open={openModal} onClose={handleCloseModal} className='modal' style={{ transitionDuration: 0 + "s" }}>
-                <div className='modalContainer'>
-                    <Box className='modalContent'>
-                        <div className='modalLeft'>
-                            <div className='modaltitle'>
-                                <h2>{currentReview.data().author?.split(" ")[0]}'s Review</h2>
-                                <Rating sx={{ fontSize: "1.25em" }} name='read-only' value={currentReview.data().rating} readOnly />
-                            </div>
-                            <h4>Based on {currentReview.data().year}</h4>
-
-                            <h3>{currentReview.data().review}</h3>
-                        </div>
-
-                        <div className='modalRight'>
-                            <div className='modalData'>
-                                <h2>{currentReview.data().author?.split(" ")[0]}'s Ranking</h2>
-                                <div className='ranking-in-modal'>
-                                    <IndRating name='Stress Level' level={currentReview.data().stressLevel} extra='/5'></IndRating>
-                                    <IndRating name='Learning Level' level={currentReview.data().learningLevel} extra='/5'></IndRating>
-                                    {/* Blame Ashwin for the terrible spelling */}
-                                    <IndRating name='Difficulty' level={currentReview.data().difficulty} extra='/5'></IndRating>
-                                    <IndRating name='Time Commitment' level={currentReview.data().time} extra='min'></IndRating>
-                                </div>
-                                <div className='boxButtons'>
-                                    <Chip variant={reviewAttributes[currentReview.id]?.like} title='Like' onClick={() => like(currentReview)} label={currentReview.data().likedBy.length} icon={<ThumbUpIcon />}></Chip>
-                                    <Chip variant={reviewAttributes[currentReview.id]?.helpful} title='Helpful' onClick={() => helpful(currentReview)} label={currentReview.data().helpfulBy.length} icon={<CheckIcon />}></Chip>
-                                    <Chip variant={reviewAttributes[currentReview.id]?.report} title='Inaccurate' onClick={() => report(currentReview)} label={currentReview.data().reportedBy.length} icon={<FlagIcon />}></Chip>
-                                </div>
-                            </div>
-                        </div>
-                    </Box>
-                </div>
-            </Modal>
-        );
     };
 
     const thumb = {
@@ -167,34 +86,12 @@ const Class = () => {
         height: "0",
     };
 
-    const Review = ({ review }) => {
-        return (
-            <>
-                <Box className='box' onClick={() => handleOpenModal(review)}>
-                    <div>
-                        <h4>{review.data().review.substring(0, 200)}...</h4>
-                    </div>
-                    <div className='all-buttons-individual-rating'>
-                        <Rating className='reviewStar' sx={{ fontSize: "1.75em" }} value={review.data().rating} readOnly />
-                        <div className='boxButtons'>
-                            <Chip variant={reviewAttributes[review.id]?.like} title='Like' onClick={() => like(review)} label={review.data().likedBy.length} icon={<ThumbUpIcon />}></Chip>
-                            <Chip variant={reviewAttributes[review.id]?.helpful} title='Helpful' onClick={() => helpful(review)} label={review.data().helpfulBy.length} icon={<CheckIcon />}></Chip>
-                            <Chip variant={reviewAttributes[review.id]?.report} title='Inaccurate' onClick={() => report(review)} label={review.data().reportedBy.length} icon={<FlagIcon />}></Chip>
-                        </div>
-                    </div>
-                </Box>
-            </>
-        );
-    };
-
     return (
         <>
             {loadingData ? (
                 <Loading />
             ) : (
                 <div className='classContainer'>
-                    <ReviewModal />
-
                     <Navbar />
                     <div className='title'>
                         <h1>{classData.name}</h1>
@@ -222,14 +119,14 @@ const Class = () => {
                                     <IndRating name='Learning Level' level={Math.round((classData.sumOfLearning / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
                                     {/* Blame Ashwin for the terrible spelling */}
                                     <IndRating name='Difficulty' level={Math.round((classData.sumOfDiffulty / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
-                                    <IndRating name='Time Commitment' level={Math.round((classData.sumOfTimeCommit / classData.reviewCt) * 10) / 10} extra='min'></IndRating>
+                                    <IndRating name='Time Commitment' level={Math.round(classData.sumOfTimeCommit / classData.reviewCt)} extra='min'></IndRating>
                                 </div>
                             </div>
                             <div className='rightSide'>
                                 <h1>Reviews</h1>
                                 <div className='reviews'>
                                     {classReviewData.map((review, index) => {
-                                        return <Review key={index} review={review} />;
+                                        return <Review key={index} review={review} uid={user?.uid} classId={id} />;
                                     })}
                                 </div>
                             </div>
