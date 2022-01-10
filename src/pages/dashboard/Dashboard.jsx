@@ -4,21 +4,15 @@ import SuggestedActions from "./SuggestedActions";
 import Loading from "../../components/loading/Loading";
 import { getAuth } from "@firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import useAuthRedirect from "../../hooks/useAuthRedirect";
 import "./dashboard.css";
 
 const auth = getAuth();
 
 const Dashboard = () => {
     const [user, loading] = useAuthState(auth);
-    let navigate = useNavigate();
-    useEffect(() => {
-        if (!loading && user === null) {
-            // No user, redirect
-            navigate("/login");
-        }
-    }, [loading, navigate, user]);
+    
+    useAuthRedirect();
 
     const DashboardContent = () => {
         return (

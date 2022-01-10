@@ -104,9 +104,10 @@
 .each-suggested-question-tag::-webkit-scrollbar-track {
     background-color: transparent;
 }
-.random-button-container {
+.button-container {
     margin-top: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    gap: 0.75rem;
 }

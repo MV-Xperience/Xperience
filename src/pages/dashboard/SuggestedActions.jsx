@@ -50,10 +50,10 @@ const SuggestedActions = (params) => {
                     })
                 )}
             </div>
-            <div className='random-button-container'>
-                <Button variant='contained'>Create a Review</Button>
-                <Button variant='contained'>Browse Reviews</Button>
+            <div className='button-container'>
+                <Link to = {{pathname: '/review'}}><Button variant='contained'>Create a Review</Button></Link>
                 <Button variant='contained'>Browse Questions</Button>
+                <Button variant='contained'>Browse Reviews</Button>
             </div>
         </div>
     );

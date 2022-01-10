@@ -59,7 +59,7 @@ const YourQuestions = (params) => {
                         })}
                         {questionData.length < 4 ? (
                             <h2 style={{ marginTop: "auto" }}>
-                                Have more questions?
+                                Have more questions?{" "}
                                 <Link to='/question/new' style={{ marginLeft: 0.25 + "rem" }}>
                                     <Button variant='contained'>Ask them here</Button>
                                 </Link>

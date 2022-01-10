@@ -7,6 +7,8 @@ import { getFirestore, addDoc, collection, serverTimestamp, doc, updateDoc, arra
 import { getAuth } from "@firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import useAuthRedirect from "../../hooks/useAuthRedirect";
+
 import Alert from "@mui/material/Alert";
 const db = getFirestore();
 const auth = getAuth();
@@ -19,14 +21,8 @@ const NewQuestion = () => {
     const [tags, setTags] = useState([]);
     const [user, loading] = useAuthState(auth);
     let navigate = useNavigate();
-    useEffect(() => {
-        if (!loading) {
-            if (user) {
-            } else {
-                navigate("/login");
-            }
-        }
-    }, [loading, navigate, user]);
+    useAuthRedirect();
+
     const addTag = (e) => {
         e.preventDefault();
         console.log(tagInput.current.value);

@@ -13,7 +13,6 @@ const IndRating = (props) => {
             }}>
             <h2>
                 {props.level}
-
                 <span>{props.extra}</span>
             </h2>
             <p>{props.name}</p>
