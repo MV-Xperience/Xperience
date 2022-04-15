@@ -4,13 +4,13 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
-
 import { useEffect, useState } from "react";
 
 import Loading from "../../components/loading/Loading";
 import Navbar from "../../components/navbar/Navbar";
 import IndRating from "./IndRating";
 import NoReview from "./NoReview";
+import Review from "./Review";
 
 import "./class.css";
 
@@ -25,7 +25,10 @@ import FlagIcon from "@mui/icons-material/Flag";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import CheckIcon from "@mui/icons-material/Check";
 import useAuthRedirect from "../../hooks/useAuthRedirect";
+<<<<<<< HEAD
 import classNames from "../../data/classNames2122.json";
+=======
+>>>>>>> 585779aeb569a5b0adeb4394cc3e27746462e343
 
 const db = getFirestore();
 const auth = getAuth();
@@ -50,6 +53,7 @@ const Class = () => {
         },
     });
 
+<<<<<<< HEAD
     const handleOpenModal = (doc) => {
         setOpenModal(true);
         // changed to now use the entire document, not just the data
@@ -88,6 +92,8 @@ const Class = () => {
     //     setReviewAttributes({ ...object });
     // };
 
+=======
+>>>>>>> 585779aeb569a5b0adeb4394cc3e27746462e343
     useEffect(() => {
         if (!loading && user !== null){
             // Load in everything!
@@ -115,17 +121,13 @@ const Class = () => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             temp.push(doc);
-            let likedAlready = doc.data().likedBy.includes(user.uid) ? "filled" : "outlined";
-            let reportedAlready = doc.data().reportedBy.includes(user.uid) ? "filled" : "outlined";
-            let helpfulAlready = doc.data().helpfulBy.includes(user.uid) ? "filled" : "outlined";
-            temporaryLikingData[doc.id] = { like: likedAlready, report: reportedAlready, helpful: helpfulAlready };
         });
         setClassReviewData(temp);
-        setReviewAttributes(temporaryLikingData);
 
         setLoadingData(false);
     };
 
+<<<<<<< HEAD
     const ReviewModal = () => {
         return (
             <Modal open={openModal} onClose={handleCloseModal} className='modal' style={{ transitionDuration: 0 + "s" }}>
@@ -181,6 +183,12 @@ const Class = () => {
                 </Box>
             </>
         );
+=======
+    const thumb = {
+        color: "transparent",
+        width: "0",
+        height: "0",
+>>>>>>> 585779aeb569a5b0adeb4394cc3e27746462e343
     };
 
     return (
@@ -189,7 +197,6 @@ const Class = () => {
                 <Loading />
             ) : (
                 <div className='classContainer'>
-                    <ReviewModal />
                     <Navbar />
                     <div className='title'>
                         <h1>{classData.name}</h1>
@@ -218,7 +225,7 @@ const Class = () => {
                                     <IndRating name='Learning Level' level={Math.round((classData.sumOfLearning / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
                                     {/* Blame Ashwin for the terrible spelling */}
                                     <IndRating name='Difficulty' level={Math.round((classData.sumOfDiffulty / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
-                                    <IndRating name='Time Commitment' level={Math.round((classData.sumOfTimeCommit / classData.reviewCt) * 10) / 10} extra='min'></IndRating>
+                                    <IndRating name='Time Commitment' level={Math.round(classData.sumOfTimeCommit / classData.reviewCt)} extra='min'></IndRating>
                                 </div>
                                 :
                                 <div className='overall-rating-container'>
@@ -253,6 +260,7 @@ const Class = () => {
                                 }
                             </div>
                             <div className='rightSide'>
+<<<<<<< HEAD
 
                             {
                                 classData.reviewCt > 0 ?
@@ -267,6 +275,23 @@ const Class = () => {
                                 : 
                                 <NoReview />
                             }
+=======
+                                <h1>Reviews</h1>
+                                <div className='reviews'>
+                                    {classReviewData.map((review, index) => {
+                                        return <Review key={index} review={review} uid={user?.uid} classId={id} />;
+                                    })}
+                                </div>
+                                <br />
+                                <Button
+                                    variant='contained'
+                                    size='large'
+                                    onClick={() => {
+                                        navigate("./path");
+                                    }}>
+                                    View Class Path For this Class
+                                </Button>
+>>>>>>> 585779aeb569a5b0adeb4394cc3e27746462e343
                             </div>
 
                             
