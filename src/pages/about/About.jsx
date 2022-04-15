@@ -17,7 +17,7 @@ const About = () => {
                     <h2>Who Created MV Xperience?</h2>
                     <h3>Project Lead: Ashwin Talwalkar</h3>
                     <h4>- Major Contributors: Ashwin Talwalkar & Wyatt Cowley</h4>
-                    <h4>- Contributors and Design Specialists: Zypher Jones, Lorenzo Varlaro, & Sonav Agarwal</h4>
+                    <h4>- Contributors and Design Specialists: Zephyr Jones, Lorenzo Varlaro, & Sonav Agarwal</h4>
                 </div>
             </div>
         </>
