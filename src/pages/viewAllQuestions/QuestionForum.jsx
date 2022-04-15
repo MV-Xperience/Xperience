@@ -60,7 +60,7 @@ const QuestionForum = () => {
                             <h1 className='pageHeading'>Question Forum</h1>
                         </div>
                         <div className="form-browse">
-                            <input type='text' value={searchedTag} onChange={(e) => setSearchedTag(e.target.value)} placeholder='Search by tags.' />
+                            <input type='text' value={searchedTag} onChange={(e) => setSearchedTag(e.target.value)} placeholder='Search by tags...' />
                             <Button onClick = {getData} variant='contained' size='large'>Search</Button>
                         </div>
                         <br />
@@ -79,11 +79,17 @@ const QuestionForum = () => {
                         :
                         <>
                         {
-                            searched &&
+                            searched ?
                                 <div className="noReviewContainer">
                                 <h1>No Questions For This Tag!</h1>
                                 <Link to = '/question/new'><h3>Click here to ask a new questions</h3></Link>
                             </div>
+                            :
+                            <div className="noReviewContainer">
+                                <h1>No Questions Yet!</h1>
+                                <Link to = '/question/new'><h3>Click here to ask a new questions</h3></Link>
+                            </div>
+                            
                         }   
                         </>
                     }

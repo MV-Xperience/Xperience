@@ -67,3 +67,9 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.replies-scroll{
+    width: calc(100%);
+    height: 60vh;
+    overflow-x: hidden;
+}

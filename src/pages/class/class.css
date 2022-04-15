@@ -66,6 +66,10 @@
     align-items: center;
 }
 
+.classContent h1{
+    font-size: 2.25rem;
+}
+
 .classContent > * {
     margin: 0 3vw;
 }

@@ -12,6 +12,7 @@ import NewQuestion from "./pages/newQuestion/NewQuestion";
 import QuestionForum from "./pages/viewAllQuestions/QuestionForum";
 import Class from "./pages/class/Class.jsx";
 import Browse from "./pages/browseReviews/Browse";
+import About from "./pages/about/About";
 import "./app.css";
 
 const App = () => {
@@ -43,7 +44,7 @@ const App = () => {
                         </Route>
                     </Route>
                     <Route path='browse-reviews' element = {<Browse />} />                    
-                    <Route path='about' />
+                    <Route path='about' element = {<About />}/>
                     <Route path='logout' element={<Logout />} />
                     <Route path='login' element={<Login />} />
                 </Routes>

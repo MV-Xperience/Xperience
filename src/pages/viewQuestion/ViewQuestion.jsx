@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import { useParams } from "react-router";
-import { getFirestore, getDoc, getDocs, collection, doc, query, orderBy } from "@firebase/firestore";
+import { getFirestore, getDoc, addDoc, getDocs, collection, doc, query, orderBy } from "@firebase/firestore";
 import { getAuth } from "@firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -17,61 +17,83 @@ const ViewQuestion = () => {
     const [loadingData, setLoading] = useState(true);
     const [liked, setLiked] = useState(false);
     const [user, loading] = useAuthState(auth);
+    const [reply, setReply] = useState("");
     useEffect(() => {
         // Load in question data
-        if (!loading && user) {
-            getQuestionAndReplies();
-        }
-    }, [loading]);
-    const getQuestionAndReplies = async () => {
-        const questionRef = doc(db, "questions", params.id);
-        const document = await getDoc(questionRef);
+       
+        const getQuestionAndReplies = async () => {
+            const questionRef = doc(db, "questions", params.id);
+            const document = await getDoc(questionRef);
+    
+            setData(document.data());
+            
+            const collectionRef = collection(db, "questions/" + params.id + "/replies");
+            const q = query(collectionRef);
+            const querySnapshot = await getDocs(q);
+            let tempArr = [];
 
-        setData(document.data());
-        if (document.data().likedBy.includes()) {
-        }
-        const collectionRef = collection(questionRef, "replies");
-        const q = query(collectionRef, orderBy("likes", "asc"));
-        const querySnapshot = await getDocs(q);
-        let repliesArray = [];
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-            doc.data().id = doc.id;
-            repliesArray.push(doc.data());
-        });
+            querySnapshot.forEach((doc) => {
+                tempArr.push(doc);
+            });
+            
+            setReplies(tempArr);
+            setLoading(false);            
+           
+        };
 
-        setReplies(repliesArray);
-        setLoading(false);
+        getQuestionAndReplies();
+
+    }, [loading, user]);
+    
+    const setLike = async () => {
+
     };
-    const setLike = async () => {};
+
+    const handleAddReply = async (question) => {
+        setLoading(true);
+        if(reply !== "") {
+            const collectionRef = collection(db, "questions/" + question + "/replies");
+            const replyObj = {
+                text: reply,    
+                likedBy: [],
+                createdAt: new Date(),
+                createdBy: auth.currentUser.uid,
+                author: auth.currentUser.displayName,
+            };
+            await addDoc(collectionRef, replyObj);
+            setReply("");
+            setLoading(false);
+            alert("Reply added!");
+        }
+    }
     return (
         <>
-            <Navbar></Navbar>
+            <Navbar />
             {!loadingData ? (
                 <div className='view-replies-container'>
                     <h1>{data.text}</h1>
-                    <div>
-                        {replies.length === 0 ? (
-                            <div>
-                                <h2>There are no replies yet.</h2>
-                            </div>
-                        ) : (
-                            replies.map((eachData) => {
-                                return (
-                                    <div key={eachData.id} className='each-reply'>
+                    <div className="replies-scroll">
+                        {
+                        replies.map((reply) => {
+                            return (
+                                <>
+                                    <div key={reply.id} className='each-reply'>
                                         <div>
-                                            <h2>{eachData.text}</h2>
+                                            <h2>{reply.data().text}</h2>
                                             <span onClick={setLike}>
-                                                <p>{eachData.likes}</p>
-                                                <ThumbUpRoundedIcon></ThumbUpRoundedIcon>
+                                                <p>{reply.data().likedBy.length}</p>
+                                                <ThumbUpRoundedIcon />
                                             </span>
                                         </div>
-                                        <p style={{ textAlign: "right" }}>- {eachData.displayName}</p>
+                                        <p style={{ textAlign: "right" }}>- {reply.data().author}</p>
                                     </div>
-                                );
-                            })
-                        )}
+                                    <br />
+                                </>
+                            );
+                        })}
+                        {
+                            replies.length === 0 && <h3>No Replies Yet!</h3>
+                        }
                     </div>
                 </div>
             ) : (
@@ -80,9 +102,9 @@ const ViewQuestion = () => {
                 </div>
             )}
             <div className='replies-entry'>
-                <textarea placeholder='Write your response here...'></textarea>
+                <textarea value = {reply} onChange = {(e)=>setReply(e.target.value)} placeholder='Write your response here...'></textarea>
                 <div>
-                    <Button variant='contained'>Submit</Button>
+                    <Button variant='contained' onClick = {()=>handleAddReply(params.id)}>Submit</Button>
                 </div>
             </div>
         </>
