@@ -22,3 +22,21 @@
     background-color: var(--accent-background);
     border-radius: var(--border-radius);
 }
+
+.askMore{
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+.askMoreLeft{
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+}
+
+.questionContainer{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 1rem 0;
+}

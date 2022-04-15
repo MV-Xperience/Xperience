@@ -20,26 +20,23 @@ import Chip from "@mui/material/Chip";
 
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 
 import FlagIcon from "@mui/icons-material/Flag";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import CheckIcon from "@mui/icons-material/Check";
 import useAuthRedirect from "../../hooks/useAuthRedirect";
-
+import classNames from "../../data/classNames2122.json";
 
 const db = getFirestore();
 const auth = getAuth();
 const Class = () => {
     useAuthRedirect();
-
     let navigate = useNavigate();
     let { id } = useParams();
     const db = getFirestore();
-    const [classData, setClassData] = useState({});
+    const [classData, setClassData] = useState({next: [], previous: []});
     const [loadingData, setLoadingData] = useState(true);
     const [user, loading, error] = useAuthState(auth);
-
     const [classReviewData, setClassReviewData] = useState({});
 
     // nested object
@@ -62,37 +59,37 @@ const Class = () => {
         setOpenModal(false);
     };
 
-    const like = async (review) => {
-        let object = reviewAttributes;
-        console.log(review);
+    // const like = async (review) => {
+    //     let object = reviewAttributes;
+    //     console.log(review);
 
-        let reviewRef = doc(db, "/classes/" + id + "/reviews", review.id);
-        if (object[review.id].like == "outlined") {
-            object[review.id].like = "filled";
-            await updateDoc(reviewRef, {
-                likedBy: arrayUnion(user.uid),
-            });
-        } else {
-            object[review.id].like = "outlined";
-            await updateDoc(reviewRef, {
-                likedBy: arrayRemove(user.uid),
-            });
-        }
-        setReviewAttributes({ ...object });
-    };
-    const helpful = async (review) => {
-        let object = reviewAttributes;
-        object[review.id].helpful = object[review.id].helpful == "outlined" ? "filled" : "outlined";
-        setReviewAttributes({ ...object });
-    };
-    const report = async (review) => {
-        let object = reviewAttributes;
-        object[review.id].report = object[review.id].report == "outlined" ? "filled" : "outlined";
-        setReviewAttributes({ ...object });
-    };
+    //     let reviewRef = doc(db, "/classes/" + id + "/reviews", review.id);
+    //     if (object[review.id].like === "outlined") {
+    //         object[review.id].like = "filled";
+    //         await updateDoc(reviewRef, {
+    //             likedBy: arrayUnion(user.uid),
+    //         });
+    //     } else {
+    //         object[review.id].like = "outlined";
+    //         await updateDoc(reviewRef, {
+    //             likedBy: arrayRemove(user.uid),
+    //         });
+    //     }
+    //     setReviewAttributes({ ...object });
+    // };
+    // const helpful = async (review) => {
+    //     let object = reviewAttributes;
+    //     object[review.id].helpful = object[review.id].helpful === "outlined" ? "filled" : "outlined";
+    //     setReviewAttributes({ ...object });
+    // };
+    // const report = async (review) => {
+    //     let object = reviewAttributes;
+    //     object[review.id].report = object[review.id].report === "outlined" ? "filled" : "outlined";
+    //     setReviewAttributes({ ...object });
+    // };
 
     useEffect(() => {
-        if (!loading && user !== null) {
+        if (!loading && user !== null){
             // Load in everything!
             console.log("Loading in everything, signed in already");
             getData();
@@ -155,9 +152,8 @@ const Class = () => {
                                     <IndRating name='Time Commitment' level={currentReview.data().time} extra='min'></IndRating>
                                 </div>
                                 <div className='boxButtons'>
-                                    <Chip variant={reviewAttributes[currentReview.id]?.like} title='Like' onClick={() => like(currentReview)} label={currentReview.data().likedBy.length} icon={<ThumbUpIcon />}></Chip>
-                                    <Chip variant={reviewAttributes[currentReview.id]?.helpful} title='Helpful' onClick={() => helpful(currentReview)} label={currentReview.data().helpfulBy.length} icon={<CheckIcon />}></Chip>
-                                    <Chip variant={reviewAttributes[currentReview.id]?.report} title='Inaccurate' onClick={() => report(currentReview)} label={currentReview.data().reportedBy.length} icon={<FlagIcon />}></Chip>
+
+                                  
                                 </div>
                             </div>
                         </div>
@@ -177,9 +173,9 @@ const Class = () => {
                     <div className='all-buttons-individual-rating'>
                         <Rating className='reviewStar' sx={{ fontSize: "1.75em" }} value={review.data().rating} readOnly />
                         <div className='boxButtons'>
-                            <Chip variant={reviewAttributes[review.id]?.like} title='Like' onClick={() => like(review)} label={review.data().likedBy.length} icon={<ThumbUpIcon />}></Chip>
+                            {/* <Chip variant={reviewAttributes[review.id]?.like} title='Like' onClick={() => like(review)} label={review.data().likedBy.length} icon={<ThumbUpIcon />}></Chip>
                             <Chip variant={reviewAttributes[review.id]?.helpful} title='Helpful' onClick={() => helpful(review)} label={review.data().helpfulBy.length} icon={<CheckIcon />}></Chip>
-                            <Chip variant={reviewAttributes[review.id]?.report} title='Inaccurate' onClick={() => report(review)} label={review.data().reportedBy.length} icon={<FlagIcon />}></Chip>
+                            <Chip variant={reviewAttributes[review.id]?.report} title='Inaccurate' onClick={() => report(review)} label={review.data().reportedBy.length} icon={<FlagIcon />}></Chip> */}
                         </div>
                     </div>
                 </Box>
@@ -212,10 +208,11 @@ const Class = () => {
                             />
                         </div>
                     </div>
-                    {classData.reviewCt > 0 ? (
                         <div className='classContent'>
                             <div className='leftSide'>
                                 <h3>{classData.desc}</h3>
+                                {classData.reviewCt > 0 ?
+
                                 <div className='overall-rating-container'>
                                     <IndRating name='Stress Level' level={Math.round((classData.sumOfStress / classData.reviewCt) * 10) / 10} extra='/5' style={{ backgroundImage: "linearGradient(to left top, red,white" }}></IndRating>
                                     <IndRating name='Learning Level' level={Math.round((classData.sumOfLearning / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
@@ -223,21 +220,57 @@ const Class = () => {
                                     <IndRating name='Difficulty' level={Math.round((classData.sumOfDiffulty / classData.reviewCt) * 10) / 10} extra='/5'></IndRating>
                                     <IndRating name='Time Commitment' level={Math.round((classData.sumOfTimeCommit / classData.reviewCt) * 10) / 10} extra='min'></IndRating>
                                 </div>
+                                :
+                                <div className='overall-rating-container'>
+                                    <IndRating name='Stress Level' level={"?"} extra='/5' style={{ backgroundImage: "linearGradient(to left top, red,white" }}></IndRating>
+                                    <IndRating name='Learning Level' level={"?"} extra='/5'></IndRating>
+                                    {/* Blame Ashwin for the terrible spelling */}
+                                    <IndRating name='Difficulty' level={"?"} extra='/5'></IndRating>
+                                    <IndRating name='Time Commitment' level={"?"} extra='min'></IndRating>
+                                </div>
+                                }
+                                
+                                <h1>Suggested Class Path</h1>
+                                <h2>Previous</h2>
+                                {
+                                    classData.previous.map((className, index) => {
+                                        return (
+                                            <p key = {className} onClick = {()=>navigate("/class/" + className)}>
+                                                {Object.keys(classNames).filter(key => classNames[key].code === className)[0]}
+                                            </p>
+                                        )
+                                    })
+                                }
+                                <h2>Next</h2>
+                                {
+                                    classData.next.map((className, index) => {
+                                        return (
+                                            <p key = {className} onClick = {()=>navigate("/class/" + className)}>
+                                                {Object.keys(classNames).filter(key => classNames[key].code === className)[0]}
+                                            </p>
+                                        )
+                                    })
+                                }
                             </div>
                             <div className='rightSide'>
-                                <h1>Reviews</h1>
-                                <div className='reviews'>
-                                    {classReviewData.map((review, index) => {
-                                        return <Review key={index} review={review} />;
-                                    })}
-                                </div>
-                                <br/>
-                                <Button variant='contained' size='large' onClick = {()=> {navigate('./path')}}>View Class Path For this Class</Button>
+
+                            {
+                                classData.reviewCt > 0 ?
+                                    <>
+                                    <h1>Reviews</h1>
+                                    <div className='reviews'>
+                                        {classReviewData.map((review, index) => {
+                                            return <Review key={index} review={review} />;
+                                        })}
+                                    </div>
+                                    </>
+                                : 
+                                <NoReview />
+                            }
                             </div>
+
+                            
                         </div>
-                    ) : (
-                        <NoReview />
-                    )}
                 </div>
             )}
         </>

@@ -29,7 +29,14 @@ ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
             <BrowserRouter>
-                <App />
+                {
+                    window.innerWidth > 786 && window.innerHeight > 414 ? <App /> : 
+                    <div className="mobileProblem">
+                        <h1>Sorry, this site is not optimized for mobile devices.</h1>
+                        <br />
+                        <h1>{":/"}</h1>
+                    </div>
+                }
             </BrowserRouter>
         </ThemeProvider>
     </React.StrictMode>,

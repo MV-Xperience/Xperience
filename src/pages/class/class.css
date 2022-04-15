@@ -12,6 +12,9 @@
     margin: 1rem;
     transition: all 0.25s;
 }
+.leftSide p{
+    cursor: pointer;
+}
 .ind-rating-container:hover {
     transform: scale(1.025);
 }
@@ -125,7 +128,7 @@
 }
 
 .noReviewContainer h1 {
-    margin: 10vh 0 0 5vh;
+    margin: 10vh 0 0 0vh;
     color: var(--accent-color);
 }
 
@@ -239,7 +242,7 @@
 
 .modaltitle h2 {
     font-size: 1.5em;
-    margin: 1vh 0;
+    margin: 0.5vh 0;
 }
 
 .modalContent h3 {
@@ -251,3 +254,14 @@
     font-size: 1.5em;
     margin: 1vh 0;
 }
+
+.boxButton{
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 3px solid var(--accent-color) !important;
+    background-color: transparent;
+}
+

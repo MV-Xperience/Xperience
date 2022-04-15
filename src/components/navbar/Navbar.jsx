@@ -14,32 +14,29 @@ const Navbar = (params) => {
                     <Link to='/'>
                         <img src='/favicon.ico' alt='logo' className='navbarLogo' />
                     </Link>
-                    <div className='searchBar'>
-                        <input className='searchInput' placeholder={"Search for certain tags or classes ..."}></input>
+                  
+                    <div className="nav-right">
+                        <Link className='navbarOption' to='/'>
+                            Dashboard
+                        </Link>
+                        <Link to='/about' className='navbarOption'>
+                            About
+                        </Link>
+                        {user ? (
+                            <Link to='/logout' className='navbarOption'>
+                                Sign Out
+                            </Link>
+                        ) : (
+                            <Link to='/login' className='navbarOption'>
+                                Sign In
+                            </Link>
+                        )}
+                        {user && (
+                            <div className='navbarPhoto'>
+                                <img className='navbarPhotoImage' alt = 'navbar' src={user.photoURL}></img>
+                            </div>
+                        )}
                     </div>
-                    <Link className='navbarOption' to='/'>
-                        Dashboard
-                    </Link>
-                    <Link to='/help' className='navbarOption'>
-                        Help
-                    </Link>
-                    <Link to='/about' className='navbarOption'>
-                        About
-                    </Link>
-                    {user ? (
-                        <Link to='/logout' className='navbarOption'>
-                            Sign Out
-                        </Link>
-                    ) : (
-                        <Link to='/login' className='navbarOption'>
-                            Sign In
-                        </Link>
-                    )}
-                    {user && (
-                        <div className='navbarPhoto'>
-                            <img className='navbarPhotoImage' alt = 'navbar' src={user.photoURL}></img>
-                        </div>
-                    )}
                 </div>
             </nav>
         </>

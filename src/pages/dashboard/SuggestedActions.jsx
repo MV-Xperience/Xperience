@@ -52,8 +52,8 @@ const SuggestedActions = (params) => {
             </div>
             <div className='button-container'>
                 <Link to = {{pathname: '/review'}}><Button variant='contained'>Create a Review</Button></Link>
-                <Button variant='contained'>Browse Questions</Button>
-                <Button variant='contained'>Browse Reviews</Button>
+                <Link to = {{pathname: '/browse-questions'}}><Button variant='contained'>Browse Questions</Button></Link>
+                <Link to = {{pathname: '/browse-reviews'}}><Button variant='contained'>Browse Reviews</Button></Link>
             </div>
         </div>
     );

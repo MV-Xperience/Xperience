@@ -91,7 +91,7 @@ h1 {
     width: 7rem;
     border: none;
     box-sizing: border-box;
-    font-size: 1rrem;
+    font-size: 1rem;
     padding: 20px 0;
     color: var(--content-color);
     background-color: var(--accent-color);

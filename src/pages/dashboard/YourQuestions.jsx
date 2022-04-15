@@ -55,7 +55,7 @@ const YourQuestions = (params) => {
                 ) : (
                     <>
                         {questionData.map((doc) => {
-                            return <IndQuestion key={doc.id} data={doc.data} id={doc.id}></IndQuestion>;
+                            return <IndQuestion key={doc.id} data={doc.data} id={doc.id} />
                         })}
                         {questionData.length < 4 ? (
                             <h2 style={{ marginTop: "auto" }}>

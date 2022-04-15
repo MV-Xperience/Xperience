@@ -118,7 +118,7 @@ const ReviewSubmitter = () => {
             <Navbar />
             {loading && <Loading />}
             <div className='pageContent'>
-                <div className='mainText' style={{ width: "" }}>
+                <div className='mainText' >
                     <h1 className='pageHeading'>Submit A Review</h1>
                 </div>
                 <datalist id='classes'>
