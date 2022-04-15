@@ -25,10 +25,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import CheckIcon from "@mui/icons-material/Check";
 import useAuthRedirect from "../../hooks/useAuthRedirect";
-<<<<<<< HEAD
 import classNames from "../../data/classNames2122.json";
-=======
->>>>>>> 585779aeb569a5b0adeb4394cc3e27746462e343
 
 const db = getFirestore();
 const auth = getAuth();
@@ -53,7 +50,6 @@ const Class = () => {
         },
     });
 
-<<<<<<< HEAD
     const handleOpenModal = (doc) => {
         setOpenModal(true);
         // changed to now use the entire document, not just the data
@@ -92,8 +88,6 @@ const Class = () => {
     //     setReviewAttributes({ ...object });
     // };
 
-=======
->>>>>>> 585779aeb569a5b0adeb4394cc3e27746462e343
     useEffect(() => {
         if (!loading && user !== null){
             // Load in everything!
@@ -127,7 +121,6 @@ const Class = () => {
         setLoadingData(false);
     };
 
-<<<<<<< HEAD
     const ReviewModal = () => {
         return (
             <Modal open={openModal} onClose={handleCloseModal} className='modal' style={{ transitionDuration: 0 + "s" }}>
@@ -183,12 +176,6 @@ const Class = () => {
                 </Box>
             </>
         );
-=======
-    const thumb = {
-        color: "transparent",
-        width: "0",
-        height: "0",
->>>>>>> 585779aeb569a5b0adeb4394cc3e27746462e343
     };
 
     return (
@@ -260,7 +247,6 @@ const Class = () => {
                                 }
                             </div>
                             <div className='rightSide'>
-<<<<<<< HEAD
 
                             {
                                 classData.reviewCt > 0 ?
@@ -275,23 +261,6 @@ const Class = () => {
                                 : 
                                 <NoReview />
                             }
-=======
-                                <h1>Reviews</h1>
-                                <div className='reviews'>
-                                    {classReviewData.map((review, index) => {
-                                        return <Review key={index} review={review} uid={user?.uid} classId={id} />;
-                                    })}
-                                </div>
-                                <br />
-                                <Button
-                                    variant='contained'
-                                    size='large'
-                                    onClick={() => {
-                                        navigate("./path");
-                                    }}>
-                                    View Class Path For this Class
-                                </Button>
->>>>>>> 585779aeb569a5b0adeb4394cc3e27746462e343
                             </div>
 
                             
