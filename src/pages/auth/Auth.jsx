@@ -25,11 +25,10 @@ const FirebaseContainer = () => {
             const docSnap = await getDoc(docRef);
 
             if (!docSnap.exists()) {
-                let emptyArray = [];
                 await setDoc(docRef, {
                     name: user.displayName,
-                    questionIds: emptyArray,
-                    reviewPaths: emptyArray,
+                    questionIds: [],
+                    reviewedClasses: [],
                 });
             }
         };

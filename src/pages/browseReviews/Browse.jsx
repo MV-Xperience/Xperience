@@ -1,39 +1,38 @@
 import "./browse.css";
-import { useEffect, useState } from "react";
-import { getFirestore, doc, getDoc, orderBy, query, collection, getDocs, limit} from "firebase/firestore";
+import {useState } from "react";
+import { getFirestore, doc, getDoc, orderBy, query, collection, getDocs} from "firebase/firestore";
+import {getAuth} from "firebase/auth";
 import Navbar from "../../components/navbar/Navbar";
-import IndRating from "../class/IndRating";
 
-import Rating from "@mui/material/Rating";
-
-
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
-import FlagIcon from "@mui/icons-material/Flag";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import CheckIcon from "@mui/icons-material/Check";
+
+import ReviewModal from '../../components/reviewModal/ReviewModal';
+import Review from "../../components/review/Review";
 import useAuthRedirect from "../../hooks/useAuthRedirect";
 import classNames from "../../data/classNames2122.json";
 import NoReview from "../../pages/class/NoReview";
 import { Link } from "react-router-dom";
-const Browse = () => {
-    useAuthRedirect();
-    const [classData, setClassData] = useState({});
-    const [classReviewData, setClassReviewData] = useState([]);
+import Loading from "../../components/loading/Loading";
 
+const Browse = () => {
+
+    useAuthRedirect();
+
+    const [classData, setClassData] = useState({});
+    const [allClassReviewData, setAllClassReviewData] = useState([]);
+    const [yourReviews, setYourReviews] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const db = getFirestore();
+    const auth = getAuth();
     const [classInput, setClassInput] = useState("");
     const [searched, setSearched] = useState(false);
     const [classId, setClassId] = useState("");
-    useEffect(() => {
-       
-    }, []);
 
-    const getData = async () => {
-        
+    const [loading, setLoading] = useState(false);
+
+    const getData = async() => {
+            setLoading(true);
             const classId = classNames[classInput]?.code;
 
             if (!classId){
@@ -49,20 +48,26 @@ const Browse = () => {
                 setClassData(docSnap.data());
             } else {
                 // doc.data() will be undefined in this case
-                console.log("No such document!");
+                setClassData(null);
+
             }
 
             const subCollectionRef = collection(db, `classes/${classId}/reviews`);
-            const collectionQuery = query(subCollectionRef, orderBy("helpfulCount", "desc"));
+            const collectionQuery = query(subCollectionRef, orderBy("likes", "desc"));
             const querySnapshot = await getDocs(collectionQuery);
             let temp = [];
-            let temporaryLikingData = {};
             querySnapshot.forEach((doc) => {
                 // doc.data() is never undefined for query doc snapshots
                 temp.push(doc);
                 
             });
-            setClassReviewData(temp);
+            
+            let tempCopy = temp.filter((review) => review.data().reports < 3);
+            setAllClassReviewData(tempCopy);
+
+            temp = temp.filter((review) => review.data().uid === auth.currentUser.uid);
+            setYourReviews(temp);
+            setLoading(false);
     };
 
     const handleCloseModal = () => {
@@ -73,77 +78,28 @@ const Browse = () => {
         // changed to now use the entire document, not just the data
         setCurrentReview(doc);
     };
-    const [currentReview, setCurrentReview] = useState({
-        data: function () {
-            return { id: "id", helpfulBy: [], likedBy: [], reportedBy: [] };
-        },
-    });
-    const ReviewModal = () => {
-        return (
-            <Modal open={openModal} onClose={handleCloseModal} className='modal' style={{ transitionDuration: 0 + "s" }}>
-                <div className='modalContainer'>
-                    <Box className='modalContent'>
-                        <div className='modalLeft'>
-                            <div className='modaltitle'>
-                                <h2>{currentReview.data().author?.split(" ")[0]}'s Review</h2>
-                                <Rating sx={{ fontSize: "1.25em" }} name='read-only' value={currentReview.data().rating} readOnly />
-                            </div>
-                            <h4>Based on {currentReview.data().year}</h4>
+    const [currentReview, setCurrentReview] = useState(null);
 
-                            <h3>{currentReview.data().review}</h3>
-                        </div>
+    const [toggleYours, setToggleYours] = useState(false);
 
-                        <div className='modalRight'>
-                            <div className='modalData'>
-                                <h2>{currentReview.data().author?.split(" ")[0]}'s Ranking</h2>
-                                <div className='ranking-in-modal'>
-                                    <IndRating name='Stress Level' level={currentReview.data().stressLevel} extra='/5'></IndRating>
-                                    <IndRating name='Learning Level' level={currentReview.data().learningLevel} extra='/5'></IndRating>
-                                    {/* Blame Ashwin for the terrible spelling */}
-                                    <IndRating name='Difficulty' level={currentReview.data().difficulty} extra='/5'></IndRating>
-                                    <IndRating name='Time Commitment' level={currentReview.data().time} extra='min'></IndRating>
-                                </div>
-                                <div className='boxButtons'>
-
-                                  
-                                </div>
-                            </div>
-                        </div>
-                    </Box>
-                </div>
-            </Modal>
-        );
-    };
-
-    const Review = ({ review }) => {
-        return (
-            <>
-                <Box className='box' onClick={() => handleOpenModal(review)}>
-                    <div>
-                        <h4>{review.data().review.substring(0, 200)}...</h4>
-                    </div>
-                    <div className='all-buttons-individual-rating'>
-                        <Rating className='reviewStar' sx={{ fontSize: "1.75em" }} value={review.data().rating} readOnly />
-                        <div className='boxButtons'>
-                            {/* <Chip variant={reviewAttributes[review.id]?.like} title='Like' onClick={() => like(review)} label={review.data().likedBy.length} icon={<ThumbUpIcon />}></Chip>
-                            <Chip variant={reviewAttributes[review.id]?.helpful} title='Helpful' onClick={() => helpful(review)} label={review.data().helpfulBy.length} icon={<CheckIcon />}></Chip>
-                            <Chip variant={reviewAttributes[review.id]?.report} title='Inaccurate' onClick={() => report(review)} label={review.data().reportedBy.length} icon={<FlagIcon />}></Chip> */}
-                        </div>
-                    </div>
-                </Box>
-            </>
-        );
-    };
 
     return (
         <>
-            <ReviewModal />
-
+            {
+                searched && currentReview !== null && <ReviewModal classId = {classId} currentReview={currentReview} handleCloseModal = {handleCloseModal} openModal = {openModal} />
+            }
             <Navbar />
             <div className="browse-page">
                 <div className="content">
-                    <div className='mainText' >
+                    <div className='mainText'>
                         <h1 className='pageHeading'>Look For Reviews</h1>
+                        {
+                            searched && 
+                            <span>
+                                <label htmlFor="toggleYourOwn">{!toggleYours ? "Viewing All": "Viewing Your Own"}</label>
+                                <input type="checkbox" onChange = {(e)=> setToggleYours(!toggleYours)} id="toggleYourOwn" name="toggleYourOwn" />
+                            </span>
+                        }
                     </div>
                     <datalist id='classes'>
                         {Object.keys(classNames).map((className, index) => {
@@ -156,23 +112,46 @@ const Browse = () => {
                     </div>
                     <br />
                    {
-                       searched ? 
-                          <>
-                          { 
-                          classData?.reviewCt > 0?
+                        loading ? <Loading size = {100}/> :
+                        
+                        <>
+                        {
+                            searched ? 
                             <>
-                                <h1>Reviews</h1>
-                                <div className=''>
-                                    {classReviewData.map((review, index) => {
-                                        return <Review key={index} review={review} />;
-                                    })}
-                                </div>
+                            { 
+                                yourReviews.length > 0 || allClassReviewData.length > 0?
+                                <>
+                                    <h1>Reviews</h1>
+                                    <div className=''>
+                                        {
+                                            toggleYours ? 
+                                            <>
+                                                {yourReviews.map((review, index) => {
+                                                    return <Review key={review.id} classData = {classData} setAllClassReviewData = {setAllClassReviewData} setYourReviews = {setYourReviews} handleOpenModal = {handleOpenModal} classId = {classId} review={review} />;
+                                                })}
+                                                {
+                                                    yourReviews.length === 0 && <NoReview />
+                                                }
+                                            </>
+                                            :
+                                            <>
+                                                {allClassReviewData.map((review, index) => {
+                                                    return <Review key={review.id} classData = {classData} setAllClassReviewData = {setAllClassReviewData} setYourReviews = {setYourReviews} handleOpenModal = {handleOpenModal} classId = {classId} review={review} />;
+                                                })}
+                                                {
+                                                    allClassReviewData.length === 0 && <NoReview />
+                                                }
+                                            </>
+                                        }
+                                    </div>
+                                </>
+                                : 
+                                <NoReview />
+                                }
                             </>
-                            : 
-                            <NoReview />
-                            }
+                            :<></>
+                        }
                         </>
-                        :<></>
                    }
                   {
                         searched &&

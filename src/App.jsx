@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -13,17 +12,15 @@ import QuestionForum from "./pages/viewAllQuestions/QuestionForum";
 import Class from "./pages/class/Class.jsx";
 import Browse from "./pages/browseReviews/Browse";
 import About from "./pages/about/About";
+import NotFound from "./pages/notFound/NotFound";
 import "./app.css";
 
 const App = () => {
     const auth = getAuth(fbApp);
-    const [user, setUser] = useState(auth.currentUser);
 
     onAuthStateChanged(auth, (userIn) => {
-        setUser(userIn);
+        
     });
-
-    console.log(user); // remove this line later
 
     return (
         <div className='App'>
@@ -47,6 +44,7 @@ const App = () => {
                     <Route path='about' element = {<About />}/>
                     <Route path='logout' element={<Logout />} />
                     <Route path='login' element={<Login />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
         </div>

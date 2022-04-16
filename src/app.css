@@ -1,22 +1,10 @@
-@media (prefers-color-scheme: light) {
-    html {
-        --background-color: white;
-        --accent-background: #f5f5f5;
-        --content-color: black;
-        --shadow-color: gray;
-        --box-shadow: 0 0 0.5em -0.2em var(--shadow-color);
-    }
-}
 
-@media (prefers-color-scheme: dark) {
-    html {
-        --background-color: #262626;
-        --accent-background: black;
-        --content-color: white;
-        --box-shadow: 0 0 0.5em -0.2em var(--shadow-color);
-    }
-}
 html {
+    --background-color: white;
+    --accent-background: #f5f5f5;
+    --content-color: black;
+    --shadow-color: gray;
+    --box-shadow: 0 0 0.5em -0.2em var(--shadow-color);
     scroll-behavior: smooth;
     --accent-color: rgb(242, 199, 59);
     --transparent-accent-color: rgba(242, 199, 59, 0.75);
@@ -73,4 +61,13 @@ textarea {
 .mobileProblem h1{
     font-size: 1rem;
     color: var(--content-color);
+}
+
+.notFound{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
 }

@@ -1,38 +1,39 @@
 import { useEffect, useState } from "react";
-import { getFirestore, collection, query, orderBy, where, limit, getDocs } from "@firebase/firestore";
+import { getFirestore, collection, query, orderBy, where, limit, onSnapshot } from "@firebase/firestore";
+import { getAuth } from "@firebase/auth";
 import Loading from "../../components/loading/Loading";
 
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import ReplyRoundedIcon from "@mui/icons-material/ReplyRounded";
+
 const db = getFirestore();
 const SuggestedActions = (params) => {
+    const auth = getAuth();
     const [loading, setLoading] = useState(true);
     const [suggestedQuestions, setSuggestedQuestions] = useState([]);
     // In the future, use IN to give the person questions based on classes they've taken or reviewed
     // In the future, could order by replies < 0
     // In the future, could use an array peopleToIgnore, to make sure they aren't always spammed with the same recommendation
     useEffect(() => {
-        if (!params.loading && params.user !== null) {
-            // Get the questions from the query
-            console.log("Starting");
-            const questionCollection = collection(db, "questions");
-            const q = query(questionCollection, where("numReplies", "==", 0), orderBy("date", "desc"), limit(3));
-            getDocuments(q);
-        }
-    }, [params]);
-    async function getDocuments(q) {
-        const querySnapshot = await getDocs(q);
-        console.log("Got documents");
-        let fullArray = [];
-        querySnapshot.forEach((doc) => {
-            console.log("Matching information:", doc.id, doc.data());
-            fullArray.push({ id: doc.id, data: doc.data() });
+        const questionCollection = collection(db, "questions");
+        const q = query(questionCollection, where("numReplies", "==", 0), orderBy("date", "desc"), limit(3));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            let fullArray = [];
+            querySnapshot.forEach((doc) => {
+                fullArray.push({ id: doc.id, data: doc.data() });
+            });
+            fullArray = fullArray.filter((question) => question.data.uid !== auth.currentUser.uid);
+            setSuggestedQuestions(fullArray);              
         });
-        setSuggestedQuestions(fullArray);
         setLoading(false);
-    }
+        return () => {
+            unsubscribe();
+        }
+        
+    }, [params, auth]);
+    
     return (
         <div className='suggested-actions-container'>
             <div className='your-questions-title'>

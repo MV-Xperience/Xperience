@@ -29,7 +29,7 @@ const ReviewSubmitter = () => {
     const [loading, setLoading] = useState(false);
 
     const db = getFirestore();
-    
+    const auth = getAuth();
 
     const handleSubmit = async (e) => {
         setLoading(true);
@@ -49,7 +49,7 @@ const ReviewSubmitter = () => {
             });
 
             const reviewData = {
-                author: getAuth().currentUser.displayName,
+                author: auth.currentUser.displayName,
                 class: classInput,
                 difficulty: difficultyInput,
                 learningLevel: learningInput,
@@ -58,9 +58,9 @@ const ReviewSubmitter = () => {
                 rating: rating,
                 review: review,
                 year: yearInput,
-                helpfulCount: 0,
-                likeCount: 0,
-                reportCount: 0,
+                likes: 0,
+                reports: 0,
+                uid: auth.currentUser.uid,
                 likedBy: [],
                 helpfulBy: [],
                 reportedBy: [],
@@ -128,7 +128,7 @@ const ReviewSubmitter = () => {
                 </datalist>
                 <form id='enterReview' onSubmit={handleSubmit}>
                     {/* <div className='titlesforReview required'>Class Name</div> */}
-                    <input type='text' required value={classInput} list='classes' onChange={(e) => setClassInput(e.target.value)} placeholder='Search for the class you are reviewing...'></input>
+                    <input type='text' required value={classInput} list='classes' onChange={(e) => setClassInput(e.target.value)} placeholder='Search for the class you are reviewing...' />
                     <div className='inputRating'>
                         <h3>Rating</h3>
                         <Rating

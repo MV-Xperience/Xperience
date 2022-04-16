@@ -111,3 +111,50 @@
     justify-content: space-evenly;
     gap: 0.75rem;
 }
+
+.deleteButton{
+    background-color: transparent;
+    color: var(--reported);
+    border: none;
+    cursor: pointer;    
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.topPart{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.action-button-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action-button-group span {
+    display: flex;
+    align-items: center;
+    margin: 0 0.5rem;
+    background-color: var(--accent-background);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.25s;
+}
+.action-button-group span:hover {
+    box-shadow: var(--box-shadow);
+    transform: scale(1.05);
+}
+.action-button-group span:active {
+    transform: scale(0.95);
+}
+.action-button-group h2 {
+    width: 80%;
+}
+.action-button-group span > p {
+    margin: 0px;
+    margin-right: 0.5rem;
+}

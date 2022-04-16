@@ -84,9 +84,10 @@
 .rightSide {
     display: flex;
     flex-direction: column;
-    align-self: start;
+    align-self: flex-start;
     width: calc(35vw + 10px);
 }
+
 .reviews {
     display: flex;
     flex-direction: column;
@@ -95,11 +96,19 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.reviews::-webkit-scrollbar {
+    display: none;
+}
 .all-buttons-individual-rating {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.all-buttons-individual-rating .action-button-group span{
+    border: 0.5px solid black;
 }
 
 .reviews::-webkit-scrollbar {
@@ -152,7 +161,11 @@
     background-color: var(--accent-background);
     border-radius: var(--border-radius);
 }
-.box:hover {
+
+.box .openClickPart{
+    width: 95%;
+}
+.box h4:hover {
     cursor: pointer;
 }
 
@@ -162,6 +175,9 @@
     align-items: center;
     gap: 1vw;
     margin-bottom: 0.5rem;
+}
+.box h4{
+    font-size: 1.5rem;
 }
 
 .reviewStar {
@@ -235,9 +251,9 @@
 .modaltitle {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: row;
-    font-size: 2em;
+    font-size: 2rem;
 }
 
 .modaltitle > * {
@@ -257,6 +273,11 @@
 .modalContent h4 {
     font-size: 1.5em;
     margin: 1vh 0;
+}
+
+.modalLeft p {
+    font-size: 1rem;
+    margin: 2vh 0;
 }
 
 .boxButton{

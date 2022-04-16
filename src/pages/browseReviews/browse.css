@@ -12,6 +12,17 @@
     width: 95%;
     margin-top: 1rem;
 }
+.browse-page .content .mainText{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.browse-page .content .mainText input[type="checkbox"]{
+    aspect-ratio: 1/1;
+    margin-left: 0.5rem;
+}
 .browse-page .form-browse{
     display: flex;
     flex-direction: column;

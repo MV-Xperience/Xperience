@@ -1,9 +1,15 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import './loading.css'
-const Loading = () => {
+const Loading = ({size}) => {
+
+    if(size === undefined){
+        size = 25;
+    }
+    const sizeLocal = size;
+
     return ( 
     <div className = 'loader'>
-        <CircularProgress color='primary' />
+        <CircularProgress size = {sizeLocal} color='primary' />
     </div> 
     )
     ;

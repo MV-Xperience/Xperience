@@ -12,11 +12,17 @@ const ReviewModal = ({currentReview, handleCloseModal, openModal}) => {
                 <Box className='modalContent'>
                     <div className='modalLeft'>
                         <div className='modaltitle'>
-                            <h2>{currentReview.data().author?.split(" ")[0]}'s Review</h2>
+                            <div>
+                                <h2>{currentReview.data().author?.split(" ")[0]}'s Review</h2>
+                                <p>Based on {currentReview.data().year}</p>
+                            </div>
+                            
                             <Rating sx={{ fontSize: "1.25em" }} name='read-only' value={currentReview.data().rating} readOnly />
                         </div>
-                        <h4>Based on {currentReview.data().year}</h4>
-
+                        {
+                            currentReview.data().reports
+                            > 2 ? <p style = {{color: "red"}}>This review has been taken down due to a large number of reports. If you want to refute this decision please contact us!</p> : <br />
+                        }
                         <h3>{currentReview.data().review}</h3>
                     </div>
 

@@ -27,14 +27,11 @@ const YourQuestions = (params) => {
             let individualData = await getDoc(individualReference);
             if (individualData.exists()) {
                 arrayOfData.push({ data: individualData.data(), id: allQuestionIds[i] });
-            } else {
-                console.log("Wait this one doesn't exist");
             }
         }
 
         setQuestionData(arrayOfData);
         setLoading(false);
-        console.log("Done");
     }
 
     return (
@@ -53,9 +50,9 @@ const YourQuestions = (params) => {
                         <CircularProgress color='primary'></CircularProgress>
                     </div>
                 ) : (
-                    <>
+                    <> 
                         {questionData.map((doc) => {
-                            return <IndQuestion key={doc.id} data={doc.data} id={doc.id} />
+                            return <IndQuestion key={doc.id} data={doc.data} id={doc.id} setQuestions = {setQuestionData} />
                         })}
                         {questionData.length < 4 ? (
                             <h2 style={{ marginTop: "auto" }}>

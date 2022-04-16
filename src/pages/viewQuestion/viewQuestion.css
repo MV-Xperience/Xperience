@@ -8,10 +8,11 @@
     display: block;
 }
 .each-reply {
+    margin: 1vh 15px;
     padding: 1rem;
-    width: calc(100% - 2rem);
+    width: calc(100% - 2rem - 30px);
     border-radius: 1rem;
-    box-shadow: var(--box-shadow);
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 .each-reply div {
     display: flex;
@@ -22,7 +23,7 @@
 .each-reply span {
     display: flex;
     align-items: center;
-    margin: 0px;
+    margin: 0 0.5rem;
     background-color: var(--accent-background);
     padding: 0.5rem;
     border-radius: 0.5rem;
@@ -54,8 +55,8 @@
     top: calc(100vh - 10rem);
     left: 2rem;
 }
-.replies-entry textarea {
-    width: calc(100% - 4rem);
+.replies-entry textarea{
+    width: calc(100% - 2rem);
     background-color: transparent;
     border: none;
     outline: none;

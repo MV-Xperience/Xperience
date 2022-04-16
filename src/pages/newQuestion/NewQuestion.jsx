@@ -1,6 +1,6 @@
 import "./newquestion.css";
 import Navbar from "../../components/navbar/Navbar";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 import { getFirestore, addDoc, collection, serverTimestamp, doc, updateDoc, arrayUnion } from "@firebase/firestore";
@@ -10,22 +10,22 @@ import { useNavigate } from "react-router-dom";
 import useAuthRedirect from "../../hooks/useAuthRedirect";
 
 import Alert from "@mui/material/Alert";
-const db = getFirestore();
-const auth = getAuth();
+
 const NewQuestion = () => {
     const tagInput = useRef(null);
     const questionInput = useRef(null);
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-
+    const db = getFirestore();
+    const auth = getAuth();
     const [tags, setTags] = useState([]);
-    const [user, loading] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     let navigate = useNavigate();
+    
     useAuthRedirect();
 
     const addTag = (e) => {
         e.preventDefault();
-        console.log(tagInput.current.value);
         if (tags.length < 5) {
             if (!tags.includes(tagInput.current.value.toUpperCase())) {
                 setTags([...tags, tagInput.current.value.toUpperCase()]);
@@ -50,12 +50,12 @@ const NewQuestion = () => {
         array = array.filter((tag) => {
             return tag !== tagToRemove;
         });
-        console.log(array);
         setTags(array);
     };
     const writeToFirestore = async () => {
         let data = {};
         data.likes = 0;
+        data.reports = 0;
         data.numReplies = 0;
         data.tags = tags;
         data.text = questionInput.current.value;
@@ -64,9 +64,9 @@ const NewQuestion = () => {
         data.date = serverTimestamp();
         data.resolved = false;
         data.likedBy = [];
-        console.log(data);
+        data.reportedBy = [];
+        
         const docRef = await addDoc(collection(db, "questions"), data);
-        console.log("Document created! ID:", docRef.id);
 
         const userRef = doc(db, "users", user.uid);
         await updateDoc(userRef, { questionIds: arrayUnion(docRef.id) });

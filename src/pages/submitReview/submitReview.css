@@ -103,7 +103,7 @@ h1 {
     color: var(--accent-background);
 }
 .year-input {
-    width: calc(5rem);
+    width: 4rem;
     border: none !important;
     margin-top: 13px;
     font-size: 1rem;
