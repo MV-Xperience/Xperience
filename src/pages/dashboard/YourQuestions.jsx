@@ -11,28 +11,35 @@ const YourQuestions = (params) => {
     const [loading, setLoading] = useState(true);
     // Get data from firestore
     useEffect(() => {
+        const getAllData = async(userRef) =>{
+            const document = await getDoc(userRef);
+            let allQuestionIds = document.data().questionIds;
+    
+            if(document.data().banned){
+                params.setBanned(true);
+            }
+    
+            let arrayOfData = [];
+            for (let i = 0; i < 5 && i < allQuestionIds.length; i++) {
+                let individualReference = doc(db, "questions", allQuestionIds[i]);
+                let individualData = await getDoc(individualReference);
+                if (individualData.exists()) {
+                    arrayOfData.push({ data: individualData.data(), id: allQuestionIds[i] });
+                }
+            }
+    
+            setQuestionData(arrayOfData);
+            setLoading(false);
+        }
+
         if (!params.loading && params.user !== null) {
             // Load in everything!
-            const userRef = doc(db, "users", params.user.uid);
-            getAllData(userRef);
+            const userDocRef = doc(db, "users", params.user.uid);
+            getAllData(userDocRef);
         }
     }, [params]);
-    async function getAllData(userRef) {
-        const document = await getDoc(userRef);
-        let allQuestionIds = document.data().questionIds;
-
-        let arrayOfData = [];
-        for (let i = 0; i < 5 && i < allQuestionIds.length; i++) {
-            let individualReference = doc(db, "questions", allQuestionIds[i]);
-            let individualData = await getDoc(individualReference);
-            if (individualData.exists()) {
-                arrayOfData.push({ data: individualData.data(), id: allQuestionIds[i] });
-            }
-        }
-
-        setQuestionData(arrayOfData);
-        setLoading(false);
-    }
+    
+    
 
     return (
         <div className='your-questions-container'>

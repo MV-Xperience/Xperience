@@ -29,6 +29,8 @@ const FirebaseContainer = () => {
                     name: user.displayName,
                     questionIds: [],
                     reviewedClasses: [],
+                    uid: user.uid,
+                    strikes: 0
                 });
             }
         };
