@@ -14,7 +14,7 @@ const ReviewModal = ({currentReview, handleCloseModal, openModal}) => {
                         <div className='modaltitle'>
                             <div>
                                 <h2>{currentReview.data().author?.split(" ")[0]}'s Review</h2>
-                                <p>Based on {currentReview.data().year}</p>
+                                <p>Based on the {currentReview.data().year} school year</p>
                             </div>
                             
                             <Rating sx={{ fontSize: "1.25em" }} name='read-only' value={currentReview.data().rating} readOnly />

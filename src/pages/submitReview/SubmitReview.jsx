@@ -146,7 +146,7 @@ const ReviewSubmitter = () => {
                             id='reviewSelector'
                             required
                             placeholder='Write a thoughful review here!'
-                            maxLength='500'
+                            maxLength='600'
                             onChange={(e) => {
                                 setReview(e.target.value);
                             }}></textarea>

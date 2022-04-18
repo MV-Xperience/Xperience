@@ -149,7 +149,7 @@ const Class = () => {
                                         }
                                     </>
                                     :
-                                    <p>None</p>
+                                    <p style = {{cursor: "text"}}>NONE</p>
                                 }
                                 <h2>Next</h2>
                                 {
@@ -166,7 +166,7 @@ const Class = () => {
                                     }
                                     </>
                                     :
-                                    <p>None</p>
+                                    <p style = {{cursor: "text"}}>NONE</p>
                                 }
                             </div>
                             <div className='rightSide'>
