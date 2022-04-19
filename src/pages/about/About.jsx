@@ -103,13 +103,11 @@ const About = () => {
                                 )
                             })
                         }
-                        
                     </div>
                     <br />
                     <p>A special thanks to Josie Penix for helping spark the idea!</p>
                 </div>
                 <br />
-
             </div>
         </>
      );

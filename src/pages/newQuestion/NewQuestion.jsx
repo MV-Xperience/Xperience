@@ -53,26 +53,32 @@ const NewQuestion = () => {
         setTags(array);
     };
     const writeToFirestore = async () => {
-        let data = {};
-        data.likes = 0;
-        data.reports = 0;
-        data.numReplies = 0;
-        data.tags = tags;
-        data.text = questionInput.current.value;
-        data.uid = user.uid;
-        data.displayName = user.displayName;
-        data.date = serverTimestamp();
-        data.resolved = false;
-        data.likedBy = [];
-        data.reportedBy = [];
-        
-        const docRef = await addDoc(collection(db, "questions"), data);
+        if (questionInput.current.value) {
+            let data = {
+                likes: 0,
+                reports: 0,
+                numReplies: 0,
+                tags: tags,
+                text: questionInput.current.value,
+                uid: user.uid,
+                displayName: user.displayName,
+                date: serverTimestamp(),
+                resolved: false,
+                likedBy: [],
+                reportedBy: [],
+            };
+            
+            const docRef = await addDoc(collection(db, "questions"), data);
 
-        const userRef = doc(db, "users", user.uid);
-        await updateDoc(userRef, { questionIds: arrayUnion(docRef.id) });
+            const userRef = doc(db, "users", user.uid);
+            await updateDoc(userRef, { questionIds: arrayUnion(docRef.id) });
 
-        navigate("/question/" + docRef.id);
+            navigate("/question/" + docRef.id);
+        }
     };
+    const backTohome = () => {
+        navigate("/");
+    }
     return (
         <>
             <Navbar />
@@ -109,9 +115,12 @@ const NewQuestion = () => {
                     <></>
                 )}
 
-                <div style={{ marginTop: "2rem" }}>
+                <div className="btn-wrapper">
                     <Button variant='contained' size='large' onClick={writeToFirestore}>
                         Post
+                    </Button>
+                    <Button color="gray" variant='contained' size='large' onClick={backTohome}>
+                        Cancel
                     </Button>
                 </div>
             </div>

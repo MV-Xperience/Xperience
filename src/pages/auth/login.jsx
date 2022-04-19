@@ -4,12 +4,10 @@ import FirebaseContainer from "./Auth";
 const Login = () => {
     return (
         <div className='login-total-container'>
-            <div>
-                <h2>
-                    To continue using <span>MVXperience</span>, you need to:
-                </h2>
-                <FirebaseContainer />
-            </div>
+            <h2>
+                Sign in to continue using <span>MVXperience</span>
+            </h2>
+            <FirebaseContainer />
         </div>
     );
 };

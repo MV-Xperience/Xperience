@@ -23,6 +23,12 @@ const theme = createTheme({
             dark: "#ba000d",
             contrastText: "#000",
         },
+        gray: {
+            main: "#e9e9e9",
+            light: "#e9e9e9",
+            dark: "#e9e9e9",
+            contrastText: "#000"
+        }
     },
 });
 ReactDOM.render(

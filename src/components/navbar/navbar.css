@@ -1,8 +1,9 @@
 .navbar {
     overflow: hidden;
-    width: 100vw;
+    width: 100%;
     max-width: 100%; /* added */
 
+    min-height: 5rem;
     height: 6rem;
     padding: 1rem;
     box-sizing: border-box;
@@ -64,6 +65,7 @@
 
 .navbarPhoto {
     height: 100%;
+    aspect-ratio: 1;
     padding: 0.7rem;
     box-sizing: border-box;
 }

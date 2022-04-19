@@ -74,35 +74,30 @@ const IndQuestion = ({data, setQuestions, id}) => {
                 <div>
                     <h2>{data.text}</h2>
                 </div>
-
-
-               
-                <div className="action-button-group">
-
-                    <span style = {{color: liked ? "dodgerblue" : "" }} onClick = {()=>handleLike(id)}>
-                        <p>{likeCount}</p>
-                        <PanToolIcon />
-                    </span>
-                    <span style = {{color: reported ? "var(--reported)" : "" }} onClick = {()=>handleReport(id)}>
-                        <p>{reportCount}</p>
-                        <FlagIcon />
-                    </span>
-
-                    <span className = "deleteButton" onClick = {()=>handleDelete(id)}>
-                        <DeleteForeverIcon />
-                    </span>
-                   
-                </div>
-
             </div>
             {
                 data.reports
                 > 2 ? <p style = {{color: "red"}}>This question has been taken down due to a large number of reports. If you want to refute this decision please contact us!</p> : <br />
             }
-            <Link to={"/question/" + id} className='question-link'>
-                View Replies
-            </Link>
-           
+            <div className="action-button-group">
+                <div className="link-wrapper">
+                    <Link to={"/question/" + id} className='question-link'>
+                        View Replies
+                    </Link>
+                </div>
+                <span style = {{color: liked ? "dodgerblue" : "" }} onClick = {()=>handleLike(id)}>
+                    <p>{likeCount}</p>
+                    <PanToolIcon />
+                </span>
+                <span style = {{color: reported ? "var(--reported)" : "" }} onClick = {()=>handleReport(id)}>
+                    <p>{reportCount}</p>
+                    <FlagIcon />
+                </span>
+
+                <span className = "deleteButton" onClick = {()=>handleDelete(id)}>
+                    <DeleteForeverIcon />
+                </span>
+            </div>
         </div>
     );
 };
