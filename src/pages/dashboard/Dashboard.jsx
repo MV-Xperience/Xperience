@@ -30,12 +30,10 @@ const Dashboard = () => {
     }
     return (
         <>
-            {loading ? <Loading /> : 
-                <>
-                    {
-                        banned ? <BannedPage /> :  <DashboardContent />
-                    }
-                </>
+            {
+                loading
+                ? <Loading />
+                : banned ? <BannedPage /> :  <DashboardContent />
             }
         </>
     );

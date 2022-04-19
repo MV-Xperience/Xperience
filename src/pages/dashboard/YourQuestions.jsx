@@ -43,8 +43,10 @@ const YourQuestions = (params) => {
 
     return (
         <div className='your-questions-container'>
-            <div className='your-questions-title'>
-                <h1>Your Recent Questions</h1>
+            <div className='your-questions-title text-left'>
+                <h1>
+                    Your Recent Questions
+                </h1>
                 <Link to='/question/new'>
                     <Fab color='primary' aria-label='add' style={{ fontSize: "1.5rem" }}>
                         +
@@ -62,9 +64,9 @@ const YourQuestions = (params) => {
                             return <IndQuestion key={doc.id} data={doc.data} id={doc.id} setQuestions = {setQuestionData} />
                         })}
                         {questionData.length < 4 ? (
-                            <h2 style={{ marginTop: "auto" }}>
-                                Have more questions?{" "}
-                                <Link to='/question/new' style={{ marginLeft: 0.25 + "rem" }}>
+                            <h2 className="ask-more-questions">
+                                <span>Have more questions?</span>
+                                <Link to='/question/new'>
                                     <Button variant='contained'>Ask them here</Button>
                                 </Link>
                             </h2>

@@ -13,6 +13,12 @@ const SuggestedActions = (params) => {
     const auth = getAuth();
     const [loading, setLoading] = useState(true);
     const [suggestedQuestions, setSuggestedQuestions] = useState([]);
+
+    const btnStyle = {
+        wordBreak: 'keep-all',
+        whiteSpace: 'nowrap',
+    }
+
     // In the future, use IN to give the person questions based on classes they've taken or reviewed
     // In the future, could order by replies < 0
     // In the future, could use an array peopleToIgnore, to make sure they aren't always spammed with the same recommendation
@@ -36,25 +42,25 @@ const SuggestedActions = (params) => {
     
     return (
         <div className='suggested-actions-container'>
-            <div className='your-questions-title'>
+            <div className='your-questions-title text-right'>
                 <h1>Suggested Actions</h1>
             </div>
             <div className='suggested-questions-container'>
                 <p style={{ fontWeight: 500, marginTop: 0 }}>Answer relevant questions:</p>
                 {loading ? (
-                    <div style={{ width: 100 + "%", display: "flex", justifyContent: "center" }}>
+                    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                         <Loading />
                     </div>
                 ) : (
-                    suggestedQuestions.map((doc) => {
-                        return <EachSuggestedQuestion data={doc.data} id={doc.id} key={doc.id} />;
+                    suggestedQuestions.map((doc, index) => {
+                        return <EachSuggestedQuestion data={doc.data} id={doc.id} key={`${index}esq`} />;
                     })
                 )}
             </div>
             <div className='button-container'>
-                <Link to = {{pathname: '/review'}}><Button variant='contained'>Create a Review</Button></Link>
-                <Link to = {{pathname: '/browse-questions'}}><Button variant='contained'>Browse Questions</Button></Link>
-                <Link to = {{pathname: '/browse-reviews'}}><Button variant='contained'>Browse Reviews</Button></Link>
+                <Link to = {{pathname: '/review'}}><Button variant='contained' sx={btnStyle}>Create a Review</Button></Link>
+                <Link to = {{pathname: '/browse-questions'}}><Button variant='contained' sx={btnStyle}>Browse Questions</Button></Link>
+                <Link to = {{pathname: '/browse-reviews'}}><Button variant='contained' sx={btnStyle}>Browse Reviews</Button></Link>
             </div>
         </div>
     );
@@ -64,8 +70,8 @@ const EachSuggestedQuestion = (params) => {
         <div className='each-suggested-question'>
             <p>{params.data.text}</p>
             <div className='each-suggested-question-tag'>
-                {params.data.tags.map((tag) => {
-                    return <Chip style={{ borderRadius: 1 + "rem", marginRight: 0.5 + "rem" }} color='primary' clickable={true} label={tag} variant='outlined'></Chip>;
+                {params.data.tags.map((tag, index) => {
+                    return <Chip style={{ borderRadius: 1 + "rem", marginRight: 0.5 + "rem" }} key={`${index}esqt`} color='primary' clickable={true} label={tag} variant='outlined'></Chip>;
                 })}
             </div>
             <Link to={"/question/" + params.id} className='reply-each-question'>
