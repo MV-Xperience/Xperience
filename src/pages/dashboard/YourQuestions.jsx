@@ -63,6 +63,13 @@ const YourQuestions = (params) => {
                         {questionData.map((doc) => {
                             return <IndQuestion key={doc.id} data={doc.data} id={doc.id} setQuestions = {setQuestionData} />
                         })}
+                        {
+                            questionData.length === 0 ? (
+                                <div className='no-questions-wrapper'>
+                                    You have no questions
+                                </div>
+                            ) : <></>
+                        }
                         {questionData.length < 4 ? (
                             <h2 className="ask-more-questions">
                                 <span>Have more questions?</span>
