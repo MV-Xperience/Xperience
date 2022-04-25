@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { getAuth } from "firebase/auth";
-import { getFirestore, doc,updateDoc, arrayRemove, arrayUnion} from "firebase/firestore";
+import { getFirestore, doc,updateDoc, arrayRemove, arrayUnion, writeBatch} from "firebase/firestore";
 import ThumbUpRoundedIcon from "@mui/icons-material/ThumbUpRounded";
 import FlagIcon from "@mui/icons-material/Flag";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 const Reply = ({reply, id}) => {
     const auth = getAuth();
     const db = getFirestore();
@@ -47,6 +49,15 @@ const Reply = ({reply, id}) => {
 
     }
 
+    const handleDelete = async(docId) => {
+        const batch = writeBatch(db);
+        const docRef = doc(db, "questions", id, "replies", docId);
+        batch.delete(docRef);
+
+        await batch.commit();
+
+    }
+
     return(
         <>
             <div className='each-reply'>
@@ -61,6 +72,12 @@ const Reply = ({reply, id}) => {
                             <p>{reportCount}</p>
                             <FlagIcon />
                         </span>
+                        {
+                            auth.currentUser.uid === reply.data().createdBy &&
+                            <span className = "deleteButton" onClick = {()=>handleDelete(id)}>
+                                <DeleteForeverIcon />
+                            </span>
+                        }
                     </div>
                 </div>
                 <p style={{ textAlign: "right" }}>- {reply.data().author}</p>

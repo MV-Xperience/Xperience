@@ -71,7 +71,11 @@ const EachSuggestedQuestion = (params) => {
             <p>{params.data.text}</p>
             <div className='each-suggested-question-tag'>
                 {params.data.tags.map((tag, index) => {
-                    return <Chip style={{ borderRadius: 1 + "rem", marginRight: 0.5 + "rem" }} key={`${index}esqt`} color='primary' clickable={true} label={tag} variant='outlined'></Chip>;
+                    return(
+                        <Link to = {"/browse-questions/" + tag}  key={`${index}esqt`} >
+                             <Chip style={{ borderRadius: 1 + "rem", marginRight: 0.5 + "rem" }} color='primary' clickable={true} label={tag} variant='outlined' />
+                        </Link>
+                    )
                 })}
             </div>
             <Link to={"/question/" + params.id} className='reply-each-question'>

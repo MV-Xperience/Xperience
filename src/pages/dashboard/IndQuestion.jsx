@@ -8,6 +8,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import { useState } from "react";
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc,updateDoc, arrayRemove, arrayUnion, writeBatch} from "firebase/firestore";
+
 const IndQuestion = ({data, setQuestions, id}) => {
     const db = getFirestore();
     const auth = getAuth();
@@ -74,8 +75,6 @@ const IndQuestion = ({data, setQuestions, id}) => {
                 <div>
                     <h2>{data.text}</h2>
                 </div>
-
-
                
                 <div className="action-button-group">
 
@@ -88,10 +87,13 @@ const IndQuestion = ({data, setQuestions, id}) => {
                         <FlagIcon />
                     </span>
 
-                    <span className = "deleteButton" onClick = {()=>handleDelete(id)}>
-                        <DeleteForeverIcon />
-                    </span>
-                   
+                    {
+                        auth.currentUser.uid === data.uid &&
+
+                        <span className = "deleteButton" onClick = {()=>handleDelete(id)}>
+                            <DeleteForeverIcon />
+                        </span>
+                    }
                 </div>
 
             </div>

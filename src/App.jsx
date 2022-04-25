@@ -33,7 +33,11 @@ const App = () => {
                         {/* <ReplyList /> */}
                         <Route path='new' element={<NewQuestion />} />
                     </Route>
-                    <Route path='browse-questions' element = {<QuestionForum />}/>
+                    <Route path='browse-questions' element = {<QuestionForum />}>
+                        <Route path=':id'>
+                            <Route element = {<QuestionForum />} />
+                        </Route>
+                    </Route>
                     <Route path='review' element={<SubmitReview />} />
                     <Route path='class'>
                         <Route path=':id'>

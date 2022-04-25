@@ -6,7 +6,7 @@ import {useState, useEffect} from 'react';
 import Navbar from "../../components/navbar/Navbar";
 import Button from "@mui/material/Button";
 import { collection, query, where, getDocs, getFirestore } from "firebase/firestore"; 
-import {Link} from 'react-router-dom';  
+import {Link, useParams} from 'react-router-dom';  
 import Loading from "../../components/loading/Loading";
 const QuestionForum = () => {
     
@@ -14,11 +14,39 @@ const QuestionForum = () => {
     const [questions, setQuestions] = useState([]);
     const [searched, setSearched] = useState(false);
     const db = getFirestore();
-
+    let {id} = useParams();
     const [searchedTag, setSearchedTag] = useState("");
     const [loading, setLoading] = useState(true);
     useEffect(() => {
+        const getData = async () => {
+            setSearched(true);
+            const q = query(collection(db, 'questions'), where("tags", "array-contains", searchedTag));
+    
+            const querySnapshot = await getDocs(q);
+            let tempArr = [];
+    
+            querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+                tempArr.push(doc);
+    
+            });
+    
+            tempArr = tempArr.filter((reply) => reply.data().reports < 3)
+    
+            
+            setQuestions(tempArr);
+            setLoading(false);
+
+        }
+
         const getInitialData = async () => {
+
+            if(id !== undefined){ 
+                setSearchedTag(id);
+                getData();
+                return;
+            }
+
             const querySnapshot = await getDocs(collection(db, "questions"));
             let tempArr = [];
             querySnapshot.forEach((doc) => {
@@ -27,15 +55,17 @@ const QuestionForum = () => {
             });
             tempArr = tempArr.filter((reply) => reply.data().reports < 3)
 
+           
             setQuestions(tempArr);
             setLoading(false);
 
         }
         
         getInitialData()
-    } , [db]);
 
-    const getData = async () => {
+    } , [db, id, searchedTag]);
+
+    const getData = async () => {   
         setSearched(true);
         const q = query(collection(db, 'questions'), where("tags", "array-contains", searchedTag));
 

@@ -66,7 +66,7 @@ const YourQuestions = (params) => {
                         {
                             questionData.length === 0 ? (
                                 <div className='no-questions-wrapper'>
-                                    You have no questions
+                                    You have not asked any questions
                                 </div>
                             ) : <></>
                         }
