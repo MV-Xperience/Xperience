@@ -42,7 +42,7 @@ const About = () => {
                 "role": "Designer",
                 "job": "Logo Designer",
                 "githubLink": "",
-                "websiteLink": "https://soundcloud.com/lorenzo-varlaro?ref=clipboard&p=i&c=1",
+                "websiteLink": "https://www.youtube.com/channel/UCnRfqSAfQ9_Sx7cyRbkO3Rw",
                 "mailLink": "mailto:lorenzo.varlaro@gmail.com",
             }
         ]      
@@ -56,19 +56,6 @@ const About = () => {
                     <br />
 
                 <div className="content">
-                    {/* <h1>About MV Xperience</h1>
-                   
-                    <h2>How does MV Xperience work?</h2>
-                    <h4>MV Xperience offers a platform for you to ask questions as well as view or leave reviews of classes in order for other students and yourself to get a better understanding of what classes are expecting at MVHS.</h4>
-                    {/* <h2>Does MV Xperiece have a Terms of Agreement?</h2>
-                    <h4>YES! Please read it carefully. We understand not wanting to read it, but if you decide to, it will be very helpful to understand what is allowed and whats not!</h4>
-                    <a href = 'https://ashwintalwalkar.com' rel="noreferrer" target = "_blank">Link to Terms of Agreement</a>
-                    <h2>Who Created MV Xperience?</h2>
-                    <h3>Project Lead and Manager: Ashwin Talwalkar</h3>
-                    <h4>- Major Contributors: Ashwin Talwalkar, Wyatt Cowley, & Zephyr Jones</h4>
-                    <h4>- Design Specialists:Lorenzo Varlaro, & Sonav Agarwal</h4>
-    */}                     
-
                     <div className="left">
                         <div>
                             <h2>Our Mission</h2>
