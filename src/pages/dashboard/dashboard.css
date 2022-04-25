@@ -2,20 +2,12 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 1rem;
-    justify-content: space-between;
-}
-.text-right {
-    text-align: right;
-}
-.text-left {
-    text-align: left;
 }
 .your-questions-title h1 {
     width: auto;
     margin: 0px;
     margin-right: 1rem;
     font-size: 3rem;
-    font-weight: 400;
 }
 .individual-question-div {
     box-shadow: 0 0 0.5em -0.2em var(--shadow-color);
@@ -34,20 +26,22 @@
     font-weight: 500;
 }
 .all-questions-container {
+    height: calc(100% - 4rem);
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 .your-questions-container {
-    min-width: 300px;
-    width: 100%;
+    width: calc(60% - 2rem);
+    margin-right: 5%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    margin-left: 2rem;
 }
 .suggested-actions-container {
-    min-width: 250px;
-    max-width: 350px;
-    width: 100%;
+    width: 30%;
+    margin-right: 5%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -55,23 +49,7 @@
 .entire-dashboard {
     display: flex;
     flex-direction: row;
-    justify-content: stretch;
-    height: 100%;
-    gap: 40px;
-    padding: 0 40px;
-    /* flex-wrap: wrap; */
-}
-@media (max-width: 710px) {
-    .entire-dashboard {
-        flex-wrap: wrap
-    }
-    .entire-dashboard > .suggested-actions-container {
-        max-width: 100%;
-        width: 100%;
-    }
-    .entire-dashboard > .suggested-actions-container > .your-questions-title {
-        text-align: left;
-    }
+    height: calc(100vh - 8rem);
 }
 .suggested-questions-container {
     box-shadow: 0 0 0.5em -0.2em var(--shadow-color);
@@ -129,10 +107,9 @@
 .button-container {
     margin-top: 1rem;
     display: flex;
-    align-items: flex-end;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-    gap: 8px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 0.75rem;
 }
 
 .deleteButton{
@@ -154,10 +131,8 @@
 .action-button-group{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-}
-.action-button-group > .link-wrapper {
-    margin-right: 10px;
 }
 
 .action-button-group span {
@@ -195,8 +170,8 @@
 
 .ask-more-questions {
     position: fixed !important;
-    left: 10px;
-    bottom: 10px;
+    left: 1rem;
+    bottom: 1rem;
     z-index: 5;
     margin: 0;
     display: flex;

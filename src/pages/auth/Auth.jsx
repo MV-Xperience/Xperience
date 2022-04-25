@@ -48,7 +48,7 @@ const FirebaseContainer = () => {
         return (
             <button onClick={signIn} className='google-button'>
                 <img src='images/googleLogo.png' alt='google' style={{ width: "auto", height: 100 + "%" }}></img>
-                <p style={{ lineHeight: 5 + "rem", fontSize: 1.5 + "rem", paddingLeft: 0.5 + "rem" }}>Sign In with Google</p>
+                <p style={{ lineHeight: 5 + "rem", fontSize: 1.5 + "rem", paddingLeft: 0.5 + "rem" }}>Sign in with Google</p>
             </button>
         );
     };

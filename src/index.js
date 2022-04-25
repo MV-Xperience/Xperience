@@ -38,9 +38,10 @@ ReactDOM.render(
                 {
                     window.innerWidth > 786 && window.innerHeight > 414 ? <App /> : 
                     <div className="mobileProblem">
-                        <h1>Sorry, this site is not optimized for mobile devices.</h1>
+                        <h1>Sorry, this site is not optimized for small devices.</h1>
                         <br />
-                        <h1>{":/"}</h1>
+                        <p>Please access this web app on a larger device</p>
+                        <p>(Such as a laptop or tablet)</p>
                     </div>
                 }
             </BrowserRouter>
